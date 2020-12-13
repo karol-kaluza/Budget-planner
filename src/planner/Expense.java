@@ -16,10 +16,8 @@ public class Expense {
     private LocalDate date;
 
     private List<Expense> expensesMainList = new ArrayList<>();
-
-    Map<String, Integer> categoriesGoals = new HashMap<>();
+    private Map<String, Integer> categoriesGoals = new HashMap<>();
     // key - category name(String), value - expected level (Integer)
-
 
     public Expense() {
     }
@@ -79,6 +77,14 @@ public class Expense {
 
     public List<Expense> getExpensesMainList() {
         return expensesMainList;
+    }
+
+    public Map<String, Integer> getCategoriesGoals() {
+        return categoriesGoals;
+    }
+
+    public void setCategoriesGoals(Map<String, Integer> categoriesGoals) {
+        this.categoriesGoals = categoriesGoals;
     }
 
     @Override
