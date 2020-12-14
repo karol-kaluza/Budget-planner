@@ -1,0 +1,20 @@
+
+e
+java:S1192"JDefine a constant instead of duplicating this literal "transport" 4 times.(óøþ‹ýÿÿÿÿ
+U
+java:S1854":Remove this useless assignment to local variable "income".(§†ÏÝùÿÿÿÿ
+S	java:S106!"9Replace this use of System.out or System.err by a logger.(°Ï¬Ûûÿÿÿÿ
+S	java:S106%"9Replace this use of System.out or System.err by a logger.(Ë´Šüýÿÿÿÿ
+S	java:S106'"9Replace this use of System.out or System.err by a logger.(ãË¨ïûÿÿÿÿ
+N	java:S106("9Replace this use of System.out or System.err by a logger.(ÆÀ³À
+N	java:S106)"9Replace this use of System.out or System.err by a logger.(¸›Ø¿
+S	java:S106."9Replace this use of System.out or System.err by a logger.(šîÌ¯þÿÿÿÿ
+S	java:S1060"9Replace this use of System.out or System.err by a logger.(ÎÞÎ¯üÿÿÿÿ
+N	java:S1061"9Replace this use of System.out or System.err by a logger.(‰âíÝ
+S	java:S1062"9Replace this use of System.out or System.err by a logger.(²õÕÐùÿÿÿÿ
+S	java:S1067"9Replace this use of System.out or System.err by a logger.(ˆêõ–üÿÿÿÿ
+N	java:S1068"9Replace this use of System.out or System.err by a logger.(‰âíÝ
+N	java:S106<"9Replace this use of System.out or System.err by a logger.(¯ìÈ—
+Q	java:S125A"<This block of commented-out lines of code should be removed.(Žšéÿ
+F
+java:S1481"+Remove this unused "income" local variable.(§†ÏÝùÿÿÿÿ

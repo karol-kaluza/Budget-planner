@@ -3,6 +3,7 @@ package planner;
 import java.time.LocalDateTime;
 
 public class Income {
+
     private String name;
     private int value;
     private LocalDateTime date;
