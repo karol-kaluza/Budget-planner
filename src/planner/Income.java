@@ -1,13 +1,19 @@
 package planner;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Income {
     private String name;
     private int value;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Income(String name, int value, LocalDate date) {
+    public Income(String name, int value) {
+        this.name = name;
+        this.value = value;
+        this.date = LocalDateTime.now();
+    }
+
+    public Income(String name, int value, LocalDateTime date) {
         this.name = name;
         this.value = value;
         this.date = date;
@@ -29,11 +35,11 @@ public class Income {
         this.value = value;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }
