@@ -24,10 +24,10 @@ public class Converter {
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             //Move to future logger
-            System.out.println(response.statusCode());
+            System.out.println("status cod: " + response.statusCode());
             Map<String, Map<String, Integer>> map = mapper.readValue(response.body(), Map.class);
             Map<String, Integer> rates = map.get("rates");
-            System.out.println(rates.get(currency.toString()));
+            System.out.println("rate " + currency + " to PLN: " + rates.get(currency.toString()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
