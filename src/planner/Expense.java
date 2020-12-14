@@ -9,9 +9,7 @@ import java.util.Map;
 public class Expense {
 
     private String name;
-    //    private Category category;
     private String categoryName;
-    //    private BigDecimal value;
     private int value;
     private LocalDate date;
 
@@ -25,7 +23,6 @@ public class Expense {
     public Expense(String name, String categoryName, int value, LocalDate date) {
         this.name = name;
         this.categoryName = categoryName;
-//        this.category = new Category("food");
         this.value = value;
         this.date = date;
     }
