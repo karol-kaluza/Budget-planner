@@ -1,6 +1,6 @@
 package planner.Exchange;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,14 +12,10 @@ import java.util.Map;
 public class Converter {
 
     public enum Currency {
-        EUR, USD, CHF, GBP
+        EUR, USD, CHF, GBP, PLN
     }
 
-    public static void main(String[] args) {
-        new Converter().convert();
-    }
-
-    public void convert() {
+    public void convert(Currency currency) {
         ObjectMapper mapper = new ObjectMapper();
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -27,12 +23,11 @@ public class Converter {
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            //Move to future logger
             System.out.println(response.statusCode());
-
             Map<String, Map<String, Integer>> map = mapper.readValue(response.body(), Map.class);
-
-            System.out.println(map.get("rates").get("EUR"));
-
+            Map<String, Integer> rates = map.get("rates");
+            System.out.println(rates.get(currency.toString()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
