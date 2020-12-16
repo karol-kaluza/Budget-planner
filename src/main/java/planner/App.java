@@ -3,16 +3,12 @@ package planner;
 import planner.Exchange.Converter;
 import planner.database.LocalDB;
 
-import java.time.Month;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 public class App {
     public static void main(String[] args) {
 
         Expense expense = new Expense();
         Income income = new Income("salary December", 10_000);
+
         new Converter().getRate(Converter.Currency.PLN);
 
         LocalDB exampleDB = new LocalDB();
@@ -47,7 +43,6 @@ public class App {
 //        categoriesGoals.put("transport",100);
 //        int transportMonthlyGoal = categoriesGoals.get("transport");
 //        System.out.println("Category \"transport\" - expected expenses: " + transportMonthlyGoal);
-
 
     }
 }
