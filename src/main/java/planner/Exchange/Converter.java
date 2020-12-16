@@ -30,6 +30,7 @@ public class Converter {
             System.out.println(response.statusCode());
             Map<String, Integer> rates = extractRates(response.body(), mapper);
             System.out.println(rates.get(currency.toString()));
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

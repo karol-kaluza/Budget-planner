@@ -1,7 +1,6 @@
 package planner;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ public class Expense {
     private int value;
     private LocalDate date;
 
-    private List<Expense> expensesMainList = new ArrayList<>();
     private Map<String, Integer> categoriesGoals = new HashMap<>();
     // key - category name(String), value - expected level (Integer)
 
@@ -25,11 +23,6 @@ public class Expense {
         this.categoryName = categoryName;
         this.value = value;
         this.date = date;
-    }
-
-    public List<Expense> addExpense(String name, String categoryName, int value, LocalDate date) {
-        expensesMainList.add(new Expense(name, categoryName, value, date));
-        return expensesMainList;
     }
 
     public static int getTotalValue(List<Expense> expensesList) {
@@ -70,10 +63,6 @@ public class Expense {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public List<Expense> getExpensesMainList() {
-        return expensesMainList;
     }
 
     public Map<String, Integer> getCategoriesGoals() {
