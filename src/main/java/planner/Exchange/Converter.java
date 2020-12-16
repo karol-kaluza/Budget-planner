@@ -1,6 +1,7 @@
 package planner.Exchange;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,6 +11,8 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 
 public class Converter {
+
+    final static Logger logger = Logger.getLogger(Converter.class);
 
     private String serverResponse;
 
@@ -29,12 +32,10 @@ public class Converter {
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            //TODO Move to future logger
-            System.out.println(response.statusCode());
+            logger.info("HTTPRequest status code: " + response.statusCode());
             return response.body();
         } catch (Exception e) {
-            //TODO log error to logger
-            System.out.println(e);
+            logger.error("Connection to api error: ", e);
         }
         return "";
     }
