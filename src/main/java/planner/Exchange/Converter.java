@@ -11,15 +11,18 @@ import java.util.Map;
 
 public class Converter {
 
+    private String serverResponse;
+
     public enum Currency {
         EUR, USD, CHF, GBP, PLN
     }
 
-    public void convert(Currency currency) {
+    public void getRate(Currency currency) {
+        serverResponse = getDataFromAPI();
         convertWithMapper(currency, new ObjectMapper());
     }
 
-    void convertWithMapper(Currency currency, ObjectMapper mapper) {
+    private String getDataFromAPI() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.exchangeratesapi.io/latest?base=PLN"))
@@ -28,21 +31,26 @@ public class Converter {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             //TODO Move to future logger
             System.out.println(response.statusCode());
-            Map<String, Integer> rates = extractRates(response.body(), mapper);
-            System.out.println(rates.get(currency.toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            return response.body();
+        } catch (Exception e) {
+            //TODO log error to logger
+            System.out.println(e);
         }
+        return "";
     }
 
-    Map<String, Integer> extractRates(String responseBody, ObjectMapper mapper) {
+    private void convertWithMapper(Currency currency, ObjectMapper mapper) {
+        Map<String, Integer> rates = extractRates(serverResponse, mapper);
+        System.out.println(rates.get(currency.toString()));
+    }
+
+    protected Map<String, Integer> extractRates(String responseBody, ObjectMapper mapper) {
         try {
         Map<String, Map<String, Integer>> map = mapper.readValue(responseBody, Map.class);
         return map.get("rates");
         } catch (IOException e) {
-            e.printStackTrace();
+            //TODO log error to logger
+            System.out.println(e);
         }
         return null;
     }
