@@ -16,22 +16,35 @@ public class Converter {
     }
 
     public void convert(Currency currency) {
-        ObjectMapper mapper = new ObjectMapper();
+        convertWithMapper(currency, new ObjectMapper());
+    }
+
+    void convertWithMapper(Currency currency, ObjectMapper mapper) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.exchangeratesapi.io/latest?base=PLN"))
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            //Move to future logger
-            System.out.println("status cod: " + response.statusCode());
-            Map<String, Map<String, Integer>> map = mapper.readValue(response.body(), Map.class);
-            Map<String, Integer> rates = map.get("rates");
-            System.out.println("rate " + currency + " to PLN: " + rates.get(currency.toString()));
+            //TODO Move to future logger
+            System.out.println(response.statusCode());
+            Map<String, Integer> rates = extractRates(response.body(), mapper);
+            System.out.println(rates.get(currency.toString()));
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    Map<String, Integer> extractRates(String responseBody, ObjectMapper mapper) {
+        try {
+        Map<String, Map<String, Integer>> map = mapper.readValue(responseBody, Map.class);
+        return map.get("rates");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
