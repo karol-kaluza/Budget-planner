@@ -42,16 +42,15 @@ public class Converter {
 
     private void convertWithMapper(Currency currency, ObjectMapper mapper) {
         Map<String, Integer> rates = extractRates(serverResponse, mapper);
-        System.out.println(rates.get(currency.toString()));
+        logger.info("Rates: " + rates.get(currency.toString()));
     }
 
     protected Map<String, Integer> extractRates(String responseBody, ObjectMapper mapper) {
         try {
-        Map<String, Map<String, Integer>> map = mapper.readValue(responseBody, Map.class);
-        return map.get("rates");
+            Map<String, Map<String, Integer>> map = mapper.readValue(responseBody, Map.class);
+            return map.get("rates");
         } catch (IOException e) {
-            //TODO log error to logger
-            System.out.println(e);
+            logger.error("Cannot parse JSON to map", e);
         }
         return null;
     }
