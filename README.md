@@ -16,4 +16,5 @@
     - authentykacja przez googla
  - Converter Service
     - update dziennych kursów
+ - Interfejs z metodą getDataBase 
     
