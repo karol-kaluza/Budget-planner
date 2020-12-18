@@ -1,7 +1,10 @@
 # Lambda Warriors
 ### Backlog:
-- Logger (logowanie aktualnego kursu z datą)
+- ~~Logger (logowanie aktualnego kursu z datą)~~
 - ~~Dodać interface do ExpensesDB~~
+- Refaktoryzacja klasy Converter
+    - podział na mniejsze metody
+    - pokrycie logik testami
 - Rozszerzenie klasy Expense o ID
 - Expense Service
     - metoda wyświetlająca wydatki w danym miesiącu
