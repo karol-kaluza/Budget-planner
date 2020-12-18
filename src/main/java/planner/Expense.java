@@ -11,9 +11,7 @@ public class Expense {
     private String categoryName;
     private int value;
     private LocalDate date;
-
     private Map<String, Integer> categoriesGoals = new HashMap<>();
-    // key - category name(String), value - expected level (Integer)
 
     public Expense() {
     }

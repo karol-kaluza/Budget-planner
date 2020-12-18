@@ -6,43 +6,15 @@ import planner.database.LocalDB;
 public class App {
     public static void main(String[] args) {
 
-        Expense expense = new Expense();
+        new Converter().getRate(Converter.Currency.EUR);
+        LocalDB localDB = new LocalDB();
         Income income = new Income("salary December", 10_000);
-
-        new Converter().getRate(Converter.Currency.PLN);
-
-        LocalDB exampleDB = new LocalDB();
-
-        exampleDB.getAllExpenses();
-
-//        System.out.println("wszystkie wydatki Grudzień: ");
-//        List<Expense>expensesDecember = exampleDB.stream()
-//                .filter(x -> x.getDate().getMonth() == Month.DECEMBER)
-//                .collect(Collectors.toList());
-//        expensesDecember.forEach(System.out::println);
-//        int totalValueDecember = Expense.getTotalValue(expensesDecember);
-//        System.out.println("Total value expenses in december: " + totalValueDecember);
-//        System.out.println("------------------------------------------");
-//        System.out.println("wydatki Listopad, tylko kategoria \"food\":" );
-//        List<Expense> expensesFoodNovember = exampleDB.stream()
-//                .filter(x -> x.getDate().getMonth() == Month.NOVEMBER)
-//                .filter(x -> x.getCategoryName().equals("food"))
-//                .collect(Collectors.toList());
-//        expensesFoodNovember.forEach(System.out::println);
-//        int valueFoodNovember = Expense.getTotalValue(expensesFoodNovember);
-//        System.out.println("Value food in November: " + valueFoodNovember);
-//        System.out.println("-----------------------------------------");
-//        System.out.println("Istniejące kategorie: ");
-//        List<String> categories = exampleDB.stream()
-//                .map(Expense::getCategoryName)
-//                .distinct()
-//                .collect(Collectors.toList());
-//        categories.forEach(System.out::println);
-//        System.out.println("-----------------------------------------");
-//        Map<String,Integer> categoriesGoals = expense.getCategoriesGoals();
-//        categoriesGoals.put("transport",100);
-//        int transportMonthlyGoal = categoriesGoals.get("transport");
-//        System.out.println("Category \"transport\" - expected expenses: " + transportMonthlyGoal);
+        ExpenseService service = new ExpenseService();
+        service.printList(service.getMonthlyList(LocalDB.list,12));
+        System.out.println("Total money spent december: " + service.getAmountMonthlyTotal(LocalDB.list, 12));
+        System.out.println("total money spent december, category food:" +
+                service.getAmountCategory("food",12,LocalDB.list));
+        service.printCategory(LocalDB.list);
 
     }
 }
