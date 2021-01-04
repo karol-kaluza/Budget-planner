@@ -11,7 +11,6 @@ public class Expense {
     private String categoryName;
     private int value;
     private LocalDate date;
-    private Map<String, Integer> categoriesGoals = new HashMap<>();
 
     public Expense() {
     }
@@ -63,13 +62,7 @@ public class Expense {
         this.value = value;
     }
 
-    public Map<String, Integer> getCategoriesGoals() {
-        return categoriesGoals;
-    }
 
-    public void setCategoriesGoals(Map<String, Integer> categoriesGoals) {
-        this.categoriesGoals = categoriesGoals;
-    }
 
     @Override
     public String toString() {
