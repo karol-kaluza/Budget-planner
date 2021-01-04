@@ -1,9 +1,12 @@
 package planner.Exchange;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 import java.util.Map;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class ConverterTest {
 
     @Test
@@ -14,8 +17,6 @@ public class ConverterTest {
         // when
         Map<String, Integer> actual = subject.extractRates(testInput, new ObjectMapper());
         // then
-        assertTrue(actual.size() == 2);
-        assertTrue(actual.containsKey("CUR1"));
-        assertTrue(actual.containsKey("CUR2"));
+        assertEquals(actual.get("CUR1"), "12");
     }
 }
