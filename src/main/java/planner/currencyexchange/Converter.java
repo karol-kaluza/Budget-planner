@@ -1,9 +1,10 @@
-package planner.Exchange;
+package planner.currencyexchange;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.lang.Double;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,9 +21,9 @@ public class Converter {
         EUR, USD, CHF, GBP, PLN
     }
 
-    public void getRate(Currency currency) {
+    public Double getRate(Currency currency) {
         serverResponse = getDataFromAPI();
-        convertWithMapper(currency, new ObjectMapper());
+        return getRateFromRates(currency);
     }
 
     private String getDataFromAPI() {
@@ -40,14 +41,15 @@ public class Converter {
         return "";
     }
 
-    private void convertWithMapper(Currency currency, ObjectMapper mapper) {
-        Map<String, Integer> rates = extractRates(serverResponse, mapper);
-        logger.info("Rates: " + rates.get(currency.toString()));
+    private Double getRateFromRates(Currency currency) {
+        Map<String, Double> rates = convertToMap(serverResponse, new ObjectMapper());
+        logger.info("Rate for " + currency + ": " + rates.get(currency.toString()));
+        return rates.get(currency.toString());
     }
 
-    protected Map<String, Integer> extractRates(String responseBody, ObjectMapper mapper) {
+    protected Map<String, Double> convertToMap(String responseBody, ObjectMapper mapper) {
         try {
-            Map<String, Map<String, Integer>> map = mapper.readValue(responseBody, Map.class);
+            Map<String, Map<String, Double>> map = mapper.readValue(responseBody, Map.class);
             return map.get("rates");
         } catch (IOException e) {
             logger.error("Cannot parse JSON to map", e);
