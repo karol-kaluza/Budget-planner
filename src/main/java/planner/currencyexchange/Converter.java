@@ -15,15 +15,13 @@ public class Converter {
 
     final static Logger logger = Logger.getLogger(Converter.class);
 
-    private String serverResponse;
-
     public enum Currency {
         EUR, USD, CHF, GBP, PLN
     }
 
     public Double getRate(Currency currency) {
-        serverResponse = getDataFromAPI();
-        return getRateFromRates(currency);
+        return getRateFromRates(currency,
+                convertToMap(getDataFromAPI(), new ObjectMapper()));
     }
 
     private String getDataFromAPI() {
@@ -41,10 +39,13 @@ public class Converter {
         return "";
     }
 
-    private Double getRateFromRates(Currency currency) {
-        Map<String, Double> rates = convertToMap(serverResponse, new ObjectMapper());
-        logger.info("Rate for " + currency + ": " + rates.get(currency.toString()));
-        return rates.get(currency.toString());
+    protected Double getRateFromRates(Currency currency, Map<String, Double> rates) {
+        if (rates == null) {
+            return 1.0;
+        }
+        Double rate = rates.get(currency.toString());
+        logger.info("Rate for " + currency + ": " + rate);
+        return rate;
     }
 
     protected Map<String, Double> convertToMap(String responseBody, ObjectMapper mapper) {
@@ -53,6 +54,8 @@ public class Converter {
             return map.get("rates");
         } catch (IOException e) {
             logger.error("Cannot parse JSON to map", e);
+        } catch (Exception e) {
+            logger.error("Empty response body");
         }
         return null;
     }
