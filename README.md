@@ -13,7 +13,7 @@
  - Stworzenie konfiguracji (plik properties)
  - User Service
     - dodawanie/usuwanie uzytkowników
-    - authentykacja przez googla
+    - authentykacja przez googla (osobne zadanie)
  - Converter Service
     - update dziennych kursów
  - Interfejs z metodą getDataBase 
