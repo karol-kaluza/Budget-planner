@@ -47,4 +47,15 @@ public class ConverterTest {
         //then
         assertEquals(actual, expected);
     }
+
+    @Test
+    public void convertToMapReturnsNullWithEmptyStringArg() {
+        // given
+        String testInput = "";
+        Converter subject = new Converter();
+        // when
+        Map<String, Double> actual = subject.convertToMap(testInput, new ObjectMapper());
+        // then
+        assertNull(actual);
+    }
 }
