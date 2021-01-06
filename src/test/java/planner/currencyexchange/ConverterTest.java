@@ -58,4 +58,37 @@ public class ConverterTest {
         // then
         assertNull(actual);
     }
+
+    @Test
+    public void convertToMapReturnsNullWithWrongStringArg() {
+        // given
+        String testInput = "{\"rate\": {\"CUR1\":\"12\", \"CUR2\":\"15\"}}";
+        Converter subject = new Converter();
+        // when
+        Map<String, Double> actual = subject.convertToMap(testInput, new ObjectMapper());
+        // then
+        assertNull(actual);
+    }
+
+    @Test
+    public void getDataFromApi() {
+        //given
+        Converter subject = new Converter();
+        String result;
+        //when
+        result = subject.getDataFromAPI();
+        //then
+        assertTrue(result.getClass() == String.class);
+    }
+
+    @Test
+    public void getProperRate() {
+        //given
+        Converter subject = new Converter();
+        double result;
+        //when
+        result = subject.getRate(Converter.Currency.GBP);
+        //then
+        assertNotNull(result);
+    }
 }

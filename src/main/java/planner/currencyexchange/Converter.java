@@ -24,7 +24,7 @@ public class Converter {
                 convertToMap(getDataFromAPI(), new ObjectMapper()));
     }
 
-    private String getDataFromAPI() {
+    protected String getDataFromAPI() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.exchangeratesapi.io/latest?base=PLN"))
@@ -52,10 +52,8 @@ public class Converter {
         try {
             Map<String, Map<String, Double>> map = mapper.readValue(responseBody, Map.class);
             return map.get("rates");
-        } catch (IOException e) {
-            logger.error("Cannot parse JSON to map", e);
         } catch (Exception e) {
-            logger.error("Empty response body");
+            logger.error("Cannot parse JSON to map");
         }
         return null;
     }
