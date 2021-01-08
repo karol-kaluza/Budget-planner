@@ -1,6 +1,7 @@
-package planner.database;
+package com.planner.database;
 
-import planner.Expense;
+import com.planner.Expense;
+import com.planner.Expense;
 
 import java.time.LocalDate;
 import java.time.Month;

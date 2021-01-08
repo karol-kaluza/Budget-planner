@@ -1,0 +1,11 @@
+2021-01-08 13:29:12 INFO  Converter:33 - HTTPRequest status code: 200
+2021-01-08 13:29:12 INFO  Converter:47 - Rate for GBP: 0.2004311303
+2021-01-08 13:29:12 ERROR Converter:56 - Cannot parse JSON to map
+2021-01-08 13:29:12 INFO  Converter:47 - Rate for GBP: 2.1
+2021-01-08 13:29:12 INFO  Converter:33 - HTTPRequest status code: 200
+2021-01-08 13:36:26 INFO  Converter:33 - HTTPRequest status code: 200
+2021-01-08 13:36:26 INFO  Converter:47 - Rate for EUR: 0.2222320992
+2021-01-08 13:38:16 INFO  Converter:33 - HTTPRequest status code: 200
+2021-01-08 13:38:17 INFO  Converter:47 - Rate for EUR: 0.2222320992
+2021-01-08 13:43:29 INFO  Converter:33 - HTTPRequest status code: 200
+2021-01-08 13:43:29 INFO  Converter:47 - Rate for EUR: 0.2222320992

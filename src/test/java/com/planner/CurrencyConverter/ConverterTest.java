@@ -1,4 +1,4 @@
-package planner.currencyexchange;
+package com.planner.CurrencyConverter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

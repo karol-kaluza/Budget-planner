@@ -1,4 +1,4 @@
-package planner;
+package com.planner;
 
 import java.util.List;
 

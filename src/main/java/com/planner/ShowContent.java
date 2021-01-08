@@ -1,13 +1,16 @@
-package planner;
+package com.planner;
 
-import planner.currencyexchange.Converter;
-import planner.database.LocalDB;
+import com.planner.CurrencyConverter.Converter;
+import com.planner.database.LocalDB;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-public class App {
-    public static void main(String[] args) {
+@RestController
+public class ShowContent {
 
-        Double curRate = new Converter().getRate(Converter.Currency.EUR);
-        System.out.println(curRate);
+    @GetMapping("index")
+    public String run() {
+
 
         LocalDB localDB = new LocalDB();
 
@@ -22,8 +25,8 @@ public class App {
         service.setCategoriesGoals("savings", 5000);
         System.out.println("savings expected in december: " + service.getCategoryGoal("savings"));
         System.out.println("is goal reached in category \"savings\":");
-        service.isGoalReached("savings",12,localDB.list);
-
-
+        service.isGoalReached("savings", 12, localDB.list);
+        Double curRate = new Converter().getRate(Converter.Currency.EUR);
+        return curRate.toString();
     }
 }
