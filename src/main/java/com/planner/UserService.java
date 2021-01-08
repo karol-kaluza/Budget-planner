@@ -1,4 +1,4 @@
-package planner;
+package com.planner;
 
 public class UserService {
 

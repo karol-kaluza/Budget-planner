@@ -1,6 +1,6 @@
-package planner.database;
+package com.planner.database;
 
-import planner.Expense;
+import com.planner.Expense;
 
 import java.util.List;
 

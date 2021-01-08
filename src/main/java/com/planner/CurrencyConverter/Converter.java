@@ -1,10 +1,9 @@
-package planner.currencyexchange;
+package com.planner.CurrencyConverter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
+import org.assertj.core.util.VisibleForTesting;
 
-import java.io.IOException;
-import java.lang.Double;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -39,7 +38,8 @@ public class Converter {
         return "";
     }
 
-    protected Double getRateFromRates(Currency currency, Map<String, Double> rates) {
+    @VisibleForTesting
+    Double getRateFromRates(Currency currency, Map<String, Double> rates) {
         if (rates == null) {
             return 1.0;
         }
