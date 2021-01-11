@@ -1,17 +1,19 @@
 package com.planner;
 
-import com.planner.CurrencyConverter.Converter;
-import jdk.jfr.Registered;
+import com.planner.CurrencyConverter.Currency;
+import com.planner.CurrencyConverter.CurrencyRate;
+import com.planner.CurrencyConverter.ExchangeRatesAPI;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.planner.database.LocalDB;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
 
-        Double curRate = new Converter().getRate(Converter.Currency.EUR);
+        SpringApplication.run(App.class, args);
+
+        Double curRate = new CurrencyRate().getRate(Currency.EUR);
         System.out.println(curRate);
 
         LocalDB localDB = new LocalDB();
