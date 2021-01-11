@@ -30,7 +30,6 @@ public class App {
         System.out.println("is goal reached in category \"savings\":");
         service.isGoalReached("savings",12,localDB.list);
 
-
     }
 }
 

@@ -3,18 +3,20 @@ package com.planner;
 import com.planner.CurrencyConverter.Currency;
 import com.planner.CurrencyConverter.CurrencyRate;
 import com.planner.database.LocalDB;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class ShowContent {
 
-    @GetMapping("index")
+    @RequestMapping(path = "/index")
     public String run() {
-
-
         LocalDB localDB = new LocalDB();
-
         Income income = new Income("salary December", 10_000);
         ExpenseService service = new ExpenseService();
         service.printList(service.getMonthlyList(localDB.list, 12));
@@ -29,6 +31,6 @@ public class ShowContent {
         service.isGoalReached("savings", 12, localDB.list);
 
         Double curRate = new CurrencyRate().getRate(Currency.EUR);
-        return curRate.toString();
+        return "PLN - EUR rate: " + curRate.toString();
     }
 }
