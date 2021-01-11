@@ -7,7 +7,13 @@ import java.util.List;
 public class User {
 
     private String username;
-    private long userId;
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User() {
+    }
 
     public String getUsername() {
         return username;
@@ -15,14 +21,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public List<Expense> getExpenses() {

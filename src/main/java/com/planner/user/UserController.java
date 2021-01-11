@@ -21,7 +21,7 @@ public class UserController {
     }
     @PutMapping("/register")
     public ResponseEntity<PlainResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
-        userService.register(registerRequest.getUsername(),registerRequest.getPassword());
+        userService.register(registerRequest.getUsername());
         return ResponseEntity.ok(new PlainResponse("User saved!"));
     }
     @GetMapping("/users")
