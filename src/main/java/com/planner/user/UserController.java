@@ -24,6 +24,12 @@ public class UserController {
         userService.register(registerRequest.getUsername());
         return ResponseEntity.ok(new PlainResponse("User saved!"));
     }
+    @PutMapping("/removed")
+    public ResponseEntity<PlainResponse> removeUser(@RequestBody RegisterRequest registerRequest) {
+        userService.removeUser(registerRequest.getUsername());
+        return ResponseEntity.ok(new PlainResponse("User removed!"));
+    }
+
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());

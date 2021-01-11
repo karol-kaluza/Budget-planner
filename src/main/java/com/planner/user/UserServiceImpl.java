@@ -1,14 +1,12 @@
 package com.planner.user;
 
-import com.planner.user.User;
-import com.planner.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepositoryImpl repository = new UserRepositoryImpl();
 
@@ -19,6 +17,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void removeUser(String username) {
+        repository.remove(username);
 
     }
 
