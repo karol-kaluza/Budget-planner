@@ -18,6 +18,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void remove(String username) {
+        users.remove(username);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return users.get(username);
     }
@@ -25,5 +30,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Collection<User> findAll() {
         return users.values();
+    }
+
+    public Map<String, User> getUsers() {
+        return users;
     }
 }
