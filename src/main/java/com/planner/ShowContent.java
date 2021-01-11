@@ -1,6 +1,7 @@
 package com.planner;
 
-import com.planner.CurrencyConverter.Converter;
+import com.planner.CurrencyConverter.Currency;
+import com.planner.CurrencyConverter.CurrencyRate;
 import com.planner.database.LocalDB;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,8 @@ public class ShowContent {
         System.out.println("savings expected in december: " + service.getCategoryGoal("savings"));
         System.out.println("is goal reached in category \"savings\":");
         service.isGoalReached("savings", 12, localDB.list);
-        Double curRate = new Converter().getRate(Converter.Currency.EUR);
+
+        Double curRate = new CurrencyRate().getRate(Currency.EUR);
         return "PLN - EUR rate: " + curRate.toString();
     }
 }
