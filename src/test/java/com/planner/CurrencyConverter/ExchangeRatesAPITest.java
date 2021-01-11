@@ -11,7 +11,7 @@ class ExchangeRatesAPITest {
         //given
         String result;
         //when
-        result = new ExchangeRatesAPI().getDataFromAPI();
+        result = new ExchangeRatesRestClient().getDataFromAPI();
         //then
         assertTrue(result.getClass() == String.class);
     }

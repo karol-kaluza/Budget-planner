@@ -8,19 +8,21 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ExchangeRatesAPI {
+public class ExchangeRatesRestClient {
 
-    final static Logger logger = Logger.getLogger(ExchangeRatesAPI.class);
+    final static Logger logger = Logger.getLogger(ExchangeRatesRestClient.class);
     private String data;
+    private HttpClient client = HttpClient.newHttpClient();
 
-    public ExchangeRatesAPI() {
+
+    public ExchangeRatesRestClient() {
         setData(getDataFromAPI());
     }
 
     @VisibleForTesting
     String getDataFromAPI() {
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
+                //todo move to app props
                 .uri(URI.create("https://api.exchangeratesapi.io/latest?base=PLN"))
                 .build();
         try {

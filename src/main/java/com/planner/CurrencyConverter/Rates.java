@@ -2,13 +2,22 @@ package com.planner.CurrencyConverter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
+import org.assertj.core.util.VisibleForTesting;
 
 import java.util.Map;
 
 public class Rates {
-    private final Map<String, Double> data;
+    private Map<String, Double> data;
     final static Logger logger = Logger.getLogger(Rates.class);
 
+    @VisibleForTesting
+    Rates() {
+        String rawData = new ExchangeRatesRestClient().getData();
+        DataConverter util = new DataConverter();
+        this.data = util.convertToMap(rawData, new ObjectMapper());
+    }
+
+    @VisibleForTesting
     double getRate(Currency currency) {
         if (data == null) {
             return 1.0;
@@ -18,9 +27,8 @@ public class Rates {
         return rate;
     }
 
-    Rates() {
-        String rawData = new ExchangeRatesAPI().getData();
-        DataConverter util = new DataConverter();
-        this.data = util.convertToMap(rawData, new ObjectMapper());
+    @VisibleForTesting
+    void setData(Map<String, Double> data) {
+        this.data = data;
     }
 }

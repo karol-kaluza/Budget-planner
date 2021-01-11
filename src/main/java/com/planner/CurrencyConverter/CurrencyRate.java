@@ -1,5 +1,7 @@
 package com.planner.CurrencyConverter;
 
+import org.assertj.core.util.VisibleForTesting;
+
 public class CurrencyRate {
 
     private final Rates rates;
@@ -10,5 +12,10 @@ public class CurrencyRate {
 
     public CurrencyRate() {
         this.rates = new Rates();
+    }
+
+    @VisibleForTesting
+    Rates getRates() {
+        return rates;
     }
 }

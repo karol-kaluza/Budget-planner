@@ -2,7 +2,6 @@ package com.planner;
 
 import com.planner.CurrencyConverter.Currency;
 import com.planner.CurrencyConverter.CurrencyRate;
-import com.planner.CurrencyConverter.ExchangeRatesAPI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.planner.database.LocalDB;
