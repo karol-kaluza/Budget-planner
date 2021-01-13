@@ -41,3 +41,10 @@
 2021-01-11 14:29:13 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
 2021-01-11 14:29:14 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
 2021-01-11 14:29:14 ERROR DataConverter:19 - Cannot parse JSON to map
+2021-01-13 14:05:12 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
+2021-01-13 14:05:12 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
+2021-01-13 14:05:12 INFO  Rates:26 - Rate for EUR: 0.2210042433
+2021-01-13 14:05:12 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
+2021-01-13 14:05:12 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
+2021-01-13 14:05:12 ERROR DataConverter:19 - Cannot parse JSON to map
+2021-01-13 14:05:13 INFO  ExchangeRatesRestClient:30 - HTTPRequest status code: 200
