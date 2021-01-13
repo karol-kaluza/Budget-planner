@@ -63,4 +63,7 @@ public class LocalDB implements DataBase {
         expensesByCategory.forEach(System.out::println);
         return null;
     }
+    public List<Expense> getList() {
+        return list;
+    }
 }
