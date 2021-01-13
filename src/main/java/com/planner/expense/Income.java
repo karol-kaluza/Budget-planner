@@ -1,4 +1,4 @@
-package com.planner;
+package com.planner.expense;
 
 import java.time.LocalDateTime;
 

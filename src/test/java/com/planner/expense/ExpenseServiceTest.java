@@ -1,15 +1,14 @@
-package com.planner;
+package com.planner.expense;
 
-import com.planner.database.LocalDB;
+import com.planner.expense.Expense;
+import com.planner.expense.ExpenseService;
+import com.planner.expense.Income;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,6 +54,16 @@ class ExpenseServiceTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    void getSaveMoneyInMonth_returnsAmountOfMoneySavedInMonth() {
+        //given
+        Income income = new Income("salary December", 10_000);
+        int expected = income.getValue() - Fixtures.TOTAL_DECEMBER;
+        //when
+        int actual = expenseService.getSaveMoneyInMonth(expenseList,income,Fixtures.DECEMBER_NUMBER);
+        //then
+        assertEquals(expected, actual);
+    }
 
     private final static class Fixtures {
 

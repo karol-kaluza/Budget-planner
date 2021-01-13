@@ -1,35 +1,19 @@
 package com.planner.user;
 
-import com.planner.Expense;
+import com.planner.expense.Expense;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class User {
 
     private String username;
+    private List<Expense> expenses;
 
     public User(String username) {
         this.username = username;
     }
-
-    public User() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<Expense> getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(List<Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    private List<Expense> expenses;
 }

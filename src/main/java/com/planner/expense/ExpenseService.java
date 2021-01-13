@@ -1,4 +1,4 @@
-package com.planner;
+package com.planner.expense;
 
 import java.util.HashMap;
 import java.util.List;
