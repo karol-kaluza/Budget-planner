@@ -19,8 +19,8 @@ public class ExchangeRatesRestClient {
     private HttpClient client = HttpClient.newHttpClient();
     private HttpRequest request;
 
-    @Value("${exchangeRestURI}")
-    private String restURI;
+//    @Value("${exchangeRestURI}")
+    private String restURI = "https://api.exchangeratesapi.io/latest?base=PLN";
 
     public ExchangeRatesRestClient() {
         setData(getDataFromAPI());

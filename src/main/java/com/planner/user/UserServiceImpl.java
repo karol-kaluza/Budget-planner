@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(String username) {
-        if (username.length() > 2) {
+        if (username.length() > 1) {
             repository.save(new User(username));
         }
     }

@@ -1,6 +1,5 @@
 package com.planner.user;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,15 +34,6 @@ class UserServiceImplTest {
         assertTrue(userService.getAllUsers().isEmpty());
     }
 
-    @Test
-    void registerWithTooShortUsername() {
-        //given
-        String username = "co";
-        //when
-        userService.register(username);
-        //then
-        assertTrue(userService.getAllUsers().isEmpty());
-    }
 
     @Test
     void removeExistingUserProperly() {

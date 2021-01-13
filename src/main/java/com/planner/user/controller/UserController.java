@@ -1,5 +1,7 @@
-package com.planner.user;
+package com.planner.user.controller;
 
+import com.planner.user.User;
+import com.planner.user.UserService;
 import com.planner.user.model.PlainResponse;
 import com.planner.user.model.RegisterRequest;
 import org.springframework.http.ResponseEntity;

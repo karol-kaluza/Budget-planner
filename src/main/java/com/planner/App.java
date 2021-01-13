@@ -2,6 +2,8 @@ package com.planner;
 
 import com.planner.currency.Currency;
 import com.planner.currency.CurrencyRate;
+import com.planner.user.User;
+import com.planner.user.UserRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.planner.database.LocalDB;
@@ -14,6 +16,7 @@ public class App {
 
         Double curRate = new CurrencyRate().getRate(Currency.EUR);
         System.out.println(curRate);
+
 
 
         LocalDB localDB = new LocalDB();
