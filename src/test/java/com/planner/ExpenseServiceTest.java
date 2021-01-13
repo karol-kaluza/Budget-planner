@@ -25,26 +25,36 @@ class ExpenseServiceTest {
     }
 
     @Test
-    void getMonthlyList_ReturnExtractedList_GivenListAndMonth() {
+    void getMonthlyList_ReturnsExtractedList() {
         //given
-        int monthNumber = Fixtures.DECEMBER_NUMBER;
         List<Expense> expected = Fixtures.ONLY_DECEMBER_LIST;
         //when
-        List<Expense> actual = expenseService.getMonthlyList(expenseList,monthNumber);
+        List<Expense> actual = expenseService.getMonthlyList(expenseList, Fixtures.DECEMBER_NUMBER);
         //then
         assertEquals(expected, actual);
     }
 
     @Test
-    void getAmountMonthlyTotal_returnCorrectAmount() {
+    void getAmountMonthlyTotal_returnsCorrectAmount() {
         //given
-        int monthNumber = Fixtures.DECEMBER_NUMBER;
-        int expected = 1090;
+        int expected = Fixtures.TOTAL_DECEMBER;
         //when
-        int actual = expenseService.getAmountMonthlyTotal(expenseList, monthNumber);
+        int actual = expenseService.getAmountMonthlyTotal(expenseList, Fixtures.DECEMBER_NUMBER);
         //then
         assertEquals(expected,actual);
     }
+
+    @Test
+    void getAmountCategory_returnsMonthlyAmountInSpecificCategory() {
+        //given
+        String categoryName = "food";
+        int expected = Fixtures.FOOD_DECEMBER;
+        //when
+        int actual = expenseService.getAmountCategory(categoryName,Fixtures.DECEMBER_NUMBER,expenseList);
+        //then
+        assertEquals(expected,actual);
+    }
+
 
     private final static class Fixtures {
 
@@ -60,6 +70,7 @@ class ExpenseServiceTest {
                 new Expense("lidl 09.12", "food", 70, LocalDate.of(2020, Month.DECEMBER, 9)));
 
         public static final int DECEMBER_NUMBER = 12;
-
+        public static final int TOTAL_DECEMBER = 1090;
+        public static final int FOOD_DECEMBER = 70;
     }
 }
