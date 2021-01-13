@@ -1,8 +1,9 @@
-package com.planner.CurrencyConverter;
+package com.planner.currency;
 
 import org.apache.log4j.Logger;
 import org.assertj.core.util.VisibleForTesting;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -16,17 +17,19 @@ public class ExchangeRatesRestClient {
     final static Logger logger = Logger.getLogger(ExchangeRatesRestClient.class);
     private String data;
     private HttpClient client = HttpClient.newHttpClient();
-    @Value("${exchangeRestURI}")
-    private String restURI;
+    private HttpRequest request;
 
+//    @Value("${exchangeRestURI}")
+    private String restURI = "https://api.exchangeratesapi.io/latest?base=PLN";
 
     public ExchangeRatesRestClient() {
         setData(getDataFromAPI());
     }
 
     @VisibleForTesting
-    String getDataFromAPI() {
-        HttpRequest request = HttpRequest.newBuilder()
+    public String getDataFromAPI() {
+        System.out.println(restURI);
+        request = HttpRequest.newBuilder()
                 //todo move to app props
                 .uri(URI.create(restURI))
                 .build();

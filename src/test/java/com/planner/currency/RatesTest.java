@@ -1,4 +1,4 @@
-package com.planner.CurrencyConverter;
+package com.planner.currency;
 
 import org.junit.jupiter.api.Test;
 
