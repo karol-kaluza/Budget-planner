@@ -23,6 +23,7 @@ public class expenseManagementController implements expenseManagement {
         dataBase.addExpense(expense);
     }
 
+
     @Override
     public void remove(int id) {
 

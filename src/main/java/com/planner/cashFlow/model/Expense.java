@@ -25,6 +25,12 @@ public class Expense {
         this.date = date;
         this.id = id++;
     }
+    public Expense(String name, String categoryName, int value) {
+        this.name = name;
+        this.categoryName = categoryName;
+        this.value = value;
+        this.id = id++;
+    }
 
 
     @Override
