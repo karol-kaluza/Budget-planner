@@ -1,15 +1,19 @@
-package com.planner.expense;
+package com.planner.cashFlow.model;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
-
+@Getter
+@Setter
 public class Expense {
 
     private String name;
     private String categoryName;
     private int value;
     private LocalDate date;
+    private int id = (int) Math.floor((Math.random()*1_000_000_000));
 
     public Expense() {
     }
@@ -19,48 +23,8 @@ public class Expense {
         this.categoryName = categoryName;
         this.value = value;
         this.date = date;
+        this.id = id++;
     }
-
-    public static int getTotalValue(List<Expense> expensesList) {
-        int totalValue = 0;
-        for (Expense expense : expensesList) {
-            totalValue += expense.getValue();
-        }
-        return totalValue;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
 
 
     @Override

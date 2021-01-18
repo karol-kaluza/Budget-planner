@@ -1,6 +1,6 @@
 package com.planner.database;
 
-import com.planner.expense.Expense;
+import com.planner.cashFlow.model.Expense;
 
 import java.util.ArrayList;
 import java.util.List;

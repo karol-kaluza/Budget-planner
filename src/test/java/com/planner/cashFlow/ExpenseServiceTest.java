@@ -1,8 +1,8 @@
-package com.planner.expense;
+package com.planner.cashFlow;
 
-import com.planner.expense.Expense;
-import com.planner.expense.ExpenseService;
-import com.planner.expense.Income;
+import com.planner.cashFlow.model.Expense;
+import com.planner.cashFlow.model.ExpenseService;
+import com.planner.cashFlow.model.Income;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

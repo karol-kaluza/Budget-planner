@@ -1,4 +1,4 @@
-package com.planner.expense;
+package com.planner.cashFlow.model;
 
 import java.time.LocalDateTime;
 

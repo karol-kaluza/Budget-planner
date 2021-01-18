@@ -1,6 +1,7 @@
 package com.planner.database;
 
-import com.planner.expense.Expense;
+import com.planner.cashFlow.model.Expense;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Repository
 public class LocalDB implements DataBase {
 
     public List<Expense> list = new ArrayList<>();
