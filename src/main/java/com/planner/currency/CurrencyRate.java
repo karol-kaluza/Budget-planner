@@ -1,8 +1,6 @@
 package com.planner.currency;
 
 import org.assertj.core.util.VisibleForTesting;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 public class CurrencyRate {
 
