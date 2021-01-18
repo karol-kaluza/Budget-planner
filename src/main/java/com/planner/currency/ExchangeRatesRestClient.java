@@ -28,8 +28,6 @@ public class ExchangeRatesRestClient {
     private HttpClient client = HttpClient.newHttpClient();
     private HttpRequest request;
 
-
-
     public ExchangeRatesRestClient() {
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(RestUrlConfig.class);
         restUrl = context.getBean(AppProps.class).getRestUrl();

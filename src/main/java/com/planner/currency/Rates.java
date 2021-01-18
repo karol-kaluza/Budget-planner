@@ -13,16 +13,9 @@ public class Rates {
 
     private Map<String, Double> data;
 
-    private ExchangeRatesRestClient restClient;
-
-    @Autowired
-    public Rates(ExchangeRatesRestClient restClient) {
-        this.restClient = restClient;
-    }
-
     @VisibleForTesting
     Rates() {
-        String rawData = restClient.getDataFromAPI();
+        String rawData = new ExchangeRatesRestClient().getDataFromAPI();
         DataConverter util = new DataConverter();
         this.data = util.convertToMap(rawData, new ObjectMapper());
     }
