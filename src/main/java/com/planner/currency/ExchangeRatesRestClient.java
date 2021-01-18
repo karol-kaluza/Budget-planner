@@ -9,6 +9,7 @@ import org.assertj.core.util.VisibleForTesting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
+
 import org.springframework.stereotype.Service;
 
 import java.net.URI;

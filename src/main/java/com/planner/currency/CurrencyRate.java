@@ -1,10 +1,18 @@
 package com.planner.currency;
 
 import org.assertj.core.util.VisibleForTesting;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CurrencyRate {
 
-    private final Rates rates;
+    private Rates rates;
+
+    @Autowired
+    public CurrencyRate(Rates rates) {
+        this.rates = rates;
+    }
 
     public double getRate(Currency currency) {
         return rates.getRate(currency);

@@ -8,13 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Map;
 
 @Slf4j
+
 public class Rates {
 
     private Map<String, Double> data;
 
+    private ExchangeRatesRestClient restClient;
+
+    @Autowired
+    public Rates(ExchangeRatesRestClient restClient) {
+        this.restClient = restClient;
+    }
+
     @VisibleForTesting
     Rates() {
-        String rawData = new ExchangeRatesRestClient().getDataFromAPI();
+        String rawData = restClient.getDataFromAPI();
         DataConverter util = new DataConverter();
         this.data = util.convertToMap(rawData, new ObjectMapper());
     }
