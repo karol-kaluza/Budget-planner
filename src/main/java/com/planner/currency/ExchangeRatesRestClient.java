@@ -1,5 +1,8 @@
 package com.planner.currency;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 import org.assertj.core.util.VisibleForTesting;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +15,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Service
+@Slf4j
 public class ExchangeRatesRestClient {
 
-    final static Logger logger = Logger.getLogger(ExchangeRatesRestClient.class);
+    @Getter
+    @Setter
     private String data;
     private HttpClient client = HttpClient.newHttpClient();
     private HttpRequest request;
@@ -28,26 +33,17 @@ public class ExchangeRatesRestClient {
 
     @VisibleForTesting
     public String getDataFromAPI() {
-        System.out.println(restURI);
         request = HttpRequest.newBuilder()
                 //todo move to app props
                 .uri(URI.create(restURI))
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            logger.info("HTTPRequest status code: " + response.statusCode());
+            log.info("HTTPRequest status code: " + response.statusCode());
             return response.body();
         } catch (Exception e) {
-            logger.error("Connection to api error: ", e);
+            log.error("Connection to api error: ", e);
         }
         return "";
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    private void setData(String data) {
-        this.data = data;
     }
 }
