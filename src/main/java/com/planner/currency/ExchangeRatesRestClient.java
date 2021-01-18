@@ -2,8 +2,8 @@ package com.planner.currency;
 
 import org.apache.log4j.Logger;
 import org.assertj.core.util.VisibleForTesting;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -22,7 +22,9 @@ public class ExchangeRatesRestClient {
     @Value("${exchangeRestURI}")
     private String restURI;
 
-    public ExchangeRatesRestClient() {
+    @Autowired
+    public ExchangeRatesRestClient(@Value("${exchangeRestURI}") String restURI) {
+        this.restURI = restURI;
         setData(getDataFromAPI());
     }
 
