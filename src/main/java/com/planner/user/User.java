@@ -1,6 +1,6 @@
 package com.planner.user;
 
-import com.planner.Expense;
+import com.planner.expense.Expense;
 import lombok.Getter;
 import lombok.Setter;
 

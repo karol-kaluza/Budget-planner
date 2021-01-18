@@ -1,7 +1,8 @@
-package com.planner;
+package com.planner.expense;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Expense {
 
@@ -65,5 +66,21 @@ public class Expense {
     @Override
     public String toString() {
         return date + ": " + value + " zł," + name + ", category: " + categoryName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expense expense = (Expense) o;
+        return value == expense.value &&
+                Objects.equals(name, expense.name) &&
+                Objects.equals(categoryName, expense.categoryName) &&
+                Objects.equals(date, expense.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, categoryName, value, date);
     }
 }

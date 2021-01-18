@@ -2,8 +2,8 @@ package com.planner;
 
 import com.planner.currency.Currency;
 import com.planner.currency.CurrencyRate;
-import com.planner.user.User;
-import com.planner.user.UserRepositoryImpl;
+import com.planner.expense.ExpenseService;
+import com.planner.expense.Income;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.planner.database.LocalDB;

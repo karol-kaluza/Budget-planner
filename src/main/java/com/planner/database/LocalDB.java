@@ -1,7 +1,6 @@
 package com.planner.database;
 
-import com.planner.Expense;
-import com.planner.Expense;
+import com.planner.expense.Expense;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -62,5 +61,8 @@ public class LocalDB implements DataBase {
                 .collect(Collectors.toList());
         expensesByCategory.forEach(System.out::println);
         return null;
+    }
+    public List<Expense> getList() {
+        return list;
     }
 }
