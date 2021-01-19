@@ -45,6 +45,13 @@ public class ExpenseService {
         categories.forEach(System.out::println);
     }
 
+    public List<String> getCategories(List<Expense> list) {
+        return list.stream()
+                .map(Expense::getCategoryName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
     public int getSaveMoneyInMonth(List<Expense> list, Income income, int monthNumber) {
         int savings = income.getValue() - getAmountMonthlyTotal(list, monthNumber);
         return savings;
