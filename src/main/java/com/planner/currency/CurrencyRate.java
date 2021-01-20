@@ -4,7 +4,11 @@ import org.assertj.core.util.VisibleForTesting;
 
 public class CurrencyRate {
 
-    private final Rates rates;
+    private Rates rates;
+
+    public CurrencyRate(Rates rates) {
+        this.rates = rates;
+    }
 
     public double getRate(Currency currency) {
         return rates.getRate(currency);

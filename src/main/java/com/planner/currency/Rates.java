@@ -7,7 +7,9 @@ import org.assertj.core.util.VisibleForTesting;
 import java.util.Map;
 
 @Slf4j
+
 public class Rates {
+
     private Map<String, Double> data;
 
     @VisibleForTesting

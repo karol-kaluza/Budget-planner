@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ExpenseController implements ExpenseInterface {
+public class ExpenseControllerREST implements ExpenseInterface {
 
     private final DataBase dataBase;
     private final ExpenseService expenseService;
 
-    public ExpenseController(DataBase dataBase, ExpenseService expenseService) {
+    public ExpenseControllerREST(DataBase dataBase, ExpenseService expenseService) {
         this.dataBase = dataBase;
         this.expenseService = expenseService;
     }
@@ -38,11 +38,4 @@ public class ExpenseController implements ExpenseInterface {
     public List<Expense> getAllExpenses() {
         return dataBase.getAllExpenses();
     }
-
-    @PostMapping("/getMonthlyList")
-    public List<Expense> getMonthlyList(@RequestParam(value = "monthNr") int monthNr) {
-        System.out.println(dataBase.getAllExpenses());
-        return expenseService.getMonthlyList(dataBase.getAllExpenses(), monthNr);
-    }
-
 }
