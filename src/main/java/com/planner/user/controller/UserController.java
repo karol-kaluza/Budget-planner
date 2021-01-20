@@ -4,21 +4,16 @@ import com.planner.user.User;
 import com.planner.user.UserService;
 import com.planner.user.model.PlainResponse;
 import com.planner.user.model.RegisterRequest;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class UserController {
     private final UserService userService;
 
-    @Inject
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -26,10 +21,10 @@ public class UserController {
     @PutMapping("/register")
     public ResponseEntity<PlainResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
         userService.register(registerRequest.getUsername());
-        return ResponseEntity.ok(new PlainResponse("User saved!"));
+        return ResponseEntity.ok(new PlainResponse("User " + registerRequest.getUsername() + " saved!"));
     }
 
-    @PutMapping("/removed")
+    @DeleteMapping("/removed")
     public ResponseEntity<PlainResponse> removeUser(@RequestBody RegisterRequest registerRequest) {
         userService.removeUser(registerRequest.getUsername());
         return ResponseEntity.ok(new PlainResponse("User removed!"));

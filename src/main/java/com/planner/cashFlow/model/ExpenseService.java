@@ -1,10 +1,12 @@
 package com.planner.cashFlow.model;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+@Service
 public class ExpenseService {
 
     private Map<String, Integer> categoriesGoals = new HashMap<>();
