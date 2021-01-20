@@ -12,6 +12,7 @@ public class User {
 
     private String username;
     private List<Expense> expenses;
+    private String userType;
 
     public User(String username) {
         this.username = username;
