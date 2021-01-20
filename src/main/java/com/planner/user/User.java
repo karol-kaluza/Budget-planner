@@ -1,6 +1,6 @@
 package com.planner.user;
 
-import com.planner.expense.Expense;
+import com.planner.cashFlow.model.Expense;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +12,7 @@ public class User {
 
     private String username;
     private List<Expense> expenses;
+    private String userType;
 
     public User(String username) {
         this.username = username;

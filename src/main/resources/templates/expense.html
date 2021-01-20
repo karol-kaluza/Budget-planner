@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/semantic.min.css">
+</head>
+<body>
+    <header th:insert="index :: header"></header>
+<h1>Total money spent december</h1>
+<table border="3">
+    <thead>
+    <tr>
+        <th> month </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="expense: ${expense}">
+        <td><span th:text="${expense.name}"> value </span></td>
+    </tr>
+    </tbody>
+</table>
+<form action="#" th:action="@{/addExpense}" th:object="${expense}" method="post">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" />
+    <label>Category:</label>
+    <input type="text" th:field="*{categoryName}" />
+    <label>Value:</label>
+    <input type="number" th:field="*{value}" />
+    <button type="submit">Dodaj</button>
+</form>
+</body>
+</html>

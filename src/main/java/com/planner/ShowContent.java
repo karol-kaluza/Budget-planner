@@ -3,8 +3,8 @@ package com.planner;
 import com.planner.currency.Currency;
 import com.planner.currency.CurrencyRate;
 import com.planner.database.LocalDB;
-import com.planner.expense.ExpenseService;
-import com.planner.expense.Income;
+import com.planner.cashFlow.model.ExpenseService;
+import com.planner.cashFlow.model.Income;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

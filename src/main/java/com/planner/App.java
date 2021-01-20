@@ -2,8 +2,8 @@ package com.planner;
 
 import com.planner.currency.Currency;
 import com.planner.currency.CurrencyRate;
-import com.planner.expense.ExpenseService;
-import com.planner.expense.Income;
+import com.planner.cashFlow.model.ExpenseService;
+import com.planner.cashFlow.model.Income;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.planner.database.LocalDB;
@@ -33,6 +33,9 @@ public class App {
         System.out.println("savings expected in december: " + service.getCategoryGoal("savings"));
         System.out.println("is goal reached in category \"savings\":");
         service.isGoalReached("savings",12,localDB.list);
+        localDB.list.stream()
+                .map(x -> x.getId())
+                .forEach(System.out::println);
 
     }
 }
