@@ -1,5 +1,6 @@
 package com.planner;
 
+import com.planner.cashFlow.model.Expense;
 import com.planner.cashFlow.model.ExpenseService;
 import com.planner.database.LocalDB;
 import com.planner.user.User;
@@ -19,6 +20,7 @@ public class AppMVC {
         model.addAttribute("user", user);
         model.addAttribute("categories", expensUtils.getCategories(data.getList()));
         model.addAttribute("expenses", data.getList());
+        model.addAttribute("expense", new Expense());
         return "index";
     }
 }
