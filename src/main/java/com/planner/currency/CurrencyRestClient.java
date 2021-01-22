@@ -13,24 +13,22 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-@Service
 @Slf4j
-public class ExchangeRatesRestClient {
+@Service
+public class CurrencyRestClient {
 
     private String restUrl;
     private HttpClient client = HttpClient.newHttpClient();
     private HttpRequest request;
 
-    public ExchangeRatesRestClient() {
+    public CurrencyRestClient() {
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(RestUrlConfig.class);
         restUrl = context.getBean(AppProps.class).getRestUrl();
-        setData(getDataFromAPI());
     }
 
     @VisibleForTesting
     public String getDataFromAPI() {
         request = HttpRequest.newBuilder()
-                //todo move to app props
                 .uri(URI.create(restUrl))
                 .build();
         try {

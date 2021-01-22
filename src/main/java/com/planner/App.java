@@ -1,7 +1,5 @@
 package com.planner;
 
-import com.planner.currency.Currency;
-import com.planner.currency.CurrencyRateProvider;
 import com.planner.cash_flow.ExpenseService;
 import com.planner.cash_flow.model.Income;
 import org.springframework.boot.SpringApplication;
@@ -13,11 +11,6 @@ public class App {
     public static void main(String[] args) {
 
         SpringApplication.run(App.class, args);
-
-        //TODO remove unused code when not needed
-        Double curRate = new CurrencyRateProvider().getRate(Currency.EUR);
-        System.out.println(curRate);
-
 
 
         LocalDB localDB = new LocalDB();

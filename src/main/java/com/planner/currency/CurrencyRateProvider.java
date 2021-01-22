@@ -1,20 +1,18 @@
 package com.planner.currency;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.util.VisibleForTesting;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
 public class CurrencyRateProvider {
 
-    ExchangeRatesRestClient client;
+    CurrencyRestClient client;
     HttpResponseToCurrencyMapConverter converter;
     ObjectMapper objectMapper;
-    //TODO add depenency injection
 
     @Autowired
-    public CurrencyRateProvider(ExchangeRatesRestClient client,
+    public CurrencyRateProvider(CurrencyRestClient client,
                                 HttpResponseToCurrencyMapConverter converter,
                                 ObjectMapper objectMapper) {
         this.client = client;
@@ -26,5 +24,9 @@ public class CurrencyRateProvider {
         String jsonResponse = client.getDataFromAPI();
         Map<String, Double> currencies = converter.convert(jsonResponse, objectMapper);
         return currencies.get(currency);
+    }
+
+    public enum Currency {
+        EUR, USD, CHF, GBP, PLN;
     }
 }
