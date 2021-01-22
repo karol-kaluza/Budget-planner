@@ -12,15 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExpenseServiceTest {
 
-    //TODO sprawdzic czy dziala w taki sposob
     private List<Expense> expenseList = Fixtures.INPUT_LIST;
     private ExpenseService expenseService = new ExpenseService();
-//
-//    @BeforeEach
-//    void setExpenseList() {
-//        expenseList = Fixtures.INPUT_LIST;
-//        expenseService = new ExpenseService();
-//    }
+
 
     @Test
     void getMonthlyList_ReturnsExtractedList() {

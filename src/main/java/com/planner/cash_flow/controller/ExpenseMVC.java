@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.time.LocalDate;
 
-//TODO find out what is it for? :)
 public class ExpenseMVC {
 
     @GetMapping("/expense")
