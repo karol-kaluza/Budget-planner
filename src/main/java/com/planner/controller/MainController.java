@@ -1,6 +1,6 @@
-package com.planner;
+package com.planner.controller;
 
-import com.planner.cashFlow.model.ExpenseService;
+import com.planner.cash_flow.ExpenseService;
 import com.planner.database.LocalDB;
 import com.planner.user.User;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AppMVC {
+public class MainController {
 
     @GetMapping("/index")
     public String index(Model model) {

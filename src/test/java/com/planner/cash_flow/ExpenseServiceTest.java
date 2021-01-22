@@ -1,28 +1,20 @@
-package com.planner.cashFlow;
+package com.planner.cash_flow;
 
-import com.planner.cashFlow.model.Expense;
-import com.planner.cashFlow.model.ExpenseService;
-import com.planner.cashFlow.model.Income;
-import org.junit.jupiter.api.BeforeEach;
+import com.planner.cash_flow.model.Expense;
+import com.planner.cash_flow.model.Income;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExpenseServiceTest {
 
-    private List<Expense> expenseList;
-    private ExpenseService expenseService;
+    private List<Expense> expenseList = Fixtures.INPUT_LIST;
+    private ExpenseService expenseService = new ExpenseService();
 
-    @BeforeEach
-    void setExpenseList() {
-        expenseList = Fixtures.INPUT_LIST;
-        expenseService = new ExpenseService();
-    }
 
     @Test
     void getMonthlyList_ReturnsExtractedList() {

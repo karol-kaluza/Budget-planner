@@ -1,4 +1,4 @@
-package com.planner.currency.config;
+package com.planner.config;
 
 import lombok.Getter;
 import lombok.Setter;
