@@ -7,15 +7,15 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DataConverterTest {
+class HttpResponseToCurrencyMapConverterTest {
 
     @Test
     public void convertToMap() {
         // given
         String testInput = "{\"rates\": {\"CUR1\":\"12\", \"CUR2\":\"15\"}}";
-        DataConverter subject = new DataConverter();
+        HttpResponseToCurrencyMapConverter subject = new HttpResponseToCurrencyMapConverter();
         // when
-        Map<String, Double> actual = subject.convertToMap(testInput, new ObjectMapper());
+        Map<String, Double> actual = subject.convert(testInput, new ObjectMapper());
         // then
         assertEquals(actual.get("CUR1"), "12");
     }
@@ -24,9 +24,9 @@ class DataConverterTest {
     public void convertToMapReturnsNullWithEmptyStringArg() {
         // given
         String testInput = "";
-        DataConverter subject = new DataConverter();
+        HttpResponseToCurrencyMapConverter subject = new HttpResponseToCurrencyMapConverter();
         // when
-        Map<String, Double> actual = subject.convertToMap(testInput, new ObjectMapper());
+        Map<String, Double> actual = subject.convert(testInput, new ObjectMapper());
         // then
         assertNull(actual);
     }
@@ -35,9 +35,9 @@ class DataConverterTest {
     public void convertToMapReturnsNullWithWrongStringArg() {
         // given
         String testInput = "{\"rate\": {\"CUR1\":\"12\", \"CUR2\":\"15\"}}";
-        DataConverter subject = new DataConverter();
+        HttpResponseToCurrencyMapConverter subject = new HttpResponseToCurrencyMapConverter();
         // when
-        Map<String, Double> actual = subject.convertToMap(testInput, new ObjectMapper());
+        Map<String, Double> actual = subject.convert(testInput, new ObjectMapper());
         // then
         assertNull(actual);
     }

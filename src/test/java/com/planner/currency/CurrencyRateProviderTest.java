@@ -2,14 +2,14 @@ package com.planner.currency;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class CurrencyRateTest {
+class CurrencyRateProviderTest {
 
     @Test
     public void getProperRate() {
         //given
-        CurrencyRate subject = new CurrencyRate();
+        CurrencyRateProvider subject = new CurrencyRateProvider();
         //when
         //then
         assertNotNull( subject.getRates());

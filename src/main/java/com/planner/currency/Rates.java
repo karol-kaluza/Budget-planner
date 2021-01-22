@@ -4,19 +4,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.VisibleForTesting;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-
 public class Rates {
 
     private Map<String, Double> data;
 
     @VisibleForTesting
     Rates() {
+        data = new HashMap<>();
+    }
+
+    public void fillCurrencyRatesFromService() {
         String rawData = new ExchangeRatesRestClient().getDataFromAPI();
-        DataConverter util = new DataConverter();
-        this.data = util.convertToMap(rawData, new ObjectMapper());
+        //TODO make converter field, inject it with DI. Change the name
+        HttpResponseToCurrencyMapConverter util = new HttpResponseToCurrencyMapConverter();
+        this.data = util.convert(rawData, new ObjectMapper());
     }
 
     @VisibleForTesting

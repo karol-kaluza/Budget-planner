@@ -7,10 +7,10 @@ import org.assertj.core.util.VisibleForTesting;
 import java.util.Map;
 
 @Slf4j
-public class DataConverter {
+public class HttpResponseToCurrencyMapConverter {
 
     @VisibleForTesting
-    Map<String, Double> convertToMap(String responseBody, ObjectMapper mapper) {
+    Map<String, Double> convert(String responseBody, ObjectMapper mapper) {
         try {
             Map<String, Map<String, Double>> map = mapper.readValue(responseBody, Map.class);
             return map.get("rates");

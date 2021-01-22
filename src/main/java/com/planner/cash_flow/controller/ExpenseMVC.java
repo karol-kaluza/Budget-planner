@@ -1,6 +1,6 @@
-package com.planner.cashFlow.controller;
+package com.planner.cash_flow.controller;
 
-import com.planner.cashFlow.model.Expense;
+import com.planner.cash_flow.model.Expense;
 import com.planner.user.User;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-//TODO
+
+//TODO find out what is it for? :)
 public class ExpenseMVC {
 
     @GetMapping("/expense")
