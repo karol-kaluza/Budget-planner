@@ -1,4 +1,4 @@
-package com.planner;
+package com.planner.controller;
 
 import com.planner.cash_flow.ExpenseService;
 import com.planner.database.LocalDB;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//TODO move to some package
 @Controller
 public class MainController {
 

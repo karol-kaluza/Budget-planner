@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.time.LocalDate;
 
-public class ExpenseMVC {
+public class ExpenseController {
+    //TODO what this controller will do?
 
     @GetMapping("/expense")
     public String expenseShow(Model model) {
