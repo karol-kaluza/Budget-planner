@@ -1,6 +1,7 @@
 package com.planner.controller;
 
 import com.planner.cash_flow.ExpenseService;
+import com.planner.cash_flow.model.Expense;
 import com.planner.database.LocalDB;
 import com.planner.user.User;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ public class MainController {
         model.addAttribute("user", user);
         model.addAttribute("categories", expensUtils.getCategories(data.getList()));
         model.addAttribute("expenses", data.getList());
+        model.addAttribute("expense", new Expense());
         return "index";
     }
 }
