@@ -1,10 +1,11 @@
-package com.planner.cashFlow.model;
+package com.planner.cash_flow.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Objects;
+
 @Getter
 @Setter
 public class Expense {
@@ -13,7 +14,11 @@ public class Expense {
     private String categoryName;
     private int value;
     private LocalDate date;
-    private int id = (int) Math.floor((Math.random()*1_000_000_000));
+    private int id = generateId();
+
+    private int generateId() {
+        return (int) Math.floor((Math.random()*1_000_000_000));
+    }
 
     public Expense() {
     }
@@ -23,15 +28,11 @@ public class Expense {
         this.categoryName = categoryName;
         this.value = value;
         this.date = date;
-        this.id = id++;
+        this.id = generateId();
     }
     public Expense(String name, String categoryName, int value) {
-        this.name = name;
-        this.categoryName = categoryName;
-        this.value = value;
-        this.id = id++;
+        this(name, categoryName, value, LocalDate.now());
     }
-
 
     @Override
     public String toString() {

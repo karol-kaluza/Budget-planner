@@ -1,7 +1,6 @@
-package com.planner.cashFlow.controller;
+package com.planner.cash_flow.controller;
 
-import com.planner.cashFlow.model.Expense;
-import com.planner.user.User;
+import com.planner.cash_flow.model.Expense;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
