@@ -1,6 +1,6 @@
 package com.planner.user;
 
-import com.planner.cashFlow.model.Expense;
+import com.planner.cash_flow.model.Expense;
 import lombok.Getter;
 import lombok.Setter;
 

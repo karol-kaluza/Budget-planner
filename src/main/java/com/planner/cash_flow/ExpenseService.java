@@ -1,11 +1,14 @@
-package com.planner.cashFlow.model;
+package com.planner.cash_flow;
 
+import com.planner.cash_flow.model.Expense;
+import com.planner.cash_flow.model.Income;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 @Service
 public class ExpenseService {
 
