@@ -2,6 +2,8 @@ package com.planner.currency;
 
 import com.planner.config.AppProps;
 import com.planner.config.RestUrlConfig;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.VisibleForTesting;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,6 +17,8 @@ import java.net.http.HttpResponse;
 
 @Slf4j
 @Service
+@Getter
+@Setter
 public class CurrencyRestClient {
 
     private String restUrl;
@@ -28,11 +32,11 @@ public class CurrencyRestClient {
 
     @VisibleForTesting
     public String getDataFromAPI() {
-        request = HttpRequest.newBuilder()
-                .uri(URI.create(restUrl))
-                .build();
+        setRequest(HttpRequest.newBuilder()
+                .uri(URI.create(getRestUrl()))
+                .build());
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(getRequest(), HttpResponse.BodyHandlers.ofString());
             log.info("HTTPRequest status code: " + response.statusCode());
             return response.body();
         } catch (Exception e) {

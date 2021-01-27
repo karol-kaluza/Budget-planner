@@ -2,16 +2,15 @@ package com.planner;
 
 import com.planner.cash_flow.ExpenseService;
 import com.planner.cash_flow.model.Income;
+import com.planner.database.LocalDB;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.planner.database.LocalDB;
 
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
 
         SpringApplication.run(App.class, args);
-
 
         LocalDB localDB = new LocalDB();
 

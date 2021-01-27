@@ -23,6 +23,9 @@ public class CurrencyRateProvider {
     public double getRate(Currency currency) {
         String jsonResponse = client.getDataFromAPI();
         Map<String, Double> currencies = converter.convert(jsonResponse, objectMapper);
+        if (currencies == null || currencies.size() == 0) {
+            return -1;
+        }
         return currencies.get(currency);
     }
 
