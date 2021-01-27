@@ -27,6 +27,7 @@
             <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}"></button>
         </div>
     </section>
+    <p>Kurs EUR-PLN: <span th:text="${currency}"></span></p>
     <section class="container mx-auto px-5">
         <table class="table">
             <thead>
