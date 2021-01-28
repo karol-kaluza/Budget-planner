@@ -34,7 +34,7 @@ class ExpenseServiceTest {
     @Test
     void getMonthlyList_givenEmptyList() {
         //given
-        List <Expense> expected = Fixtures.EMPTY_LIST;
+        List<Expense> expected = Fixtures.EMPTY_LIST;
         //when
         List<Expense> actual = expenseService.getMonthlyList(Fixtures.EMPTY_LIST, Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020);
         //then
@@ -48,7 +48,7 @@ class ExpenseServiceTest {
         //when
         int actual = expenseService.getAmountMonthlyTotal(expenseList, Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020);
         //then
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -67,11 +67,10 @@ class ExpenseServiceTest {
         String categoryName = "food";
         int expected = Fixtures.FOOD_DECEMBER;
         //when
-        int actual = expenseService.getAmountCategory(categoryName,Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020, expenseList);
+        int actual = expenseService.getAmountCategory(categoryName, Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020, expenseList);
         //then
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
-
 
     @Test
     void getSaveMoneyInMonth_returnsAmountOfMoneySavedInMonth() {
@@ -79,7 +78,7 @@ class ExpenseServiceTest {
         Income income = new Income("salary December", 10_000);
         int expected = income.getValue() - Fixtures.TOTAL_DECEMBER;
         //when
-        int actual = expenseService.getSaveMoneyInMonth(expenseList,income,Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020);
+        int actual = expenseService.getSaveMoneyInMonth(expenseList, income, Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020);
         //then
         assertEquals(expected, actual);
     }
@@ -89,7 +88,6 @@ class ExpenseServiceTest {
         //given
         ExpenseService expenseService = new ExpenseService();
         expenseService.setCategoriesGoals("food", 1500);
-
         String food = "food";
         int expected = 1500;
         //when
@@ -103,11 +101,11 @@ class ExpenseServiceTest {
         //given
         ExpenseService expenseService = new ExpenseService();
         expenseService.setCategoriesGoals("food", 1500);
-        Map<String, Integer> expected = Map.of("food",1500);
+        Map<String, Integer> expected = Map.of("food", 1500);
         //when
-        Map<String,Integer>actual = expenseService.getCategoriesGoals();
+        Map<String, Integer> actual = expenseService.getCategoriesGoals();
         //then
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -117,10 +115,11 @@ class ExpenseServiceTest {
         expenseService.setCategoriesGoals("food", 1500);
         boolean expected = true;
         //when
-        boolean actual = expenseService.isGoalReached(food,Fixtures.DECEMBER_NUMBER,Fixtures.YEAR_2020,Fixtures.INPUT_LIST);
+        boolean actual = expenseService.isGoalReached(food, Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020, Fixtures.INPUT_LIST);
         //then
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
+
     @Test
     void isGoalReached_givenFalse() {
         //given
@@ -129,21 +128,20 @@ class ExpenseServiceTest {
         expenseService.setCategoriesGoals("food", 60);
         boolean expected = false;
         //when
-        boolean actual = expenseService.isGoalReached(food,Fixtures.DECEMBER_NUMBER,Fixtures.YEAR_2020,Fixtures.INPUT_LIST);
+        boolean actual = expenseService.isGoalReached(food, Fixtures.DECEMBER_NUMBER, Fixtures.YEAR_2020, Fixtures.INPUT_LIST);
         //then
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void getCategories_test() {
         //given
-        List<String>expected = List.of("entertainment","accommodation","food");
+        List<String> expected = List.of("entertainment", "accommodation", "food");
         //when
-        List<String>actual = expenseService.getCategories(Fixtures.ONLY_DECEMBER_LIST);
+        List<String> actual = expenseService.getCategories(Fixtures.ONLY_DECEMBER_LIST);
         //then
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
-
 
     private final static class Fixtures {
 
@@ -159,7 +157,6 @@ class ExpenseServiceTest {
                 new Expense("lidl 09.12", "food", 70, LocalDate.of(2020, Month.DECEMBER, 9)));
 
         public static final List<Expense> EMPTY_LIST = new ArrayList<>();
-
         public static final int DECEMBER_NUMBER = 12;
         public static final int TOTAL_DECEMBER = 1090;
         public static final int FOOD_DECEMBER = 70;
