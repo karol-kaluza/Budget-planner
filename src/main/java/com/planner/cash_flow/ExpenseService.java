@@ -4,6 +4,8 @@ import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.model.Income;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,40 +16,32 @@ public class ExpenseService {
 
     private Map<String, Integer> categoriesGoals = new HashMap<>();
 
-    public void printList(List<Expense> list) {
-        list.forEach(System.out::println);
-    }
 
-    public List<Expense> getMonthlyList(List<Expense> list, int monthNumber) {
+    public List<Expense> getMonthlyList(List<Expense> list, int monthNumber, int year) {
         List<Expense> monthlyExpenses = list.stream()
                 .filter(x -> x.getDate().getMonth().getValue() == monthNumber)
+                .filter(x -> x.getDate().getYear() == year)
                 .collect(Collectors.toList());
         return monthlyExpenses;
     }
 
-    public int getAmountMonthlyTotal(List<Expense> list, int monthNumber) {
+    public int getAmountMonthlyTotal(List<Expense> list, int monthNumber, int year) {
         int sum = list.stream()
                 .filter(x -> x.getDate().getMonth().getValue() == monthNumber)
+                .filter(x -> x.getDate().getYear() == year)
                 .mapToInt(Expense::getValue)
                 .sum();
         return sum;
     }
 
-    public int getAmountCategory(String category, int monthNumber, List<Expense> list) {
+    public int getAmountCategory(String category, int monthNumber, int year, List<Expense> list) {
         int sum = list.stream()
                 .filter(x -> x.getCategoryName().equals(category))
                 .filter(x -> x.getDate().getMonth().getValue() == monthNumber)
+                .filter(x -> x.getDate().getYear() == year)
                 .mapToInt(Expense::getValue)
                 .sum();
         return sum;
-    }
-
-    public void printCategory(List<Expense> list) {
-        List<String> categories = list.stream()
-                .map(Expense::getCategoryName)
-                .distinct()
-                .collect(Collectors.toList());
-        categories.forEach(System.out::println);
     }
 
     public List<String> getCategories(List<Expense> list) {
@@ -57,8 +51,8 @@ public class ExpenseService {
                 .collect(Collectors.toList());
     }
 
-    public int getSaveMoneyInMonth(List<Expense> list, Income income, int monthNumber) {
-        int savings = income.getValue() - getAmountMonthlyTotal(list, monthNumber);
+    public int getSaveMoneyInMonth(List<Expense> list, Income income, int monthNumber, int year) {
+        int savings = income.getValue() - getAmountMonthlyTotal(list, monthNumber, year);
         return savings;
     }
 
@@ -75,11 +69,11 @@ public class ExpenseService {
         return categoryGoal;
     }
 
-    public void isGoalReached(String category, int monthNumber, List<Expense>list) {
-        if (getCategoryGoal(category) >= getAmountCategory(category, monthNumber,list)){
-            System.out.println("YES");
-        }else {
-            System.out.println("NO");
+    public boolean isGoalReached(String category, int monthNumber, int year, List<Expense> list) {
+        if (getCategoryGoal(category) >= getAmountCategory(category, monthNumber, year, list)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
