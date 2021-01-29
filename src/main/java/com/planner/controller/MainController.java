@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.text.DecimalFormat;
+
 @Controller
 public class MainController {
 
@@ -22,15 +24,18 @@ public class MainController {
 
     @GetMapping("/index")
     public String index(Model model) {
-        User user = new User("jacko12");
-        user.setUserType("admin");
+        //Only for preview - JJDRLW-8-front-base
+        User user = new User("Lambda Warrior");
+        DecimalFormat df = new DecimalFormat("#.####");
+        double rate = Double.parseDouble(df.format(currencyRateProvider.getRate(CurrencyRateProvider.Currency.EUR)));
+        user.setUserType("product owner");
         LocalDB data = new LocalDB();
         ExpenseService expensUtils = new ExpenseService();
         model.addAttribute("user", user);
         model.addAttribute("categories", expensUtils.getCategories(data.getList()));
         model.addAttribute("expenses", data.getList());
         model.addAttribute("expense", new Expense());
-        model.addAttribute("currency", currencyRateProvider.getRate(CurrencyRateProvider.Currency.EUR));
+        model.addAttribute("currency", rate);
 
         return "index";
     }

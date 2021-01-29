@@ -1,11 +1,14 @@
 package com.planner.currency;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Slf4j
 @Component
 public class CurrencyRateProvider {
 
@@ -28,6 +31,7 @@ public class CurrencyRateProvider {
         if (currencies == null || currencies.size() == 0) {
             return -1;
         }
+        log.info("Current rate for: " + currency + " is " + currencies.get(currency.toString()));
         return currencies.get(currency.toString());
     }
 
