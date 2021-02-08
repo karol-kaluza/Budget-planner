@@ -3,6 +3,7 @@ package com.planner.cash_flow.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
