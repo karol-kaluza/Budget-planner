@@ -1,15 +1,13 @@
 package com.planner.user;
 
+import com.planner.user.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
 import java.util.Collection;
+import java.util.UUID;
 
-public interface UserRepository {
-
-    void save (User user);
-
-    void remove (String username);
-
-    User findByUsername(String username);
-
-    Collection<User> findAll();
+@RepositoryRestResource(path = "user")
+public interface UserRepository extends JpaRepository<User, UUID> {
 
 }

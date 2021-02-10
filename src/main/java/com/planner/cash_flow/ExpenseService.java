@@ -4,8 +4,6 @@ import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.model.Income;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +13,6 @@ import java.util.stream.Collectors;
 public class ExpenseService {
 
     private Map<String, Integer> categoriesGoals = new HashMap<>();
-
 
     public List<Expense> getMonthlyList(List<Expense> list, int monthNumber, int year) {
         List<Expense> monthlyExpenses = list.stream()

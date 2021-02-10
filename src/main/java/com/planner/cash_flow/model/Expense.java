@@ -2,23 +2,29 @@ package com.planner.cash_flow.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
+@Entity
 public class Expense {
 
+    @Id
+    @GeneratedValue
+    @Type(type = "org.hibernate.type.UUIDCharType")
+    private UUID id;
     private String name;
     private String categoryName;
     private int value;
     private LocalDate date;
-    private int id = generateId();
 
-    private int generateId() {
-        return (int) Math.floor((Math.random()*1_000_000_000));
-    }
 
     public Expense() {
     }
@@ -28,8 +34,8 @@ public class Expense {
         this.categoryName = categoryName;
         this.value = value;
         this.date = date;
-        this.id = generateId();
     }
+
     public Expense(String name, String categoryName, int value) {
         this(name, categoryName, value, LocalDate.now());
     }
