@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface ExpenseInterface{
+public interface ExpenseInterface {
 
     ResponseEntity<PlainResponse> add(Expense expense);
 

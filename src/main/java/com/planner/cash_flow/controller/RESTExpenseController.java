@@ -1,9 +1,11 @@
 package com.planner.cash_flow.controller;
 
-import com.planner.cash_flow.ExpenseService;
+import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.model.Expense;
 import com.planner.database.DataBase;
+import com.planner.service.ServiceExp;
 import com.planner.user.model.PlainResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class RESTExpenseController implements ExpenseInterface {
 
     private final DataBase dataBase;
-    private final ExpenseService expenseService;
+    private final ServiceExp serviceExp;
 
-    public RESTExpenseController(DataBase dataBase, ExpenseService expenseService) {
-        this.dataBase = dataBase;
-        this.expenseService = expenseService;
+    @PutMapping("/save")
+    public ExpenseDto saveExpense(@RequestBody ExpenseDto expenseDto) {
+        return serviceExp.saveExpense(expenseDto);
     }
+
 
     @PutMapping("/addExpense")
     @Override
