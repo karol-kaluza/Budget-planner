@@ -22,21 +22,18 @@ public class MainController {
         this.currencyRateProvider = currencyRateProvider;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/main")
     public String index(Model model) {
         //Only for preview - JJDRLW-8-front-base
-        User user = new User("Lambda Warrior");
         DecimalFormat df = new DecimalFormat("#.####");
         double rate = Double.parseDouble(df.format(currencyRateProvider.getRate(CurrencyRateProvider.Currency.EUR)));
-        user.setUserType("product owner");
         LocalDB data = new LocalDB();
         ExpenseService expensUtils = new ExpenseService();
-        model.addAttribute("user", user);
         model.addAttribute("categories", expensUtils.getCategories(data.getList()));
         model.addAttribute("expenses", data.getList());
         model.addAttribute("expense", new Expense());
         model.addAttribute("currency", rate);
 
-        return "index";
+        return "main";
     }
 }

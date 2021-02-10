@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Planner</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="authenticated">
+        <header class="container nav justify-content-between align-items-baseline pt-5" th:fragment="header">
+            <h1 class="">Planner</h1>
+            <div class="nav-item">
+                <button class="nav-item btn btn-primary" id="add-expense">+ Expense</button>
+            </div>
+            <div class="card nav-item p-3 text-center">
+                <h2 id="username" class="font-bold"></h2>
+                <p>Product Owner</p>
+                <p class="badge bg-secondary">EUR-PLN: <span th:text="${currency}"></span></p>
+                <button class="btn btn-primary fluid" onclick="logout()">Logout</button>
+            </div>
+        </header>
+        <div th:insert="add-expense :: form"></div>
+        <section class="container mx-auto px-5">
+            <h3 class="text-xl font-bold">Categories:</h3>
+            <div>
+                <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}"></button>
+            </div>
+        </section>
+        <section class="container mx-auto px-5">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>All expenses</th>
+                    <th>PLN</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="expense : ${expenses}">
+                    <td th:text="${expense.name}"></td>
+                    <td th:text="${expense.value}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $.get("/user", function(data) {
+        $("#username").html(data.name);
+    });
+
+    var logout = function() {
+        $.post("/logout", function() {
+            $("#user").html('');
+        })
+        return true;
+    }
+</script>
+<script src="/js/addExpense.js"></script>
+</html>
