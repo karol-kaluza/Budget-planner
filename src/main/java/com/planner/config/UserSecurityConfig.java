@@ -15,13 +15,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login*").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/main", true)
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .deleteCookies("JSESSIONID");
+                .oauth2Login();
     }
 
 }

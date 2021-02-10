@@ -1,30 +1,34 @@
 package com.planner.cash_flow.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.planner.user.model.User;
+import lombok.Data;
 import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-@Getter
-@Setter
 @Entity
+@Data
 public class Expense {
 
     @Id
     @GeneratedValue
     @Type(type = "org.hibernate.type.UUIDCharType")
+    @Column(name = "expense_id")
     private UUID id;
     private String name;
     private String categoryName;
     private int value;
     private LocalDate date;
 
+    @ManyToOne
+    private User user;
 
     public Expense() {
     }

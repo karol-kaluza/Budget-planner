@@ -8,13 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.UUID;
@@ -38,9 +41,16 @@ public class User {
     @Length(min = 5)
     private String password;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Expense> expenses;
-    private List<Income> incomes;
+
+//    private List<Income> incomes;
 
     @Enumerated(EnumType.STRING)
     private CurrencyRateProvider.Currency defaultCurrency;
+
+    public User(@NotBlank String username, @Length(min = 5) String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ExpenseInterface {
 
-    ResponseEntity<PlainResponse> add(Expense expense);
+    ResponseEntity<String> add(Expense expense);
 
     void remove(int id);
 

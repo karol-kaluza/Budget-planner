@@ -1,4 +1,4 @@
-package com.planner.user;
+package com.planner.user.repository;
 
 import com.planner.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
