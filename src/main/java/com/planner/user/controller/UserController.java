@@ -2,6 +2,7 @@ package com.planner.user.controller;
 
 import com.planner.user.model.User;
 import com.planner.user.repository.UserRepository;
+import com.planner.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,11 +18,12 @@ import java.util.Map;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
-//    @GetMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
+    @GetMapping("/user-checkout")
+    public String checkUser(@AuthenticationPrincipal OAuth2User principal) {
+        return principal.getAttribute("name") + " will be added to our app.";
+    }
 
     // TODO: 10/02/2021
     @GetMapping("/user")

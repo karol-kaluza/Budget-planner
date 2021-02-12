@@ -1,14 +1,12 @@
 package com.planner.user.model;
 
 import com.planner.cash_flow.model.Expense;
-import com.planner.cash_flow.model.Income;
 import com.planner.currency.CurrencyRateProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,6 +42,7 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Expense> expenses;
 
+    // TODO: 10/02/2021 connect to future income table
 //    private List<Income> incomes;
 
     @Enumerated(EnumType.STRING)

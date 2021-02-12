@@ -5,6 +5,8 @@ import com.planner.cash_flow.model.Expense;
 import com.planner.currency.CurrencyRateProvider;
 import com.planner.database.LocalDB;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,6 @@ public class MainController {
         model.addAttribute("expenses", data.getList());
         model.addAttribute("expense", new Expense());
         model.addAttribute("currency", rate);
-
         return "main";
     }
 }

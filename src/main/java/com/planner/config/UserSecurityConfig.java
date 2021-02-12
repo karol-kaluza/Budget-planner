@@ -15,7 +15,12 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login*").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login();
+                // TODO: 10/02/2021 login page redirection
+                .oauth2Login(oauth2 -> oauth2
+                    .authorizationEndpoint(auth -> auth
+                        .baseUri("/user-checkout")
+                    )
+                );
     }
 
 }
