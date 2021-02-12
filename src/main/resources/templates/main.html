@@ -26,6 +26,7 @@
             </div>
         </section>
         <section class="container mx-auto px-5">
+            <p id="expense"></p>
             <table class="table">
                 <thead>
                 <tr>
@@ -46,6 +47,7 @@
         <div class="card nav-item p-3 text-center border-0">
             <img id="user-logo" class="card-image" alt="user logo">
             <h2 id="username" class="font-bold"></h2>
+            <h2 th:text="${user.username}" class="font-bold"></h2>
             <p>Product Owner</p>
             <p class="badge bg-secondary">EUR-PLN: <span th:text="${currency}"></span></p>
             <button class="btn btn-primary fluid" onclick="logout()">Logout</button>
@@ -77,6 +79,10 @@
     $.get("/user", function(data) {
         $("#username").html(data.name);
         $("#user-logo").attr("src", data.avatar_url);
+    });
+
+    $.get("/expense/all", function(data) {
+        $("#expense").html(data[0].name);
     });
 
     var logout = function() {

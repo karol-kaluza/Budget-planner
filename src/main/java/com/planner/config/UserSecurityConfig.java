@@ -13,14 +13,11 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
+                .antMatchers("/expense/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // TODO: 10/02/2021 login page redirection
-                .oauth2Login(oauth2 -> oauth2
-                    .authorizationEndpoint(auth -> auth
-                        .baseUri("/user-checkout")
-                    )
-                );
+                .oauth2Login();
     }
 
 }
