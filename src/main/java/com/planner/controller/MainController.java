@@ -4,8 +4,9 @@ import com.planner.cash_flow.ExpenseService;
 import com.planner.cash_flow.model.Expense;
 import com.planner.currency.CurrencyRateProvider;
 import com.planner.database.LocalDB;
-import com.planner.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +23,17 @@ public class MainController {
         this.currencyRateProvider = currencyRateProvider;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/main")
     public String index(Model model) {
         //Only for preview - JJDRLW-8-front-base
-        User user = new User("Lambda Warrior");
         DecimalFormat df = new DecimalFormat("#.####");
         double rate = Double.parseDouble(df.format(currencyRateProvider.getRate(CurrencyRateProvider.Currency.EUR)));
-        user.setUserType("product owner");
         LocalDB data = new LocalDB();
         ExpenseService expensUtils = new ExpenseService();
-        model.addAttribute("user", user);
         model.addAttribute("categories", expensUtils.getCategories(data.getList()));
         model.addAttribute("expenses", data.getList());
         model.addAttribute("expense", new Expense());
         model.addAttribute("currency", rate);
-
-        return "index";
+        return "main";
     }
 }

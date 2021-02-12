@@ -4,7 +4,6 @@ import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.model.Expense;
 import com.planner.database.DataBase;
 import com.planner.service.ServiceExp;
-import com.planner.user.model.PlainResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,12 +46,14 @@ public class RESTExpenseController implements ExpenseInterface {
         serviceExp.deleteExpense(id);
     }
 
-
     @PutMapping("/addExpense")
     @Override
-    public ResponseEntity<PlainResponse> add(@RequestBody Expense expense) {
+    public ResponseEntity<String> add(@RequestBody Expense expense) {
         dataBase.addExpense(expense);
-        return ResponseEntity.ok(new PlainResponse("expense " + expense.getName() + " added successfully"));
+        return ResponseEntity.ok(new StringBuilder("Expense ")
+                .append(expense.getName())
+                .append(" added successfully")
+                .toString());
     }
 
     @DeleteMapping("/removeExpense")
