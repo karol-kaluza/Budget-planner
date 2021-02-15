@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -31,20 +32,20 @@ public class Income {
 
     private int value;
 
-    private LocalDateTime date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
 
-    public Income(String name, int value, LocalDateTime date) {
+    public Income(String name, int value, LocalDate date) {
         this.name = name;
         this.value = value;
         this.date = date;
     }
 
     public Income(String name, int value) {
-        this(name, value, LocalDateTime.now());
+        this(name, value, LocalDate.now());
     }
 }
