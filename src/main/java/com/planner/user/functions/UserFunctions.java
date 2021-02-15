@@ -1,9 +1,12 @@
 package com.planner.user.functions;
 
+import com.planner.cash_flow.model.Expense;
+import com.planner.cash_flow.model.Income;
 import com.planner.currency.CurrencyRateProvider;
 import com.planner.user.model.User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -15,7 +18,7 @@ public class UserFunctions {
             map.get("id").toString(),
             String.valueOf(map.get("login")),
             String.valueOf(map.get("avatar_url")),
-//                new ArrayList<Expense>(),
-//                new ArrayList<Income>(),
+                new ArrayList<Expense>(),
+                new ArrayList<Income>(),
             CurrencyRateProvider.Currency.PLN);
 }

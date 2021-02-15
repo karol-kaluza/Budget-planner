@@ -1,13 +1,16 @@
 package com.planner.cash_flow.model;
 
 import com.planner.user.model.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -15,6 +18,8 @@ import java.util.UUID;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Expense {
 
     @Id
@@ -22,16 +27,18 @@ public class Expense {
     @Type(type = "org.hibernate.type.UUIDCharType")
     @Column(name = "expense_id")
     private UUID id;
+
     private String name;
+
     private String categoryName;
+
     private int value;
+
     private LocalDate date;
 
     @ManyToOne
+    @JoinColumn (name = "user_id")
     private User user;
-
-    public Expense() {
-    }
 
     public Expense(String name, String categoryName, int value, LocalDate date) {
         this.name = name;
