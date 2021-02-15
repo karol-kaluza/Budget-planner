@@ -3,7 +3,6 @@ package com.planner.currency;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -16,6 +15,7 @@ public class CurrencyRateProvider {
     HttpResponseToCurrencyMapConverter converter;
     ObjectMapper objectMapper;
 
+    //TODO change for lombok annotation
     @Autowired
     public CurrencyRateProvider(CurrencyRestClient client,
                                 HttpResponseToCurrencyMapConverter converter,
