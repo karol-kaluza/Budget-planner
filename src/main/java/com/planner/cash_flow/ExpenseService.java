@@ -67,10 +67,6 @@ public class ExpenseService {
     }
 
     public boolean isGoalReached(String category, int monthNumber, int year, List<Expense> list) {
-        if (getCategoryGoal(category) >= getAmountCategory(category, monthNumber, year, list)) {
-            return true;
-        } else {
-            return false;
-        }
+        return getCategoryGoal(category) >= getAmountCategory(category, monthNumber, year, list);
     }
 }
