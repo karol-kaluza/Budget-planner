@@ -14,8 +14,10 @@ class HttpResponseToCurrencyMapConverterTest {
         // given
         String testInput = "{\"rates\": {\"CUR1\":\"12\", \"CUR2\":\"15\"}}";
         HttpResponseToCurrencyMapConverter subject = new HttpResponseToCurrencyMapConverter();
+
         // when
         Map<String, Double> actual = subject.convert(testInput, new ObjectMapper());
+
         // then
         assertEquals(actual.get("CUR1"), "12");
     }
@@ -25,8 +27,10 @@ class HttpResponseToCurrencyMapConverterTest {
         // given
         String testInput = "";
         HttpResponseToCurrencyMapConverter subject = new HttpResponseToCurrencyMapConverter();
+
         // when
         Map<String, Double> actual = subject.convert(testInput, new ObjectMapper());
+
         // then
         assertNull(actual);
     }
@@ -36,8 +40,10 @@ class HttpResponseToCurrencyMapConverterTest {
         // given
         String testInput = "{\"rate\": {\"CUR1\":\"12\", \"CUR2\":\"15\"}}";
         HttpResponseToCurrencyMapConverter subject = new HttpResponseToCurrencyMapConverter();
+
         // when
         Map<String, Double> actual = subject.convert(testInput, new ObjectMapper());
+
         // then
         assertNull(actual);
     }

@@ -15,10 +15,13 @@ class CurrencyRateProviderTest {
 
     @Mock
     private CurrencyRestClient client;
+
     @Mock
     private HttpResponseToCurrencyMapConverter converter;
+
     @Mock
     private ObjectMapper objectMapper;
+
     @InjectMocks
     private CurrencyRateProvider subject;
 
