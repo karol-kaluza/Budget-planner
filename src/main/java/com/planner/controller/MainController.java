@@ -5,6 +5,7 @@ import com.planner.cash_flow.model.Expense;
 import com.planner.currency.CurrencyRateProvider;
 import com.planner.database.LocalDB;
 import com.planner.user.model.User;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -14,15 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.text.DecimalFormat;
 
 @Controller
+@AllArgsConstructor
 public class MainController {
 
     private CurrencyRateProvider currencyRateProvider;
-
-    //TODO lombok annotation
-    @Autowired
-    public MainController(CurrencyRateProvider currencyRateProvider) {
-        this.currencyRateProvider = currencyRateProvider;
-    }
 
     @GetMapping("/main")
     public String index(Model model) {
@@ -36,5 +32,10 @@ public class MainController {
         model.addAttribute("expense", new Expense());
         model.addAttribute("currency", rate);
         return "main";
+    }
+
+    @GetMapping("/goodbye")
+    public String goodbye() {
+        return "goodbye";
     }
 }

@@ -21,7 +21,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/expense")
 @RequiredArgsConstructor
-public class RESTExpenseController implements ExpenseInterface {
+public class ExpenseControllerREST implements ExpenseInterface {
 
     private final DataBase dataBase;
     private final ServiceExp serviceExp;

@@ -1,5 +1,7 @@
 package com.planner.user.model;
 
+import com.planner.cash_flow.model.Expense;
+import com.planner.cash_flow.model.Income;
 import com.planner.currency.CurrencyRateProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +13,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,11 +35,11 @@ public class User {
 
     private String avatarUrl;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Expense> expenses;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Expense> expenses;
 
-    // TODO: 10/02/2021 connect to future income table
-//    private List<Income> incomes;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Income> incomes;
 
     @Enumerated(EnumType.STRING)
     private CurrencyRateProvider.Currency defaultCurrency;
