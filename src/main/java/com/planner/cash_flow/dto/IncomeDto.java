@@ -9,10 +9,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExpenseDto {
+public class IncomeDto {
 
     private String name;
-    private String categoryName;
     private int value;
     private LocalDate date;
 
