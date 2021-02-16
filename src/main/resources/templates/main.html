@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Planner</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Planner</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link href="/css/style.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="main">
-        <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-                <h1 class="navbar-brand">Planner</h1>
-                <div class="nav-item">
-                    <button class="nav-item btn btn-primary" id="add-expense">+ Expense</button>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link href="/css/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="main">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <h1 class="navbar-brand">Planner</h1>
+                    <div class="nav-item">
+                        <button class="nav-item btn btn-primary" id="add-expense">+ Expense</button>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
         <div th:insert="add-expense :: form"></div>
         <section class="container mx-auto px-5">
@@ -60,36 +60,73 @@
                     </select>
                     <label for="year">Year</label>
                 </div>
-                <div class="form-floating">
-                    <select class="form-select" id="month">
-                        <option selected>All</option>
-                        <option value="1">March</option>
-                        <option value="2">February</option>
-                        <option value="3">January</option>
-                    </select>
-                    <label for="month">Month</label>
+            </section>
+            <section class="container mx-auto px-5">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>All expenses</th>
+                        <th>PLN</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="expense : ${expenses}">
+                        <td th:text="${expense.name}"></td>
+                        <td th:text="${expense.value}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="sidebar">
+            <div class="card nav-item p-3 text-center border-0">
+                <img id="user-logo" class="card-image" alt="user logo">
+                <h2 id="username" class="font-bold"></h2>
+                <p>Product Owner</p>
+                <p class="badge bg-secondary">EUR-PLN: <span th:text="${currency}"></span></p>
+                <button class="btn btn-primary fluid" onclick="logout()">Logout</button>
+                <div class="nav-item input-group py-5">
+                    <div class="form-floating">
+                        <select class="form-select" id="year">
+                            <option selected>All</option>
+                            <option value="1">2020</option>
+                            <option value="2">2019</option>
+                            <option value="3">2018</option>
+                        </select>
+                        <label for="year">Year</label>
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select" id="month">
+                            <option selected>All</option>
+                            <option value="1">March</option>
+                            <option value="2">February</option>
+                            <option value="3">January</option>
+                        </select>
+                        <label for="month">Month</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $.get("/user", function(data) {
-        $("#username").html(data.name);
-        $("#user-logo").attr("src", data.avatar_url);
-    });
+    </body>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $.get("/user", function(data) {
+            $("#username").html(data.name);
+            $("#user-logo").attr("src", data.avatar_url);
+        });
 
-    $.get("/expense/all", function(data) {
-        $("#expense").html(data[0].name);
-    });
+        $.get("/expense/all", function(data) {
+            $("#expense").html(data[0].name);
+        });
 
-    var logout = function() {
-        $.post("/logout", function() {
-            $("#user").html('');
-        })
-        return true;
-    }
-</script>
-<script src="/js/addExpense.js"></script>
+        var logout = function() {
+            $.post("/logout", function() {
+                $("#user").html('');
+            })
+            return true;
+        }
+    </script>
+    <script src="/js/addExpense.js"></script>
+
 </html>
