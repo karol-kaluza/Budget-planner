@@ -2,33 +2,32 @@ package com.planner.user.controller;
 
 import com.planner.user.model.User;
 import com.planner.user.repository.UserRepository;
-import com.planner.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import static com.planner.user.functions.UserFunctions.dataMapToUser;
+import static com.planner.user.functions.UserFunctions.oAuth2UserToMap;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
 
     private final UserRepository userRepository;
-    private final UserService userService;
 
-    @GetMapping("/user-checkout")
+    @GetMapping("/check")
     public String checkUser(@AuthenticationPrincipal OAuth2User principal) {
-        return principal.getAttribute("name") + " will be added to our app.";
-    }
-
-    // TODO: 10/02/2021
-    @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-        userRepository.save(new User(principal.getAttribute("name"), principal.getAttribute("node_id")));
-        return principal.getAttributes();
+        User user = dataMapToUser.apply(oAuth2UserToMap.apply(principal));
+        if(!userRepository.existsById(user.getId())) {
+            userRepository.save(user);
+            return user.getUsername() + " added to our app.";
+        }
+        return user.getUsername() + " already exists!";
     }
 }

@@ -10,17 +10,14 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/login*").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            // TODO: 10/02/2021 login page redirection
-            .oauth2Login(oauth2 -> oauth2
-                .authorizationEndpoint(auth -> auth
-                    .baseUri("/user-checkout")
-                )
-            );
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/login*").permitAll()
+                .antMatchers("/expense/*").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                // TODO: 10/02/2021 login page redirection
+                .oauth2Login();
     }
 
 }
