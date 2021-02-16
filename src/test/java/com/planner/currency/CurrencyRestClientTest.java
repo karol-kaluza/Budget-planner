@@ -21,6 +21,7 @@ class CurrencyRestClientTest {
 
     @Mock
     private HttpClient client;
+
     @InjectMocks
     private CurrencyRestClient subject;
 

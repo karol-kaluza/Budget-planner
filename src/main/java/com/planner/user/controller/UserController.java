@@ -27,7 +27,7 @@ public class UserController {
         if(!userRepository.existsById(user.getId())) {
             userRepository.save(user);
             return user.getUsername() + " added to our app.";
-        };
+        }
         return user.getUsername() + " already exists!";
     }
 }
