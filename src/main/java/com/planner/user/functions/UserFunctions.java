@@ -15,7 +15,7 @@ public class UserFunctions {
     public static final Function<OAuth2User, Map<String, Object>> oAuth2UserToMap = oAuth2User -> oAuth2User.getAttributes();
 
     public static final Function<Map<String, Object>, User> dataMapToUser = map -> new User(
-            map.get("id").toString(),
+            (int)map.get("id"),
             String.valueOf(map.get("login")),
             String.valueOf(map.get("avatar_url")),
             new ArrayList<Expense>(),

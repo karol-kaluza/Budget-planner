@@ -80,33 +80,7 @@
     </body>
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/js-cookie/cookie.js">
-        $.ajaxSetup({
-          beforeSend : function(xhr, settings) {
-            if (settings.type == 'POST' || settings.type == 'PUT'
-                || settings.type == 'DELETE') {
-              if (!(/^http:.*/.test(settings.url) || /^https:.*/
-                .test(settings.url))) {
-                // Only send the token to relative URLs i.e. locally.
-                xhr.setRequestHeader("X-XSRF-TOKEN",
-                  Cookies.get('XSRF-TOKEN'));
-              }
-            }
-          }
-        });
-
-    </script>
-    <script type="text/javascript">
-        $.get("/user", function(data) {
-            $("#username").html(data.name);
-            $("#user-logo").attr("src", data.avatar_url);
-        });
-
-        $.get("/expense/all", function(data) {
-            $("#expense").html(data[0].name);
-        });
-
-    </script>
+    <script src="/js/index.html"></script>
     <script src="/js/addExpense.js"></script>
 
 </html>
