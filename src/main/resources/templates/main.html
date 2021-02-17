@@ -18,50 +18,17 @@
                 </div>
             </nav>
 
-        <div th:insert="add-expense :: form"></div>
-        <section class="container mx-auto px-5">
-            <h3 class="text-xl font-bold">Categories:</h3>
-            <div>
-                <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}"></button>
-            </div>
-        </section>
-        <section class="container mx-auto px-5">
-            <p id="expense"></p>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>All expenses</th>
-                    <th>PLN</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="expense : ${expenses}">
-                    <td th:text="${expense.name}"></td>
-                    <td th:text="${expense.value}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-    </div>
-    <div class="sidebar">
-        <div class="card nav-item p-3 text-center border-0">
-            <img id="user-logo" class="card-image" alt="user logo">
-            <h2 id="username" class="font-bold"></h2>
-            <p>Product Owner</p>
-            <p class="badge bg-secondary">EUR-PLN: <span th:text="${currency}"></span></p>
-            <button class="btn btn-primary fluid" onclick="logout()">Logout</button>
-            <div class="nav-item input-group py-5">
-                <div class="form-floating">
-                    <select class="form-select" id="year">
-                        <option selected>All</option>
-                        <option value="1">2020</option>
-                        <option value="2">2019</option>
-                        <option value="3">2018</option>
-                    </select>
-                    <label for="year">Year</label>
+            <div th:insert="add-expense :: form"></div>
+
+            <section class="container mx-auto px-5">
+                <h3 class="text-xl font-bold">Categories:</h3>
+                <div>
+                    <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}"></button>
                 </div>
             </section>
+
             <section class="container mx-auto px-5">
+                <p id="expense"></p>
                 <table class="table">
                     <thead>
                     <tr>
@@ -77,14 +44,16 @@
                     </tbody>
                 </table>
             </section>
+
         </div>
+    
         <div class="sidebar">
             <div class="card nav-item p-3 text-center border-0">
                 <img id="user-logo" class="card-image" alt="user logo">
                 <h2 id="username" class="font-bold"></h2>
                 <p>Product Owner</p>
                 <p class="badge bg-secondary">EUR-PLN: <span th:text="${currency}"></span></p>
-                <button class="btn btn-primary fluid" onclick="logout()">Logout</button>
+                <a class="btn btn-primary fluid" th:href="@{/logout}">Logout</a>
                 <div class="nav-item input-group py-5">
                     <div class="form-floating">
                         <select class="form-select" id="year">
@@ -107,26 +76,11 @@
                 </div>
             </div>
         </div>
+    
     </body>
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $.get("/user", function(data) {
-            $("#username").html(data.name);
-            $("#user-logo").attr("src", data.avatar_url);
-        });
-
-        $.get("/expense/all", function(data) {
-            $("#expense").html(data[0].name);
-        });
-
-        var logout = function() {
-            $.post("/logout", function() {
-                $("#user").html('');
-            })
-            return true;
-        }
-    </script>
+    <script src="/js/index.html"></script>
     <script src="/js/addExpense.js"></script>
 
 </html>

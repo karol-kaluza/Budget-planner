@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -24,10 +25,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
+@Scope(value="session")
 public class User {
 
     @Id
-    private String id;
+    private Integer id;
 
     @Column(name = "username", nullable = false)
     @NotBlank
