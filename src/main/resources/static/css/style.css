@@ -1,12 +1,16 @@
 .sidebar {
-    width: 25vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: 0;
-    border-left: 1px solid lightgrey;
+	width: 25vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	right: 0;
+	border-left: 1px solid lightgrey;
 }
 
 .main {
-    width: 75vw;
+	width: 75vw;
+}
+
+.d-none {
+	display: none;
 }

@@ -15,4 +15,10 @@ public class IncomeDto {
     private int value;
     private LocalDate date;
 
+    public IncomeDto(String name, String value, String date) {
+        this.name = name;
+        this.value = Integer.valueOf(value);
+        this.date = LocalDate.parse(date);
+    }
+
 }

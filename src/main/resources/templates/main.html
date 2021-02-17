@@ -13,26 +13,11 @@
                 <div class="container-fluid">
                     <h1 class="navbar-brand">Planner</h1>
                     <div class="nav-item">
+                        <button class="nav-item btn btn-primary" id="add-income">+ Income</button>
                         <button class="nav-item btn btn-primary" id="add-expense">+ Expense</button>
                     </div>
                 </div>
             </nav>
-
-            <form id="expense-form" action="#" class="p-5 w-50 rounded shadow">
-                <label class="form-label">Name:</label>
-                <input type="text" name="name" class="form-control" />
-                <label class="form-label">Category:</label>
-                <input type="text" name="categoryName" class="form-control" />
-                <label class="form-label">Value:</label>
-                <input type="number" name="value" class="form-control" />
-                <Label class="form-label">Date:</Label>
-                <input type="date" name="date" class="form-control" />
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary text-center my-3">Add</button>
-                </div>
-            </form>
-
-            <div id="result"></div>
 
             <section class="container mx-auto px-5">
                 <h3 class="text-xl font-bold">Categories:</h3>
@@ -92,11 +77,35 @@
                 </div>
             </div>
         </div>
-    
+
+        <form id="expense-form" action="#" class="p-5 w-50 rounded shadow">
+            <label class="form-label">Name:</label>
+            <input type="text" name="name" class="form-control" />
+            <label class="form-label">Category:</label>
+            <input type="text" name="categoryName" class="form-control" />
+            <label class="form-label">Value:</label>
+            <input type="number" name="value" class="form-control" />
+            <Label class="form-label">Date:</Label>
+            <input type="date" name="date" class="form-control" />
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary text-center my-3">Add</button>
+            </div>
+        </form>
+
+        <form id="income-form" action="#" class="p-5 w-50 rounded shadow">
+            <label class="form-label">Name:</label>
+            <input type="text" name="name" class="form-control" />
+            <label class="form-label">Value:</label>
+            <input type="number" name="value" class="form-control" />
+            <Label class="form-label">Date:</Label>
+            <input type="date" name="date" class="form-control" />
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary text-center my-3">Add</button>
+            </div>
+        </form>
+
     </body>
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/index.js"></script>
-    <script src="/js/addExpense.js"></script>
-
 </html>
