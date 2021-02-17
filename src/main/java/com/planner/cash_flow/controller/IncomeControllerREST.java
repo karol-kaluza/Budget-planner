@@ -21,7 +21,7 @@ public class IncomeControllerREST {
 
     private final ServiceInc serviceInc;
 
-    @PostMapping("/save")
+    @PostMapping
     public IncomeDto saveIncome(@RequestBody IncomeDto incomeDto) {
         return serviceInc.saveIncome(incomeDto);
     }
@@ -31,12 +31,12 @@ public class IncomeControllerREST {
         return serviceInc.findById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<IncomeDto> findAll() {
         return serviceInc.findAll();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
         serviceInc.deleteIncome(id);
     }

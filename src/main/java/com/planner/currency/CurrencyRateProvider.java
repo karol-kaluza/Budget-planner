@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 @Slf4j
@@ -25,6 +26,11 @@ public class CurrencyRateProvider {
         }
         log.info("Current rate for: " + currency + " is " + currencies.get(currency.toString()));
         return currencies.get(currency.toString());
+    }
+
+    public double getPrettyRate(Currency currency) {
+        DecimalFormat df = new DecimalFormat("#.####");
+        return Double.parseDouble(df.format(this.getRate(currency)));
     }
 
     public enum Currency {

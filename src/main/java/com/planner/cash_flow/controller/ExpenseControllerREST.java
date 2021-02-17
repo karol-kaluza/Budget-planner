@@ -13,22 +13,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/expense")
 @RequiredArgsConstructor
-public class ExpenseControllerREST implements ExpenseInterface {
+public class ExpenseControllerREST {
 
-    private final DataBase dataBase;
     private final ServiceExp serviceExp;
 
-    @PostMapping("/save")
-    public ExpenseDto saveExpense(@RequestBody ExpenseDto expenseDto) {
-        return serviceExp.saveExpense(expenseDto);
+    @PostMapping
+    public ExpenseDto saveExpense(@RequestParam Map<String, String> requestParams) {
+        return serviceExp.saveExpense(new ExpenseDto(
+                requestParams.get("name"),
+                requestParams.get("categoryName"),
+                requestParams.get("value"),
+                requestParams.get("date")));
     }
 
     @GetMapping("/{id}")
@@ -36,35 +42,13 @@ public class ExpenseControllerREST implements ExpenseInterface {
         return serviceExp.findById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<ExpenseDto> findAll() {
         return serviceExp.findAll();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
         serviceExp.deleteExpense(id);
-    }
-
-    @PutMapping("/addExpense")
-    @Override
-    public ResponseEntity<String> add(@RequestBody Expense expense) {
-        dataBase.addExpense(expense);
-        return ResponseEntity.ok(new StringBuilder("Expense ")
-                .append(expense.getName())
-                .append(" added successfully")
-                .toString());
-    }
-
-    @DeleteMapping("/removeExpense")
-    @Override
-    public void remove(@RequestBody int id) {
-        dataBase.removeExpense();
-    }
-
-    @GetMapping("/getExpenses")
-    @Override
-    public List<Expense> getAllExpenses() {
-        return dataBase.getAllExpenses();
     }
 }
