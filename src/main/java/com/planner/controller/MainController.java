@@ -31,7 +31,6 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("categories", expenseService.getCategories());
         model.addAttribute("expenses", expenseService.findAll());
-        model.addAttribute("expenseDto", new ExpenseDto());
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
         return "main";
     }

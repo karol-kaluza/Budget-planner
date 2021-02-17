@@ -18,19 +18,21 @@
                 </div>
             </nav>
 
-            <form id="expense-form" action="#" th:action="@{/expense}" th:object="${expenseDto}" method="post" class="p-5 w-50 rounded shadow">
+            <form id="expense-form" action="#" class="p-5 w-50 rounded shadow">
                 <label class="form-label">Name:</label>
-                <input type="text" th:field="*{name}" class="form-control" />
+                <input type="text" name="name" class="form-control" />
                 <label class="form-label">Category:</label>
-                <input type="text" th:field="*{categoryName}" class="form-control" />
+                <input type="text" name="categoryName" class="form-control" />
                 <label class="form-label">Value:</label>
-                <input type="number" th:field="*{value}" class="form-control" />
+                <input type="number" name="value" class="form-control" />
                 <Label class="form-label">Date:</Label>
-                <input type="date" th:field="*{date}" class="form-control" />
+                <input type="date" name="date" class="form-control" />
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary text-center my-3">Add</button>
                 </div>
             </form>
+
+            <div id="result"></div>
 
             <section class="container mx-auto px-5">
                 <h3 class="text-xl font-bold">Categories:</h3>
