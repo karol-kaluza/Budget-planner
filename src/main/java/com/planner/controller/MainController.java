@@ -1,9 +1,14 @@
 package com.planner.controller;
 
 import com.planner.cash_flow.ExpenseService;
+import com.planner.cash_flow.dto.ExpenseDto;
+import com.planner.cash_flow.dto.IncomeDto;
 import com.planner.cash_flow.model.Expense;
 import com.planner.currency.CurrencyRateProvider;
 import com.planner.database.LocalDB;
+import com.planner.repositories.ExpenseRepository;
+import com.planner.service.ServiceExp;
+import com.planner.service.ServiceInc;
 import com.planner.user.model.User;
 import com.planner.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,22 +27,18 @@ import java.text.DecimalFormat;
 public class MainController {
 
     private CurrencyRateProvider currencyRateProvider;
-    private UserRepository userRepository;
+    private ServiceExp expenseService;
+    private ServiceInc incomeServiece;
 
     @GetMapping("/main")
     public String index(Model model) {
-        //Only for preview - JJDRLW-8-front-base
-        User user = new User("adrian", "pass");
-        DecimalFormat df = new DecimalFormat("#.####");
-        double rate = Double.parseDouble(df.format(currencyRateProvider.getRate(CurrencyRateProvider.Currency.EUR)));
-        LocalDB data = new LocalDB();
-        ExpenseService expensUtils = new ExpenseService();
-        model.addAttribute("categories", expensUtils.getCategories(data.getList()));
-        model.addAttribute("expenses", data.getList());
-        model.addAttribute("expense", new Expense());
-        model.addAttribute("currency", rate);
+        model.addAttribute("categories", expenseService.getCategories());
+        model.addAttribute("expenses", expenseService.findAll());
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        model.addAttribute("incomes", incomeServiece.findAll());
         return "main";
     }
+
 
     @GetMapping("/goodbye")
     public String goodbye() {

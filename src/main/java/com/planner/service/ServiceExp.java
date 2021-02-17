@@ -41,4 +41,12 @@ public class ServiceExp {
         Expense expense = expenseRepository.findById(expenseId).orElseThrow();
         expenseRepository.delete(expense);
     }
+
+    @Transactional
+    public List<String> getCategories() {
+        return expenseRepository.findAll().stream()
+                .map(Expense::getCategoryName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }
