@@ -3,6 +3,7 @@ package com.planner.cash_flow.service;
 import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.repository.ExpenseRepository;
+import com.planner.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class ExpenseServiceCRUD {
     @Transactional
     public String saveExpense(ExpenseDto expenseDto) {
         Expense expense = new Expense(expenseDto.getName(), expenseDto.getCategoryName(), expenseDto.getValue(), expenseDto.getDate(), expenseDto.getUser());
-        Expense savedExpense = expenseRepository.save(expense);
+        expenseRepository.save(expense);
         return "Expense added successfully";
     }
 
@@ -37,16 +38,13 @@ public class ExpenseServiceCRUD {
     }
 
     @Transactional
-    public void deleteExpense(UUID expenseId) {
-        Expense expense = expenseRepository.findById(expenseId).orElseThrow();
-        expenseRepository.delete(expense);
+    public List<ExpenseDto> findAllByUser(User user) {
+        return expenseRepository.findAllByUser(user).stream().map(expenseToExpenseDto).collect(Collectors.toList());
     }
 
     @Transactional
-    public List<String> getCategories() {
-        return expenseRepository.findAll().stream()
-                .map(Expense::getCategoryName)
-                .distinct()
-                .collect(Collectors.toList());
+    public void deleteExpense(UUID expenseId) {
+        Expense expense = expenseRepository.findById(expenseId).orElseThrow();
+        expenseRepository.delete(expense);
     }
 }

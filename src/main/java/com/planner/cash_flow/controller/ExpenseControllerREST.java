@@ -1,7 +1,10 @@
 package com.planner.cash_flow.controller;
 
 import com.planner.cash_flow.dto.ExpenseDto;
+import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.service.ExpenseServiceCRUD;
+import com.planner.cash_flow.service.ExpenseServiceUtils;
+import com.planner.user.model.User;
 import com.planner.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +27,7 @@ import java.util.UUID;
 public class ExpenseControllerREST {
 
     private final ExpenseServiceCRUD expenseServiceCRUD;
+    private final ExpenseServiceUtils expenseServiceUtils;
     private final UserRepository userRepository;
 
     @PostMapping
@@ -50,5 +54,12 @@ public class ExpenseControllerREST {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
         expenseServiceCRUD.deleteExpense(id);
+    }
+
+    //todo convert to dto
+    @GetMapping("/de/{categoryName}")
+    public List<Expense> getAllFromCategory(@PathVariable String categoryName, @AuthenticationPrincipal OAuth2User principal) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        return expenseServiceUtils.getExpensesFromCategory(user, categoryName);
     }
 }
