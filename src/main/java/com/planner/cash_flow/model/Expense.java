@@ -40,15 +40,12 @@ public class Expense {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Expense(String name, String categoryName, int value, LocalDate date) {
+    public Expense(String name, String categoryName, int value, LocalDate date, User user) {
         this.name = name;
         this.categoryName = categoryName;
         this.value = value;
         this.date = date;
-    }
-
-    public Expense(String name, String categoryName, int value) {
-        this(name, categoryName, value, LocalDate.now());
+        this.user = user;
     }
 
     @Override

@@ -20,10 +20,10 @@ public class IncomeServiceCRUD {
     private final IncomeRepository incomeRepository;
 
     @Transactional
-    public IncomeDto saveIncome(IncomeDto incomeDto) {
-        Income income = new Income(incomeDto.getName(), incomeDto.getValue(), incomeDto.getDate());
+    public String saveIncome(IncomeDto incomeDto) {
+        Income income = new Income(incomeDto.getName(), incomeDto.getValue(), incomeDto.getDate(), incomeDto.getUser());
         Income savedIncome = incomeRepository.save(income);
-        return new IncomeDto(savedIncome.getName(), savedIncome.getValue(), savedIncome.getDate());
+        return "Income added successfully";
     }
 
     @Transactional

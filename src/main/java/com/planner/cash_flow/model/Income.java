@@ -37,6 +37,12 @@ public class Income {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Income(String name, int value, LocalDate date, User user) {
+        this.name = name;
+        this.value = value;
+        this.date = date;
+        this.user = user;
+    }
 
     public Income(String name, int value, LocalDate date) {
         this.name = name;

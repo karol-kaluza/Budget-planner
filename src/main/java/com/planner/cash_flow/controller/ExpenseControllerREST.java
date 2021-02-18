@@ -2,7 +2,10 @@ package com.planner.cash_flow.controller;
 
 import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.service.ExpenseServiceCRUD;
+import com.planner.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,16 +24,19 @@ import java.util.UUID;
 public class ExpenseControllerREST {
 
     private final ExpenseServiceCRUD expenseServiceCRUD;
+    private final UserRepository userRepository;
 
     @PostMapping
-    public ExpenseDto saveExpense(@RequestParam Map<String, String> requestParams) {
+    public String saveExpense(@RequestParam Map<String, String> requestParams, @AuthenticationPrincipal OAuth2User principal) {
         return expenseServiceCRUD.saveExpense(new ExpenseDto(
                 requestParams.get("name"),
                 requestParams.get("categoryName"),
                 requestParams.get("value"),
-                requestParams.get("date")));
+                requestParams.get("date"),
+                userRepository.findByUsername(principal.getAttribute("login"))));
     }
 
+    //todo not return expensedto
     @GetMapping("/{id}")
     public ExpenseDto findById(@PathVariable UUID id) {
         return expenseServiceCRUD.findById(id);

@@ -152,15 +152,17 @@ class ExpenseServiceUtilsTest {
         public static final int YEAR_2020 = 2020;
 
         public static final List<Expense> INPUT_LIST = List.of(
-                new Expense("cinema", "entertainment", 20, LocalDate.of(2020, Month.DECEMBER, 4)),
-                new Expense("rent", "accommodation", 1000, LocalDate.of(2020, Month.DECEMBER, 7)),
-                new Expense("lidl 09.12", FOOD_CATEGORY, 70, LocalDate.of(2020, Month.DECEMBER, 9)),
-                new Expense("lidl 30.11", FOOD_CATEGORY, 70, LocalDate.of(2020, Month.NOVEMBER, 30)));
+//                new Expense("cinema", "entertainment", 20, LocalDate.of(2020, Month.DECEMBER, 4)),
+//                new Expense("rent", "accommodation", 1000, LocalDate.of(2020, Month.DECEMBER, 7)),
+//                new Expense("lidl 09.12", FOOD_CATEGORY, 70, LocalDate.of(2020, Month.DECEMBER, 9)),
+//                new Expense("lidl 30.11", FOOD_CATEGORY, 70, LocalDate.of(2020, Month.NOVEMBER, 30))
+        );
 
         public static final List<Expense> ONLY_DECEMBER_LIST = List.of(
-                new Expense("cinema", "entertainment", 20, LocalDate.of(2020, Month.DECEMBER, 4)),
-                new Expense("rent", "accommodation", 1000, LocalDate.of(2020, Month.DECEMBER, 7)),
-                new Expense("lidl 09.12", FOOD_CATEGORY, 70, LocalDate.of(2020, Month.DECEMBER, 9)));
+//                new Expense("cinema", "entertainment", 20, LocalDate.of(2020, Month.DECEMBER, 4)),
+//                new Expense("rent", "accommodation", 1000, LocalDate.of(2020, Month.DECEMBER, 7)),
+//                new Expense("lidl 09.12", FOOD_CATEGORY, 70, LocalDate.of(2020, Month.DECEMBER, 9)
+                );
 
         public static final List<Expense> EMPTY_LIST = new ArrayList<>();
 

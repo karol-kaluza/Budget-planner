@@ -20,10 +20,10 @@ public class ExpenseServiceCRUD {
     private final ExpenseRepository expenseRepository;
 
     @Transactional
-    public ExpenseDto saveExpense(ExpenseDto expenseDto) {
-        Expense expense = new Expense(expenseDto.getName(), expenseDto.getCategoryName(), expenseDto.getValue(), expenseDto.getDate());
+    public String saveExpense(ExpenseDto expenseDto) {
+        Expense expense = new Expense(expenseDto.getName(), expenseDto.getCategoryName(), expenseDto.getValue(), expenseDto.getDate(), expenseDto.getUser());
         Expense savedExpense = expenseRepository.save(expense);
-        return new ExpenseDto(savedExpense.getName(), savedExpense.getCategoryName(), savedExpense.getValue(), savedExpense.getDate());
+        return "Expense added successfully";
     }
 
     @Transactional
