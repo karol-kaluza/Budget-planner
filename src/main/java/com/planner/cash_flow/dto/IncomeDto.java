@@ -17,7 +17,7 @@ public class IncomeDto {
 
     public IncomeDto(String name, String value, String date) {
         this.name = name;
-        this.value = Integer.valueOf(value);
+        this.value = Integer.parseInt(value);
         this.date = LocalDate.parse(date);
     }
 

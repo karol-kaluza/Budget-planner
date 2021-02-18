@@ -1,4 +1,4 @@
-package com.planner.functions;
+package com.planner.cash_flow.functions;
 
 import com.planner.cash_flow.dto.IncomeDto;
 import com.planner.cash_flow.model.Income;

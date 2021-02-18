@@ -1,14 +1,12 @@
 package com.planner.cash_flow.controller;
 
-import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.dto.IncomeDto;
-import com.planner.service.ServiceInc;
+import com.planner.cash_flow.service.IncomeServiceCRUD;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,15 +20,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class IncomeControllerREST {
 
-    private final ServiceInc serviceInc;
+    private final IncomeServiceCRUD incomeServiceCRUD;
 
-    //    @PostMapping
-//    public IncomeDto saveIncome(@RequestBody IncomeDto incomeDto) {
-//        return serviceInc.saveIncome(incomeDto);
-//    }
     @PostMapping
     public IncomeDto saveIncome(@RequestParam Map<String, String> requestParams) {
-        return serviceInc.saveIncome(new IncomeDto(
+        return incomeServiceCRUD.saveIncome(new IncomeDto(
                 requestParams.get("name"),
                 requestParams.get("value"),
                 requestParams.get("date")));
@@ -38,16 +32,16 @@ public class IncomeControllerREST {
 
     @GetMapping("/{id}")
     public IncomeDto findById(@PathVariable UUID id) {
-        return serviceInc.findById(id);
+        return incomeServiceCRUD.findById(id);
     }
 
     @GetMapping
     public List<IncomeDto> findAll() {
-        return serviceInc.findAll();
+        return incomeServiceCRUD.findAll();
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
-        serviceInc.deleteIncome(id);
+        incomeServiceCRUD.deleteIncome(id);
     }
 }

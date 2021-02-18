@@ -1,8 +1,8 @@
-package com.planner.service;
+package com.planner.cash_flow.service;
 
 import com.planner.cash_flow.dto.IncomeDto;
 import com.planner.cash_flow.model.Income;
-import com.planner.repositories.IncomeRepository;
+import com.planner.cash_flow.repository.IncomeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.planner.functions.IncomeFunctions.incomeToIncomeDto;
+import static com.planner.cash_flow.functions.IncomeFunctions.incomeToIncomeDto;
 
 @Service
 @RequiredArgsConstructor
-public class ServiceInc {
+public class IncomeServiceCRUD {
 
     private final IncomeRepository incomeRepository;
 

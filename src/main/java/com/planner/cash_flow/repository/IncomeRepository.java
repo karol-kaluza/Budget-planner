@@ -1,4 +1,4 @@
-package com.planner.repositories;
+package com.planner.cash_flow.repository;
 
 import com.planner.cash_flow.model.Income;
 import org.springframework.data.jpa.repository.JpaRepository;
