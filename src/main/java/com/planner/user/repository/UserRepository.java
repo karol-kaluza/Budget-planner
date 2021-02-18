@@ -7,4 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(path = "user")
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    //todo Add method to compare users
+    boolean existsByUsername(String username);
 }

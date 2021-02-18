@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     private CurrencyRateProvider currencyRateProvider;
+
     private ExpenseServiceCRUD expenseService;
-    private IncomeServiceCRUD incomeServiece;
+    private IncomeServiceCRUD incomeService;
 
     @GetMapping("/main")
     public String index(Model model) {
         model.addAttribute("categories", expenseService.getCategories());
         model.addAttribute("expenses", expenseService.findAll());
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
-        model.addAttribute("incomes", incomeServiece.findAll());
+        model.addAttribute("incomes", incomeService.findAll());
         return "main";
     }
 

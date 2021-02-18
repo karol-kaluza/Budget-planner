@@ -1,22 +1,19 @@
+const expenseForm = document.querySelector('#expense-form');
+const incomeForm = document.querySelector('#income-form');
 
-
-const toggleModalVisibility = (modal, visibility) => {
-  if (!visibility) {
-    modal.classList.remove("d-none");
-  } else {
-    modal.classList.add("d-none")
-  }
-  visibility = !visibility;
-};
 
 //Add expense form
-const expenseForm = document.querySelector('#expense-form');
 const addExpenseBtn = document.querySelector('#add-expense');
-
 let expenseFormVisible = false;
 
-expenseForm.classList.add("d-none");
-addExpenseBtn.addEventListener("click", toggleModalVisibility(expenseForm, expenseFormVisible));
+addExpenseBtn.addEventListener("click", () => {
+  if (!expenseFormVisible) {
+    expenseForm.classList.remove("d-none");
+  } else {
+    expenseForm.classList.add("d-none")
+  }
+  expenseFormVisible = !expenseFormVisible;
+});
 
 
 $("#expense-form").submit(function(event) {
@@ -39,14 +36,18 @@ $("#expense-form").submit(function(event) {
   });
 });
 
-//Add income form
-const incomeForm = document.querySelector('#income-form');
+// //Add income form
 const addIncomeBtn = document.querySelector('#add-income');
-
 let incomeFormVisible = false;
 
-incomeForm.classList.add("d-none");
-addIncomeBtn.addEventListener("click", toggleModalVisibility(incomeForm, incomeFormVisible));
+addIncomeBtn.addEventListener("click", () => {
+  if (!incomeFormVisible) {
+    incomeForm.classList.remove("d-none");
+  } else {
+    incomeForm.classList.add("d-none")
+  }
+  incomeFormVisible = !incomeFormVisible;
+});
 
 $("#income-form").submit(function(event) {
   event.preventDefault();
