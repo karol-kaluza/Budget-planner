@@ -28,15 +28,14 @@ public class MainController {
 
     private CurrencyRateProvider currencyRateProvider;
     private ServiceExp expenseService;
-    private ServiceInc incomeServiece;
-    private UserRepository userRepository;
+    private ServiceInc incomeService;
 
     @GetMapping("/main")
-    public String index(Model model, @AuthenticationPrincipal OAuth2User principal) {
+    public String index(Model model) {
         model.addAttribute("categories", expenseService.getCategories());
         model.addAttribute("expenses", expenseService.findAll());
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
-        model.addAttribute("incomes", incomeServiece.findAll());
+        model.addAttribute("incomes", incomeService.findAll());
         return "main";
     }
 
