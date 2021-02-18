@@ -1,10 +1,8 @@
 package com.planner.controller;
 
-import com.planner.cash_flow.dto.ExpenseDto;
-import com.planner.cash_flow.dto.IncomeDto;
 import com.planner.currency.CurrencyRateProvider;
-import com.planner.service.ServiceExp;
-import com.planner.service.ServiceInc;
+import com.planner.cash_flow.service.ExpenseServiceCRUD;
+import com.planner.cash_flow.service.IncomeServiceCRUD;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Controller;
@@ -16,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     private CurrencyRateProvider currencyRateProvider;
-    private ServiceExp expenseService;
-    private ServiceInc incomeServiece;
+    private ExpenseServiceCRUD expenseService;
+    private IncomeServiceCRUD incomeServiece;
 
     @GetMapping("/main")
     public String index(Model model) {
