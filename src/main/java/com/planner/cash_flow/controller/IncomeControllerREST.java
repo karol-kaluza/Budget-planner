@@ -22,10 +22,6 @@ public class IncomeControllerREST {
 
     private final IncomeServiceCRUD incomeServiceCRUD;
 
-    //    @PostMapping
-//    public IncomeDto saveIncome(@RequestBody IncomeDto incomeDto) {
-//        return serviceInc.saveIncome(incomeDto);
-//    }
     @PostMapping
     public IncomeDto saveIncome(@RequestParam Map<String, String> requestParams) {
         return incomeServiceCRUD.saveIncome(new IncomeDto(

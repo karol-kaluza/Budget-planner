@@ -1,10 +1,9 @@
 package com.planner.controller;
 
-import com.planner.currency.CurrencyRateProvider;
 import com.planner.cash_flow.service.ExpenseServiceCRUD;
 import com.planner.cash_flow.service.IncomeServiceCRUD;
+import com.planner.currency.CurrencyRateProvider;
 import lombok.AllArgsConstructor;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -37,7 +37,7 @@ public class Expense {
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Expense(String name, String categoryName, int value, LocalDate date) {
