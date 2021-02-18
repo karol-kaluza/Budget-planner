@@ -24,11 +24,12 @@ public class UserController {
     @GetMapping("/check")
     public String checkUser(@AuthenticationPrincipal OAuth2User principal) {
         User user = dataMapToUser.apply(oAuth2UserToMap.apply(principal));
-        if(!userRepository.existsById(user.getId())) {
+        if(!userRepository.existsByUsername(user.getUsername())) {
             userRepository.save(user);
             log.info(user.getUsername() + " added to our app.");
+        } else {
+            log.info(user.getUsername() + " already exists!");
         }
-        log.info(user.getUsername() + " already exists!");
         return "redirect:/main";
     }
 }

@@ -1,8 +1,8 @@
-package com.planner.service;
+package com.planner.cash_flow.service;
 
 import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.model.Expense;
-import com.planner.repositories.ExpenseRepository;
+import com.planner.cash_flow.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.planner.functions.ExpenseFunctions.expenseToExpenseDto;
+import static com.planner.cash_flow.functions.ExpenseFunctions.expenseToExpenseDto;
 
 @Service
 @RequiredArgsConstructor
-public class ServiceExp {
+public class ExpenseServiceCRUD {
 
     private final ExpenseRepository expenseRepository;
 

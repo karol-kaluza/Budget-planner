@@ -1,4 +1,4 @@
-package com.planner.cash_flow;
+package com.planner.cash_flow.service;
 
 import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.model.Income;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ExpenseService {
+public class ExpenseServiceUtils {
 
     private Map<String, Integer> categoriesGoals = new HashMap<>();
 
