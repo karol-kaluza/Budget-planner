@@ -67,8 +67,14 @@ $("#income-form").submit(function(event) {
   });
 });
 
-// $.get("/user/info", function(data) {
-//   $("#username").html(data.username);
-//   $("#user-logo").attr("src", data.avatarUrl);
-// });
+$.get("/user/info", function(data) {
+  $("#username").html(data.username);
+  $("#user-logo").attr("src", data.avatarUrl);
+});
+
+const getDataFropmCategory = (name) => {
+  $.get(`/expense/de/${name}`, function(data) {
+    $(".preview").html(data);
+  });
+}
 
