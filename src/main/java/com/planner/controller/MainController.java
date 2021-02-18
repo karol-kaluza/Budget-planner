@@ -29,9 +29,10 @@ public class MainController {
     private CurrencyRateProvider currencyRateProvider;
     private ServiceExp expenseService;
     private ServiceInc incomeServiece;
+    private UserRepository userRepository;
 
     @GetMapping("/main")
-    public String index(Model model) {
+    public String index(Model model, @AuthenticationPrincipal OAuth2User principal) {
         model.addAttribute("categories", expenseService.getCategories());
         model.addAttribute("expenses", expenseService.findAll());
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));

@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <form id="expense-form" action="#" class="p-5 w-50 rounded shadow">
+        <form id="expense-form" action="#" class="p-5 w-50 rounded shadow d-none">
             <label class="form-label">Name:</label>
             <input type="text" name="name" class="form-control" />
             <label class="form-label">Category:</label>
@@ -92,11 +92,11 @@
             </div>
         </form>
 
-        <form id="income-form" action="#" class="p-5 w-50 rounded shadow">
+        <form id="income-form" action="#" class="p-5 w-50 rounded shadow d-none">
             <label class="form-label">Name:</label>
             <input type="text" name="name" class="form-control" />
             <label class="form-label">Value:</label>
-            <input type="number" name="value" class="form-control" />
+            <input type="number" step="0.01" name="value" class="form-control" />
             <Label class="form-label">Date:</Label>
             <input type="date" name="date" class="form-control" />
             <div class="d-grid gap-2">
