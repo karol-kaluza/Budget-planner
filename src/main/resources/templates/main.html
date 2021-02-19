@@ -26,12 +26,12 @@
             <section class="container mx-auto px-5">
                 <h3 class="text-xl font-bold">Categories:</h3>
                 <div>
-                    <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}"></button>
+                    <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}" onclick="chooseCategory()"></button>
                 </div>
             </section>
 
-            <section class="preview">
-                
+            <section id="preview">
+
             </section>
 
             <section class="container mx-auto px-5">
@@ -114,7 +114,7 @@
             <label class="form-label">Category:</label>
             <input type="text" name="categoryName" class="form-control" />
             <label class="form-label">Value:</label>
-            <input type="number" name="value" class="form-control" />
+            <input type="number" step="0.01" name="value" class="form-control" />
             <Label class="form-label">Date:</Label>
             <input type="date" name="date" class="form-control" />
             <div class="d-grid gap-2">
