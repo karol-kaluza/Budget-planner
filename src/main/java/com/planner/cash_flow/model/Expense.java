@@ -1,5 +1,6 @@
 package com.planner.cash_flow.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.planner.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,17 +39,15 @@ public class Expense {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
-    public Expense(String name, String categoryName, int value, LocalDate date) {
+    public Expense(String name, String categoryName, int value, LocalDate date, User user) {
         this.name = name;
         this.categoryName = categoryName;
         this.value = value;
         this.date = date;
-    }
-
-    public Expense(String name, String categoryName, int value) {
-        this(name, categoryName, value, LocalDate.now());
+        this.user = user;
     }
 
     @Override

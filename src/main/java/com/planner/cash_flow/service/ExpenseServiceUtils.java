@@ -2,17 +2,38 @@ package com.planner.cash_flow.service;
 
 import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.model.Income;
+import com.planner.cash_flow.repository.ExpenseRepository;
+import com.planner.user.model.User;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ExpenseServiceUtils {
 
+    private ExpenseRepository expenseRepository;
     private Map<String, Integer> categoriesGoals = new HashMap<>();
+
+    @Transactional
+    public List<String> getUserCategories(User user) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(Expense::getCategoryName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<Expense> getExpensesFromCategory(User user, String categoryName) {
+        return expenseRepository.findAllByUser(user).stream()
+                .filter(expense -> expense.getCategoryName().equals(categoryName))
+                .collect(Collectors.toList());
+    }
 
     public List<Expense> getMonthlyList(List<Expense> list, int monthNumber, int year) {
         List<Expense> monthlyExpenses = list.stream()

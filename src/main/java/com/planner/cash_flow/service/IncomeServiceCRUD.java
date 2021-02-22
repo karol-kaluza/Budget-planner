@@ -1,8 +1,10 @@
 package com.planner.cash_flow.service;
 
+import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.dto.IncomeDto;
 import com.planner.cash_flow.model.Income;
 import com.planner.cash_flow.repository.IncomeRepository;
+import com.planner.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.planner.cash_flow.functions.ExpenseFunctions.expenseToExpenseDto;
 import static com.planner.cash_flow.functions.IncomeFunctions.incomeToIncomeDto;
 
 @Service
@@ -20,10 +23,10 @@ public class IncomeServiceCRUD {
     private final IncomeRepository incomeRepository;
 
     @Transactional
-    public IncomeDto saveIncome(IncomeDto incomeDto) {
-        Income income = new Income(incomeDto.getName(), incomeDto.getValue(), incomeDto.getDate());
+    public String saveIncome(IncomeDto incomeDto) {
+        Income income = new Income(incomeDto.getName(), incomeDto.getValue(), incomeDto.getDate(), incomeDto.getUser());
         Income savedIncome = incomeRepository.save(income);
-        return new IncomeDto(savedIncome.getName(), savedIncome.getValue(), savedIncome.getDate());
+        return "Income added successfully";
     }
 
     @Transactional
@@ -40,5 +43,10 @@ public class IncomeServiceCRUD {
     public void deleteIncome(UUID incomeId) {
         Income income = incomeRepository.findById(incomeId).orElseThrow();
         incomeRepository.delete(income);
+    }
+
+    @Transactional
+    public List<IncomeDto> findAllByUser(User user) {
+        return incomeRepository.findAllByUser(user).stream().map(incomeToIncomeDto).collect(Collectors.toList());
     }
 }
