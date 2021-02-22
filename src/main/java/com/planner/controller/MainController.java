@@ -28,6 +28,9 @@ public class MainController {
     @GetMapping("/main")
     public String main(Model model, @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
+        String goal = "50%";
+        model.addAttribute("user", user);
+        model.addAttribute("goal", goal);
         model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomeService.findAllByUser(user));

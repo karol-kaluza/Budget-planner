@@ -67,16 +67,21 @@ $("#income-form").submit(function(event) {
   });
 });
 
-// $.get("/user/info", function(data) {
-//   $("#username").html(data.username);
-//   $("#user-logo").attr("src", data.avatarUrl);
-// });
 
-const chooseCategory = () => {
-  console.log(this);
-  $.get(`/expense/Rozrywka`, function(data) {
-    console.log(data);
-    $("#preview").html(data);
+//Category selection
+const selectCategory = (categoryName) => {
+  document.querySelector("#all-expenses").classList.toggle("d-none");
+  document.querySelector("#selected-expenses").classList.toggle("d-none");
+
+  $.get(`/expense/${categoryName}`, function(data) {
+    $("#category-table").html("");
+    $("#category-name").html(categoryName);
+    for (const object of data) {
+      $(`<tr>
+      <td>${object.name}</td>
+      <td>${object.value}</td>
+      <td>${object.date}</td>
+    </tr>`).appendTo("#category-table");
+    }
   });
 }
-

@@ -20,46 +20,56 @@
             </nav>
 
             <div class="progress my-3 mx-5">
-                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" role="progressbar" th:attr="style=|width: ${goal}|" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
 
             <section class="container mx-auto px-5">
                 <h3 class="text-xl font-bold">Categories:</h3>
-                <div>
-                    <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}" onclick="chooseCategory()"></button>
+                <div class="py-3">
+                    <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}" th:attr="onclick=|selectCategory('${category}')|"></button>
                 </div>
             </section>
 
-            <section id="preview">
-
-            </section>
-
             <section class="container mx-auto px-5">
-                <p id="expense"></p>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>All expenses</th>
-                        <th>PLN</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="expense : ${expenses}">
-                        <td th:text="${expense.name}"></td>
-                        <td th:text="${expense.value}"></td>
-                        <td th:text="${expense.date}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div id="selected-expenses" class="py-5 d-none">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Expenses from <span id="category-name"></span></th>
+                            <th>PLN</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody id="category-table">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="all-expenses" class="py-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>All expenses</th>
+                            <th>PLN</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="expense : ${expenses}">
+                            <td th:text="${expense.name}"></td>
+                            <td th:text="${expense.value}"></td>
+                            <td th:text="${expense.date}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
         </div>
     
         <div class="sidebar">
             <div class="card nav-item p-3 text-center border-0">
-                <img id="user-logo" class="card-image" alt="user logo">
-                <h2 id="username" class="font-bold"></h2>
+                <img id="userlogo" class="card-image" alt="user logo" th:src="${user.avatarUrl}">
+                <h2 id="username" class="font-bold" th:text="${user.username}"></h2>
                 <p>Product Owner</p>
                 <p class="badge bg-secondary">EUR-PLN: <span th:text="${currency}"></span></p>
                 <form method="POST" action="/logout">
