@@ -41,10 +41,10 @@ public class ExpenseControllerREST {
     }
 
     //todo not return expensedto
-    @GetMapping("/{id}")
-    public ExpenseDto findById(@PathVariable UUID id) {
-        return expenseServiceCRUD.findById(id);
-    }
+//    @GetMapping("/{id}")
+//    public ExpenseDto findById(@PathVariable UUID id) {
+//        return expenseServiceCRUD.findById(id);
+//    }
 
     @GetMapping
     public List<ExpenseDto> findAll() {
@@ -57,7 +57,7 @@ public class ExpenseControllerREST {
     }
 
     //todo convert to dto
-    @GetMapping("/de/{categoryName}")
+    @GetMapping("/{categoryName}")
     public List<Expense> getAllFromCategory(@PathVariable String categoryName, @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
         return expenseServiceUtils.getExpensesFromCategory(user, categoryName);
