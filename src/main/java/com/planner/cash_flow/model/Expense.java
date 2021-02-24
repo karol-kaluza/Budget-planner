@@ -35,6 +35,8 @@ public class Expense {
 
     private int value;
 
+    private int valueCurrency;
+
     private LocalDate date;
 
     @ManyToOne

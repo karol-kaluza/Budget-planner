@@ -31,6 +31,8 @@ public class Income {
 
     private int value;
 
+    private int valueCurrency;
+
     private LocalDate date;
 
     @ManyToOne

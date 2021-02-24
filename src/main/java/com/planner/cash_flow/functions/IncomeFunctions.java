@@ -10,6 +10,7 @@ public class IncomeFunctions {
     public static final Function<Income, IncomeDto> incomeToIncomeDto = income -> new IncomeDto(
             income.getName(),
             income.getValue(),
+            income.getValueCurrency(),
             income.getDate(),
             income.getUser()
     );

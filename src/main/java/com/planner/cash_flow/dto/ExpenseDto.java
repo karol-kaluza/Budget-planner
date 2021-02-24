@@ -15,6 +15,7 @@ public class ExpenseDto {
     private String name;
     private String categoryName;
     private int value;
+    private int valueCurrency;
     private LocalDate date;
     private User user;
 

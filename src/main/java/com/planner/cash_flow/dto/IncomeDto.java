@@ -14,6 +14,7 @@ public class IncomeDto {
 
     private String name;
     private int value;
+    private int valueCurrency;
     private LocalDate date;
     private User user;
 

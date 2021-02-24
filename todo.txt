@@ -4,6 +4,11 @@ TODO:
 - obliczyć sumę wydatków i przychodów dla tabel
 - modyfikowanie i usuwanie wydatków i income !!!
 
+- int na doubla
+- buttony z walutami
+- suma wydatków i dochodów
+
+
 
 
 expenseRepository.getAllExpenses.stream()
