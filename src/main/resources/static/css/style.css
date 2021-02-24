@@ -14,3 +14,11 @@
 .d-none {
 	display: none;
 }
+
+.w-100 {
+	width: 100%;
+}
+
+.delete-expense {
+	padding: 1px 3px;
+}

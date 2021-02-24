@@ -81,7 +81,55 @@ const selectCategory = (categoryName) => {
       <td>${object.name}</td>
       <td>${object.value}</td>
       <td>${object.date}</td>
+      <td><button type="button" class="delete-expense btn btn-outline-danger btn-sm" onclick="deleteExpense(${object.uuid})">Delete</button></td>
     </tr>`).appendTo("#category-table");
     }
   });
 }
+
+
+//Handle expenses edit
+const toggleExpenseTools = () => {
+  document.querySelectorAll(".delete-expense").forEach(item => item.classList.toggle("d-none"));
+};
+
+toggleExpenseTools();
+
+const deleteExpense = (id) => {
+  $.ajax({
+    url: `/expense/${id}`,
+    type: 'DELETE',
+    success: function(result) {
+      location.reload();
+    }
+  })
+};
+
+//Handle incomes edit
+const toggleIncomeTools = () => {
+  document.querySelectorAll(".delete-income").forEach(item => item.classList.toggle("d-none"));
+};
+
+toggleIncomeTools();
+
+const deleteIncome = (id) => {
+  $.ajax({
+    url: `/income/${id}`,
+    type: 'DELETE',
+    success: function(result) {
+      location.reload();
+    }
+  })
+};
+
+//Handle time filtering
+const yearInput = document.getElementById("year");
+const monthInput = document.getElementById("month");
+
+yearInput.addEventListener('input', () => {
+  console.log(this.value);
+});
+
+monthInput.addEventListener('input', () => {
+  console.log(this.value);
+});

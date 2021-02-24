@@ -8,6 +8,7 @@ import java.util.function.Function;
 public class ExpenseFunctions {
 
     public static final Function<Expense, ExpenseDto> expenseToExpenseDto = expense -> new ExpenseDto(
+            expense.getId(),
             expense.getName(),
             expense.getCategoryName(),
             expense.getValue(),

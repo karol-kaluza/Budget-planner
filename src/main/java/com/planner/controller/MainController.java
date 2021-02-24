@@ -31,6 +31,7 @@ public class MainController {
         String goal = "50%";
         model.addAttribute("user", user);
         model.addAttribute("goal", goal);
+        model.addAttribute("years", expenseServiceUtils.getYears(user));
         model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomeService.findAllByUser(user));

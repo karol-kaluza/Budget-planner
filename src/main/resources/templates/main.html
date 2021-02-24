@@ -38,6 +38,7 @@
                             <th>Expenses from <span id="category-name"></span></th>
                             <th>PLN</th>
                             <th>Date</th>
+                            <th><button type="button" class="btn btn-outline-dark btn-sm" onclick="toggleExpenseTools()">Edit</button></th>
                         </tr>
                         </thead>
                         <tbody id="category-table">
@@ -51,6 +52,7 @@
                             <th>All expenses</th>
                             <th>PLN</th>
                             <th>Date</th>
+                            <th><button type="button" class="btn btn-outline-dark btn-sm" onclick="toggleExpenseTools()">Edit</button></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,6 +60,7 @@
                             <td th:text="${expense.name}"></td>
                             <td th:text="${expense.value}"></td>
                             <td th:text="${expense.date}"></td>
+                            <td><button type="button" class="delete-expense btn btn-outline-danger btn-sm" th:attr="onclick=|deleteExpense('${expense.uuid}')|">Delete</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -76,16 +79,14 @@
                     <button class="btn btn-primary w-100" type="submit">Logout</button>
                 </form>
                 <div class="nav-item input-group py-5">
-                    <div class="form-floating">
+                    <div class="form-floating w-100 mb-2">
                         <select class="form-select" id="year">
                             <option selected>All</option>
-                            <option value="1">2020</option>
-                            <option value="2">2019</option>
-                            <option value="3">2018</option>
+                            <option th:each="year : ${years}" th:text="${year}" th:value="${year}"></option>
                         </select>
                         <label for="year">Year</label>
                     </div>
-                    <div class="form-floating">
+                    <div class="form-floating w-100">
                         <select class="form-select" id="month">
                             <option selected>All</option>
                             <option value="1">March</option>
@@ -103,6 +104,7 @@
                             <th>Name</th>
                             <th>PLN</th>
                             <th>Date</th>
+                            <th><button type="button" class="btn btn-outline-dark btn-sm" onclick="toggleIncomeTools()">Edit</button></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -110,6 +112,7 @@
                             <td th:text="${income.name}"></td>
                             <td th:text="${income.value}"></td>
                             <td th:text="${income.date}"></td>
+                            <td><button type="button" class="delete-income btn btn-outline-danger btn-sm" th:attr="onclick=|deleteIncome('${income.uuid}')|">Delete</button></td>
                         </tr>
                         </tbody>
                     </table>

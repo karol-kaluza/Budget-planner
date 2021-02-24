@@ -35,6 +35,16 @@ public class ExpenseServiceUtils {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<Integer> getYears(User user) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(Expense::getDate)
+                .map(x -> x.getYear())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
     public List<Expense> getMonthlyList(List<Expense> list, int monthNumber, int year) {
         List<Expense> monthlyExpenses = list.stream()
                 .filter(x -> x.getDate().getMonth().getValue() == monthNumber)
