@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @AllArgsConstructor
@@ -35,6 +36,24 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomeService.findAllByUser(user));
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        return "main";
+    }
+    @GetMapping("/main/{currency}")
+    public String mainWithCurrency(Model model,
+                                   @AuthenticationPrincipal OAuth2User principal,
+                                   @PathVariable("currency")CurrencyRateProvider.Currency myCurrency) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        String goal = "50%";
+        model.addAttribute("user", user);
+        model.addAttribute("goal", goal);
+        model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user));
+        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
+        model.addAttribute("incomes", incomeService.findAllByUser(user));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("EUR", CurrencyRateProvider.Currency.EUR);
+        model.addAttribute("USD", CurrencyRateProvider.Currency.USD);
+        model.addAttribute("CHF", CurrencyRateProvider.Currency.CHF);
+        model.addAttribute("GBP", CurrencyRateProvider.Currency.GBP);
         return "main";
     }
 
