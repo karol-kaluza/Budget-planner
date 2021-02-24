@@ -1,6 +1,5 @@
 package com.planner.cash_flow.service;
 
-import com.planner.cash_flow.dto.ExpenseDto;
 import com.planner.cash_flow.dto.IncomeDto;
 import com.planner.cash_flow.model.Income;
 import com.planner.cash_flow.repository.IncomeRepository;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.planner.cash_flow.functions.ExpenseFunctions.expenseToExpenseDto;
 import static com.planner.cash_flow.functions.IncomeFunctions.incomeToIncomeDto;
 
 @Service
@@ -25,7 +23,7 @@ public class IncomeServiceCRUD {
     @Transactional
     public String saveIncome(IncomeDto incomeDto) {
         Income income = new Income(incomeDto.getName(), incomeDto.getValue(), incomeDto.getDate(), incomeDto.getUser());
-        Income savedIncome = incomeRepository.save(income);
+        incomeRepository.save(income);
         return "Income added successfully";
     }
 
@@ -48,5 +46,20 @@ public class IncomeServiceCRUD {
     @Transactional
     public List<IncomeDto> findAllByUser(User user) {
         return incomeRepository.findAllByUser(user).stream().map(incomeToIncomeDto).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<IncomeDto> findAllByUser(User user, int year) {
+        return incomeRepository.findAllByUser(user).stream()
+                .filter(income -> income.getDate().getYear() == year)
+                .map(incomeToIncomeDto).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<IncomeDto> findAllByUser(User user, int year, int month) {
+        return incomeRepository.findAllByUser(user).stream()
+                .filter(income -> income.getDate().getYear() == year
+                        && income.getDate().getMonthValue() == month)
+                .map(incomeToIncomeDto).collect(Collectors.toList());
     }
 }

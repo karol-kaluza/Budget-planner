@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +18,30 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ExpenseServiceUtils {
 
-    private ExpenseRepository expenseRepository;
-    private Map<String, Integer> categoriesGoals = new HashMap<>();
+    private final ExpenseRepository expenseRepository;
+    private final Map<String, Integer> categoriesGoals = new HashMap<>();
 
     @Transactional
     public List<String> getUserCategories(User user) {
         return expenseRepository.findAllByUser(user).stream()
+                .map(Expense::getCategoryName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<String> getUserCategories(User user, int year) {
+        return expenseRepository.findAllByUser(user).stream()
+                .filter(expense -> expense.getDate().getYear() == year)
+                .map(Expense::getCategoryName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getUserCategories(User user, int year, int month) {
+        return expenseRepository.findAllByUser(user).stream()
+                .filter(expense -> expense.getDate().getYear() == year
+                    && expense.getDate().getMonthValue() == month)
                 .map(Expense::getCategoryName)
                 .distinct()
                 .collect(Collectors.toList());

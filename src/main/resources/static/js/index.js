@@ -69,11 +69,14 @@ $("#income-form").submit(function(event) {
 
 
 //Category selection
-const selectCategory = (categoryName) => {
+const selectCategory = function(categoryName) {
+
   document.querySelector("#all-expenses").classList.toggle("d-none");
   document.querySelector("#selected-expenses").classList.toggle("d-none");
 
-  $.get(`/expense/${categoryName}`, function(data) {
+  let path = location.pathname.replace("/main", "");
+
+  $.get(`/expense/${categoryName}${path}`, function(data) {
     $("#category-table").html("");
     $("#category-name").html(categoryName);
     for (const object of data) {
@@ -89,12 +92,6 @@ const selectCategory = (categoryName) => {
 
 
 //Handle expenses edit
-const toggleExpenseTools = () => {
-  document.querySelectorAll(".delete-expense").forEach(item => item.classList.toggle("d-none"));
-};
-
-toggleExpenseTools();
-
 const deleteExpense = (id) => {
   $.ajax({
     url: `/expense/${id}`,
@@ -106,12 +103,6 @@ const deleteExpense = (id) => {
 };
 
 //Handle incomes edit
-const toggleIncomeTools = () => {
-  document.querySelectorAll(".delete-income").forEach(item => item.classList.toggle("d-none"));
-};
-
-toggleIncomeTools();
-
 const deleteIncome = (id) => {
   $.ajax({
     url: `/income/${id}`,
@@ -126,23 +117,28 @@ const deleteIncome = (id) => {
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById("month");
 
-const selectInput = function() {
+const selectYearInput = function() {
   let value = this.value;
   if(value != "All") {
-    if(isNaN(value)) {
-      var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-      value = months.indexOf(value) + 1;
-      window.location.href = `${window.location.href}/${value}`;
-    } else {
-      window.location.href = `${window.location.origin}/main/${value}`;
-    }
+    window.location.href = `${window.location.origin}/main/${value}`;
   } else {
     window.location.href = `${window.location.origin}/main`;
   }
 }
 
-monthInput.addEventListener('input', selectInput);
-yearInput.addEventListener('input', selectInput);
+const selectMonthInput = function() {
+  let value = this.value;
+  if(value != "All") {
+    const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+    value = months.indexOf(value) + 1;
+    window.location.href = `${window.location.origin}/main/${yearInput.value}/${value}`;
+  } else {
+    window.location.href = `${window.location.origin}/main/${yearInput.value}`;
+  }
+}
+
+yearInput.addEventListener('input', selectYearInput);
+monthInput.addEventListener('input', selectMonthInput);
   
 
 if(yearInput.value == "All") {
