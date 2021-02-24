@@ -43,6 +43,23 @@ public class ExpenseServiceCRUD {
     }
 
     @Transactional
+    public List<ExpenseDto> findAllByUser(User user, int year) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(expenseToExpenseDto)
+                .filter(expenseDto -> expenseDto.getDate().getYear() == year)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ExpenseDto> findAllByUser(User user, int year, int month) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(expenseToExpenseDto)
+                .filter(expenseDto -> expenseDto.getDate().getYear() == year
+                    && expenseDto.getDate().getMonthValue() == month)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public void deleteExpense(UUID expenseId) {
         Expense expense = expenseRepository.findById(expenseId).orElseThrow();
         expenseRepository.delete(expense);

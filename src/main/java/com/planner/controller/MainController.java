@@ -12,18 +12,20 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.time.LocalDate;
+import java.time.Month;
 
 @Controller
 @AllArgsConstructor
 public class MainController {
 
-    private CurrencyRateProvider currencyRateProvider;
-
-    private UserRepository userRepository;
-
-    private ExpenseServiceCRUD expenseServiceCRUD;
-    private ExpenseServiceUtils expenseServiceUtils;
-    private IncomeServiceCRUD incomeService;
+    private final CurrencyRateProvider currencyRateProvider;
+    private final UserRepository userRepository;
+    private final ExpenseServiceCRUD expenseServiceCRUD;
+    private final ExpenseServiceUtils expenseServiceUtils;
+    private final IncomeServiceCRUD incomeService;
 
     @GetMapping("/main")
     public String main(Model model, @AuthenticationPrincipal OAuth2User principal) {
@@ -31,7 +33,10 @@ public class MainController {
         String goal = "50%";
         model.addAttribute("user", user);
         model.addAttribute("goal", goal);
+        model.addAttribute("selectedYear", "All");
+        model.addAttribute("selectedMonth", "All");
         model.addAttribute("years", expenseServiceUtils.getYears(user));
+        model.addAttribute("months", expenseServiceUtils.getYears(user));
         model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomeService.findAllByUser(user));
@@ -39,6 +44,38 @@ public class MainController {
         return "main";
     }
 
+    @GetMapping("/main/{year}")
+    public String main(@PathVariable int year, Model model, @AuthenticationPrincipal OAuth2User principal) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        String goal = "50%";
+        model.addAttribute("user", user);
+        model.addAttribute("goal", goal);
+        model.addAttribute("selectedYear", year);
+        model.addAttribute("selectedMonth", "All");
+        model.addAttribute("years", expenseServiceUtils.getYears(user));
+        model.addAttribute("months", expenseServiceUtils.getMonths(user, year));
+        model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user, year));
+        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
+        model.addAttribute("incomes", incomeService.findAllByUser(user));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        return "main";
+    }
+
+    @GetMapping("/main/{year}/{month}")
+    public String main(@PathVariable int year, @PathVariable int month, Model model, @AuthenticationPrincipal OAuth2User principal) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        String goal = "50%";
+        model.addAttribute("user", user);
+        model.addAttribute("goal", goal);
+        model.addAttribute("selectedYear", year);
+        model.addAttribute("selectedMonth", Month.of(month).toString().toLowerCase());
+        model.addAttribute("years", expenseServiceUtils.getYears(user));
+        model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user, year, month));
+        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
+        model.addAttribute("incomes", incomeService.findAllByUser(user));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        return "main";
+    }
 
     @GetMapping("/goodbye")
     public String goodbye() {

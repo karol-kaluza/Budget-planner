@@ -126,10 +126,25 @@ const deleteIncome = (id) => {
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById("month");
 
-yearInput.addEventListener('input', () => {
-  console.log(this.value);
-});
+const selectInput = function() {
+  let value = this.value;
+  if(value != "All") {
+    if(isNaN(value)) {
+      var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+      value = months.indexOf(value) + 1;
+      window.location.href = `${window.location.href}/${value}`;
+    } else {
+      window.location.href = `${window.location.origin}/main/${value}`;
+    }
+  } else {
+    window.location.href = `${window.location.origin}/main`;
+  }
+}
 
-monthInput.addEventListener('input', () => {
-  console.log(this.value);
-});
+monthInput.addEventListener('input', selectInput);
+yearInput.addEventListener('input', selectInput);
+  
+
+if(yearInput.value == "All") {
+  monthInput.disabled = true;
+};

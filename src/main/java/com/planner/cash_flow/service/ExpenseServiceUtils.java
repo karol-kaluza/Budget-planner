@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +41,21 @@ public class ExpenseServiceUtils {
     public List<Integer> getYears(User user) {
         return expenseRepository.findAllByUser(user).stream()
                 .map(Expense::getDate)
-                .map(x -> x.getYear())
+                .map(LocalDate::getYear)
                 .distinct()
                 .sorted()
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<String> getMonths(User user, int year) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(Expense::getDate)
+                .filter(x -> x.getYear() == year)
+                .map(LocalDate::getMonth)
+                .distinct()
+                .sorted()
+                .map(x -> x.toString().toLowerCase())
                 .collect(Collectors.toList());
     }
 
