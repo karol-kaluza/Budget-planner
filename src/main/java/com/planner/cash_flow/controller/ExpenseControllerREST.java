@@ -1,7 +1,6 @@
 package com.planner.cash_flow.controller;
 
 import com.planner.cash_flow.dto.ExpenseDto;
-import com.planner.cash_flow.model.Expense;
 import com.planner.cash_flow.service.ExpenseServiceCRUD;
 import com.planner.cash_flow.service.ExpenseServiceUtils;
 import com.planner.user.model.User;
