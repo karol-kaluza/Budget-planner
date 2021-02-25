@@ -116,13 +116,14 @@ const deleteIncome = (id) => {
 //Handle time filtering
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById("month");
+const currency = document.getElementById("myCurrency").textContent;
 
 const selectYearInput = function() {
   let value = this.value;
   if(value != "All") {
-    window.location.href = `${window.location.origin}/main/${value}`;
+    window.location.href = `${window.location.origin}/main/${currency}/${value}`;
   } else {
-    window.location.href = `${window.location.origin}/main`;
+    window.location.href = `${window.location.origin}/main/${currency}`;
   }
 }
 
