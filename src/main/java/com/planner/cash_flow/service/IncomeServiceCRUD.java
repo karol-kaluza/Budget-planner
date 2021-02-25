@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -46,6 +47,14 @@ public class IncomeServiceCRUD {
     @Transactional
     public List<IncomeDto> findAllByUser(User user) {
         return incomeRepository.findAllByUser(user).stream().map(incomeToIncomeDto).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public BigDecimal sumAllIncomesByUser(User user) {
+        return BigDecimal.valueOf(incomeRepository.findAllByUser(user).stream()
+                .map(incomeToIncomeDto)
+                .map(IncomeDto::getValue)
+                .reduce(0, Integer::sum));
     }
 
     @Transactional
