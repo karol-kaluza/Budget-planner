@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,6 +21,8 @@ import static com.planner.cash_flow.functions.IncomeFunctions.incomeToIncomeDto;
 public class IncomeServiceCRUD {
 
     private final IncomeRepository incomeRepository;
+
+    private final Comparator<IncomeDto> dateComparator = Comparator.comparing(IncomeDto::getDate);
 
     @Transactional
     public String saveIncome(IncomeDto incomeDto) {
@@ -46,14 +49,19 @@ public class IncomeServiceCRUD {
 
     @Transactional
     public List<IncomeDto> findAllByUser(User user) {
-        return incomeRepository.findAllByUser(user).stream().map(incomeToIncomeDto).collect(Collectors.toList());
+        return incomeRepository.findAllByUser(user).stream()
+                .map(incomeToIncomeDto)
+                .sorted(dateComparator.reversed())
+                .collect(Collectors.toList());
     }
 
     @Transactional
     public List<IncomeDto> findAllByUser(User user, int year) {
         return incomeRepository.findAllByUser(user).stream()
                 .filter(income -> income.getDate().getYear() == year)
-                .map(incomeToIncomeDto).collect(Collectors.toList());
+                .map(incomeToIncomeDto)
+                .sorted(dateComparator.reversed())
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -61,6 +69,8 @@ public class IncomeServiceCRUD {
         return incomeRepository.findAllByUser(user).stream()
                 .filter(income -> income.getDate().getYear() == year
                         && income.getDate().getMonthValue() == month)
-                .map(incomeToIncomeDto).collect(Collectors.toList());
+                .map(incomeToIncomeDto)
+                .sorted(dateComparator.reversed())
+                .collect(Collectors.toList());
     }
 }
