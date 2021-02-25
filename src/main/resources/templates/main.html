@@ -1,175 +1,181 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Planner</title>
+<head>
+    <meta charset="UTF-8">
+    <title>Planner</title>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link href="/css/style.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="main">
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                    <h1 class="navbar-brand">Planner</h1>
-                    <div class="nav-item">
-                        <button class="nav-item btn btn-success" id="add-income">+ Income</button>
-                        <button class="nav-item btn btn-danger" id="add-expense">+ Expense</button>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="progress my-3 mx-5">
-                <div class="progress-bar" role="progressbar" th:attr="style=|width: ${goal}|" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-
-            <section class="container mx-auto px-5">
-                <h3 class="text-xl font-bold">Categories:</h3>
-                <div class="py-3">
-                    <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}" th:attr="onclick=|selectCategory('${category}')|"></button>
-                </div>
-            </section>
-
-            <section class="container mx-auto px-5">
-                <div id="selected-expenses" class="py-5 d-none">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Expenses from <span id="category-name"></span></th>
-                            <th>PLN</th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-                        <tbody id="category-table">
-                        </tbody>
-                    </table>
-                </div>
-                <div id="all-expenses" class="py-5">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>All expenses</th>
-                            <th>PLN</th>
-                            <th th:text="${stringCurrency}"></th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="expense : ${expenses}">
-                            <td th:text="${expense.name}"></td>
-                            <td th:text="${expense.value}"></td>
-                            <td th:text="${#numbers.formatDecimal(expense.value * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
-                            <td th:text="${expense.date}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-        </div>
-    
-        <div class="sidebar">
-            <div class="card nav-item p-3 text-center border-0">
-                <img id="userlogo" class="card-image" alt="user logo" th:src="${user.avatarUrl}">
-                <h2 id="username" class="font-bold" th:text="${user.username}"></h2>
-                <p>Product Owner</p>
-                <p class="badge bg-secondary" th:text="${stringCurrency} + ' PLN= ' + ${#numbers.formatDecimal(currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></p>
-
-<!--                <span>-->
-                    <form method="GET" th:action="@{/main/USD}">
-                        <button class="btn btn-outline-dark w-25" type="submit">USD</button>
-                    </form>
-                     <form method="GET" th:action="@{/main/EUR}">
-                        <button class="btn btn-outline-dark w-25" type="submit">EUR</button>
-                    </form>
-                     <form method="GET" th:action="@{/main/GBP}">
-                        <button class="btn btn-outline-dark w-25" type="submit">GBP</button>
-                    </form>
-                     <form method="GET" th:action="@{/main/CHF}">
-                        <button class="btn btn-outline-dark w-25" type="submit">CHF</button>
-                    </form>
-<!--                    <button type="button" class="btn btn-outline-dark" id="EUR" th:text="${EUR}"></button>-->
-<!--                    <button type="button" class="btn btn-outline-dark" th:text="${USD}">USD</button>-->
-<!--                    <button type="button" class="btn btn-outline-dark" th:text="${CHF}">CHF</button>-->
-<!--                    <button type="button" class="btn btn-outline-dark" th:text="${GBP}">GBP</button>-->
-<!--                </span>-->
-                <form method="POST" action="/logout">
-                    <button class="btn btn-primary w-100" type="submit">Logout</button>
-                </form>
-                <div class="nav-item input-group py-5">
-                    <div class="form-floating">
-                        <select class="form-select" id="year">
-                            <option selected>All</option>
-                            <option value="1">2020</option>
-                            <option value="2">2019</option>
-                            <option value="3">2018</option>
-                        </select>
-                        <label for="year">Year</label>
-                    </div>
-                    <div class="form-floating">
-                        <select class="form-select" id="month">
-                            <option selected>All</option>
-                            <option value="1">March</option>
-                            <option value="2">February</option>
-                            <option value="3">January</option>
-                        </select>
-                        <label for="month">Month</label>
-                    </div>
-                </div>
-                <div class="py-5">
-                    <h4>My incomes</h4>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>PLN</th>
-                            <th>EUR</th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="income : ${incomes}">
-                            <td th:text="${income.name}"></td>
-                            <td th:text="${income.value}"></td>
-                            <td th:text="${#numbers.formatDecimal(income.value * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
-                            <td th:text="${income.date}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="main">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <h1 class="navbar-brand">Planner</h1>
+            <div class="nav-item">
+                <button class="nav-item btn btn-success" id="add-income">+ Income</button>
+                <button class="nav-item btn btn-danger" id="add-expense">+ Expense</button>
             </div>
         </div>
+    </nav>
 
-        <form id="expense-form" action="#" class="p-5 w-50 rounded shadow d-none">
-            <h2>Add expense</h2>
-            <label class="form-label">Name:</label>
-            <input type="text" name="name" class="form-control" />
-            <label class="form-label">Category:</label>
-            <input type="text" name="categoryName" class="form-control" />
-            <label class="form-label">Value:</label>
-            <input type="number" step="0.01" name="value" class="form-control" />
-            <Label class="form-label">Date:</Label>
-            <input type="date" name="date" class="form-control" />
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-danger text-center my-3">Add Expense</button>
-            </div>
+    <div class="progress my-3 mx-5">
+        <div class="progress-bar" role="progressbar" th:attr="style=|width: ${goal}|" aria-valuemin="0"
+             aria-valuemax="100"></div>
+    </div>
+
+    <section class="container mx-auto px-5">
+        <h3 class="text-xl font-bold">Categories:</h3>
+        <div class="py-3">
+            <button class="btn btn-outline-primary me-1" th:each="category : ${categories}" th:text="${category}"
+                    th:attr="onclick=|selectCategory('${category}')|"></button>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-5">
+        <div id="selected-expenses" class="py-5 d-none">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Expenses from <span id="category-name"></span></th>
+                    <th>PLN</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody id="category-table">
+                </tbody>
+            </table>
+        </div>
+        <div id="all-expenses" class="py-5">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>All expenses</th>
+                    <th>PLN</th>
+                    <th th:text="${stringCurrency}"></th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="expense : ${expenses}">
+                    <td th:text="${expense.name}"></td>
+                    <td th:text="${expense.value}"></td>
+                    <td th:text="${#numbers.formatDecimal(expense.value * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    <td th:text="${expense.date}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+<div class="sidebar">
+    <div class="card nav-item p-3 text-center border-0">
+        <img id="userlogo" class="card-image" alt="user logo" th:src="${user.avatarUrl}">
+        <h2 id="username" class="font-bold" th:text="${user.username}"></h2>
+        <p>Product Owner</p>
+        <p class="badge bg-secondary"
+           th:text="${stringCurrency} + ' PLN= ' + ${#numbers.formatDecimal(currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></p>
+        <div class="d-grid gap-2 d-md-block">
+            <form method="GET" th:action="@{/main/USD}">
+                <button class="btn btn-outline-dark" type="submit">USD</button>
+            </form>
+            <form method="GET" th:action="@{/main/EUR}">
+                <button class="btn btn-outline-dark" type="submit">EUR</button>
+            </form>
+            <form method="GET" th:action="@{/main/GBP}">
+                <button class="btn btn-outline-dark" type="submit">GBP</button>
+            </form>
+            <form method="GET" th:action="@{/main/CHF}">
+                <button class="btn btn-outline-dark" type="submit">CHF</button>
+            </form>
+        </div>
+        <!--                <span>-->
+
+        <!--                    <button type="button" class="btn btn-outline-dark" id="EUR" th:text="${EUR}"></button>-->
+        <!--                    <button type="button" class="btn btn-outline-dark" th:text="${USD}">USD</button>-->
+        <!--                    <button type="button" class="btn btn-outline-dark" th:text="${CHF}">CHF</button>-->
+        <!--                    <button type="button" class="btn btn-outline-dark" th:text="${GBP}">GBP</button>-->
+        <!--                </span>-->
+        <form method="POST" action="/logout">
+            <button class="btn btn-primary w-100" type="submit">Logout</button>
         </form>
-
-        <form id="income-form" action="#" class="p-5 w-50 rounded shadow d-none">
-            <h2>Add income</h2>
-            <label class="form-label">Name:</label>
-            <input type="text" name="name" class="form-control" />
-            <label class="form-label">Value:</label>
-            <input type="number" step="0.01" name="value" class="form-control" />
-            <Label class="form-label">Date:</Label>
-            <input type="date" name="date" class="form-control" />
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-success text-center my-3">Add Income</button>
+        <div class="nav-item input-group py-5">
+            <div class="form-floating">
+                <select class="form-select" id="year">
+                    <option selected>All</option>
+                    <option value="1">2020</option>
+                    <option value="2">2019</option>
+                    <option value="3">2018</option>
+                </select>
+                <label for="year">Year</label>
             </div>
-        </form>
+            <div class="form-floating">
+                <select class="form-select" id="month">
+                    <option selected>All</option>
+                    <option value="1">March</option>
+                    <option value="2">February</option>
+                    <option value="3">January</option>
+                </select>
+                <label for="month">Month</label>
+            </div>
+        </div>
+        <div class="py-5">
+            <h4>My incomes</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>PLN</th>
+                    <th>EUR</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="income : ${incomes}">
+                    <td th:text="${income.name}"></td>
+                    <td th:text="${income.value}"></td>
+                    <td th:text="${#numbers.formatDecimal(income.value * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    <td th:text="${income.date}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-    </body>
-      
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/js/index.js"></script>
+<form id="expense-form" action="#" class="p-5 w-50 rounded shadow d-none">
+    <h2>Add expense</h2>
+    <label class="form-label">Name:</label>
+    <input type="text" name="name" class="form-control"/>
+    <label class="form-label">Category:</label>
+    <input type="text" name="categoryName" class="form-control"/>
+    <label class="form-label">Value:</label>
+    <input type="number" step="0.01" name="value" class="form-control"/>
+    <Label class="form-label">Date:</Label>
+    <input type="date" name="date" class="form-control"/>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-danger text-center my-3">Add Expense</button>
+    </div>
+</form>
+
+<form id="income-form" action="#" class="p-5 w-50 rounded shadow d-none">
+    <h2>Add income</h2>
+    <label class="form-label">Name:</label>
+    <input type="text" name="name" class="form-control"/>
+    <label class="form-label">Value:</label>
+    <input type="number" step="0.01" name="value" class="form-control"/>
+    <Label class="form-label">Date:</Label>
+    <input type="date" name="date" class="form-control"/>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success text-center my-3">Add Income</button>
+    </div>
+</form>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
 </html>

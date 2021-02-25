@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -15,7 +16,7 @@ public class ExpenseDto {
     private String name;
     private String categoryName;
     private int value;
-    private int valueCurrency;
+    private BigDecimal valueCurrency;
     private LocalDate date;
     private User user;
 

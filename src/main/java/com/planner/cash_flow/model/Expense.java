@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class Expense {
 
     private int value;
 
-    private int valueCurrency;
+    private BigDecimal valueCurrency;
 
     private LocalDate date;
 
