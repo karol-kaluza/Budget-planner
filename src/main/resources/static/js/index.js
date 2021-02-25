@@ -74,9 +74,12 @@ const selectCategory = function(categoryName) {
   document.querySelector("#all-expenses").classList.toggle("d-none");
   document.querySelector("#selected-expenses").classList.toggle("d-none");
 
-  let path = location.pathname.replace("/main", "");
+  let path = location.pathname.replace("/main/", "");
+  if (isNaN(path)){
+    path = "";
+  }
 
-  $.get(`/expense/${categoryName}${path}`, function(data) {
+  $.get(`/expense/${categoryName}/${path}`, function(data) {
     $("#category-table").html("");
     $("#category-name").html(categoryName);
     for (const object of data) {
@@ -132,9 +135,9 @@ const selectMonthInput = function() {
   if(value != "All") {
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     value = months.indexOf(value) + 1;
-    window.location.href = `${window.location.origin}/main/${yearInput.value}/${value}`;
+    window.location.href = `${window.location.origin}/main/${currency}/${yearInput.value}/${value}`;
   } else {
-    window.location.href = `${window.location.origin}/main/${yearInput.value}`;
+    window.location.href = `${window.location.origin}/main/${currency}/${yearInput.value}`;
   }
 }
 

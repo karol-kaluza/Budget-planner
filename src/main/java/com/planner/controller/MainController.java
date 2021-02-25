@@ -55,22 +55,6 @@ public class MainController {
         return "main";
     }
 
-//    @GetMapping("/main/{currency}")
-//    public String mainWithCurrency(Model model,
-//                                   @AuthenticationPrincipal OAuth2User principal,
-//                                   @PathVariable("currency") CurrencyRateProvider.Currency myCurrency) {
-//        User user = userRepository.findByUsername(principal.getAttribute("login"));
-//        String goal = "50%";
-//        model.addAttribute("user", user);
-//        model.addAttribute("goal", goal);
-//        model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user));
-//        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
-//        model.addAttribute("incomes", incomeService.findAllByUser(user));
-//        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
-//        model.addAttribute("stringCurrency", myCurrency.toString());
-//        return "main";
-//    }
-
     @GetMapping("/main/{currency}/{year}")
     public String main(@PathVariable int year,
                        @PathVariable("currency") CurrencyRateProvider.Currency myCurrency,
@@ -99,36 +83,38 @@ public class MainController {
         return "main";
     }
 
-//    @GetMapping("/main/{year}/{month}")
-//    public String main(@PathVariable int year,
-//                       @PathVariable int month,
-//                       Model model,
-//                       @AuthenticationPrincipal OAuth2User principal) {
-//        User user = userRepository.findByUsername(principal.getAttribute("login"));
-//        String selectedMonth = Month.of(month).toString().toLowerCase();
-//        List<Integer> years = expenseServiceUtils.getYears(user).stream()
-//                .filter(integer -> integer != year)
-//                .collect(Collectors.toList());
-//        List<String> months = expenseServiceUtils.getMonths(user, year).stream()
-//                .filter(s -> !s.equals(selectedMonth))
-//                .collect(Collectors.toList());
-//        List<IncomeDto> incomes = incomeService.findAllByUser(user, year, month);
-//        List<ExpenseDto> expenses = expenseServiceCRUD.findAllByUser(user, year, month);
-//        String goal = "50%";
-//        model.addAttribute("user", user);
-//        model.addAttribute("goal", goal);
-//        model.addAttribute("selectedYear", year);
-//        model.addAttribute("selectedMonth", Month.of(month).toString().toLowerCase());
-//        model.addAttribute("years", years);
-//        model.addAttribute("months", months);
-//        model.addAttribute("expenses", expenses);
-//        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-//        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year, month));
-//        model.addAttribute("incomes", incomes);
-//        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-//        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
-//        return "main";
-//    }
+    @GetMapping("/main/{currency}/{year}/{month}")
+    public String main(@PathVariable int year,
+                       @PathVariable int month,
+                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency,
+                       Model model,
+                       @AuthenticationPrincipal OAuth2User principal) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        String selectedMonth = Month.of(month).toString().toLowerCase();
+        List<Integer> years = expenseServiceUtils.getYears(user).stream()
+                .filter(integer -> integer != year)
+                .collect(Collectors.toList());
+        List<String> months = expenseServiceUtils.getMonths(user, year).stream()
+                .filter(s -> !s.equals(selectedMonth))
+                .collect(Collectors.toList());
+        List<IncomeDto> incomes = incomeService.findAllByUser(user, year, month);
+        List<ExpenseDto> expenses = expenseServiceCRUD.findAllByUser(user, year, month);
+        String goal = "50%";
+        model.addAttribute("user", user);
+        model.addAttribute("goal", goal);
+        model.addAttribute("selectedYear", year);
+        model.addAttribute("selectedMonth", Month.of(month).toString().toLowerCase());
+        model.addAttribute("years", years);
+        model.addAttribute("months", months);
+        model.addAttribute("expenses", expenses);
+        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
+        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year, month));
+        model.addAttribute("incomes", incomes);
+        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("stringCurrency", myCurrency.toString());
+        return "main";
+    }
 
     @GetMapping("/goodbye")
     public String goodbye() {
