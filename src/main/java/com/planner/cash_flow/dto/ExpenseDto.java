@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class ExpenseDto {
     private UUID uuid;
     private String name;
     private String categoryName;
-    private int value;
+    private BigDecimal value;
     private LocalDate date;
     @JsonIgnore
     private User user;
@@ -26,7 +27,7 @@ public class ExpenseDto {
     public ExpenseDto(String name, String categoryName, String value, String date, User user) {
         this.name = name;
         this.categoryName = categoryName;
-        this.value = Integer.parseInt(value);
+        this.value = BigDecimal.valueOf(Double.parseDouble(value));
         this.date = LocalDate.parse(date);
         this.user = user;
     }

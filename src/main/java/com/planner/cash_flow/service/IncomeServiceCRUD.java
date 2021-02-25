@@ -50,14 +50,6 @@ public class IncomeServiceCRUD {
     }
 
     @Transactional
-    public BigDecimal sumAllIncomesByUser(User user) {
-        return BigDecimal.valueOf(incomeRepository.findAllByUser(user).stream()
-                .map(incomeToIncomeDto)
-                .map(IncomeDto::getValue)
-                .reduce(0, Integer::sum));
-    }
-
-    @Transactional
     public List<IncomeDto> findAllByUser(User user, int year) {
         return incomeRepository.findAllByUser(user).stream()
                 .filter(income -> income.getDate().getYear() == year)

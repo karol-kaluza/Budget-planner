@@ -3,7 +3,7 @@ TODO:
 - buttony z walutami
 
 - obliczyć sumę wydatków i przychodów dla tabel
-
+- dane wyświetlają się po kolei
 -----------------------------------------------------
 - obliczyć goal na dany okres i kategorię
 - logowanie przez google

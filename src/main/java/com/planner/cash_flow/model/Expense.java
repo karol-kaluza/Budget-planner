@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
@@ -33,7 +34,7 @@ public class Expense {
 
     private String categoryName;
 
-    private int value;
+    private BigDecimal value;
 
     private LocalDate date;
 
@@ -42,7 +43,7 @@ public class Expense {
     @JsonIgnore
     private User user;
 
-    public Expense(String name, String categoryName, int value, LocalDate date, User user) {
+    public Expense(String name, String categoryName, BigDecimal value, LocalDate date, User user) {
         this.name = name;
         this.categoryName = categoryName;
         this.value = value;

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class Income {
 
     private String name;
 
-    private int value;
+    private BigDecimal value;
 
     private LocalDate date;
 
@@ -37,20 +38,20 @@ public class Income {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Income(String name, int value, LocalDate date, User user) {
+    public Income(String name, BigDecimal value, LocalDate date, User user) {
         this.name = name;
         this.value = value;
         this.date = date;
         this.user = user;
     }
 
-    public Income(String name, int value, LocalDate date) {
+    public Income(String name, BigDecimal value, LocalDate date) {
         this.name = name;
         this.value = value;
         this.date = date;
     }
 
-    public Income(String name, int value) {
+    public Income(String name, BigDecimal value) {
         this(name, value, LocalDate.now());
     }
 }

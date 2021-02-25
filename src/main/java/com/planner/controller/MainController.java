@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.math.BigDecimal;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +45,10 @@ public class MainController {
         model.addAttribute("years", expenseServiceUtils.getYears(user));
         model.addAttribute("months", expenseServiceUtils.getYears(user));
         model.addAttribute("expenses", expenses);
-        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(0, Integer::sum));
+        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomes);
-        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(0, Integer::sum));
+        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
         return "main";
     }
@@ -68,10 +69,10 @@ public class MainController {
         model.addAttribute("years",years);
         model.addAttribute("months", expenseServiceUtils.getMonths(user, year));
         model.addAttribute("expenses", expenses);
-        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(0, Integer::sum));
+        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year));
         model.addAttribute("incomes", incomes);
-        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(0, Integer::sum));
+        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
         return "main";
     }
@@ -96,10 +97,10 @@ public class MainController {
         model.addAttribute("years", years);
         model.addAttribute("months", months);
         model.addAttribute("expenses", expenses);
-        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(0, Integer::sum));
+        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year, month));
         model.addAttribute("incomes", incomes);
-        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(0, Integer::sum));
+        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
         return "main";
     }
