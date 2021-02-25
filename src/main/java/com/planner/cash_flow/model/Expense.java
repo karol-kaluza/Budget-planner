@@ -36,6 +36,8 @@ public class Expense {
 
     private BigDecimal value;
 
+    private BigDecimal valueCurrency;
+
     private LocalDate date;
 
     @ManyToOne

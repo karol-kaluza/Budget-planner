@@ -104,6 +104,22 @@ public class MainController {
         return "main";
     }
 
+    @GetMapping("/main/{currency}")
+    public String mainWithCurrency(Model model,
+                                   @AuthenticationPrincipal OAuth2User principal,
+                                   @PathVariable("currency") CurrencyRateProvider.Currency myCurrency) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        String goal = "50%";
+        model.addAttribute("user", user);
+        model.addAttribute("goal", goal);
+        model.addAttribute("expenses", expenseServiceCRUD.findAllByUser(user));
+        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
+        model.addAttribute("incomes", incomeService.findAllByUser(user));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("stringCurrency", myCurrency.toString());
+        return "main";
+    }
+
     @GetMapping("/goodbye")
     public String goodbye() {
         return "goodbye";

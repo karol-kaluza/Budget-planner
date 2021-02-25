@@ -19,6 +19,7 @@ public class IncomeDto {
     private UUID uuid;
     private String name;
     private BigDecimal value;
+    private BigDecimal valueCurrency;
     private LocalDate date;
     private User user;
 

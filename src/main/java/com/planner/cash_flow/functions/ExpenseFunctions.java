@@ -12,6 +12,7 @@ public class ExpenseFunctions {
             expense.getName(),
             expense.getCategoryName(),
             expense.getValue(),
+            expense.getValueCurrency(),
             expense.getDate(),
             expense.getUser()
     );
