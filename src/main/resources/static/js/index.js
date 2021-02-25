@@ -85,14 +85,3 @@ const selectCategory = (categoryName) => {
     }
   });
 }
-
-const currancyInput = document.getElementById("currency");
-
-const selectCurrencyInput = function() {
-  let value = this.value;
-  if(value != "EUR") {
-    window.location.href = `${window.location.origin}/main/${value}`;
-  } else {
-    window.location.href = `${window.location.origin}/main`;
-  }
-}
