@@ -1,7 +1,6 @@
 package com.planner.cash_flow.service;
 
 import com.planner.cash_flow.model.Expense;
-import com.planner.cash_flow.model.Income;
 import com.planner.cash_flow.repository.ExpenseRepository;
 import com.planner.user.model.User;
 import lombok.AllArgsConstructor;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +20,7 @@ public class ExpenseServiceUtils {
 
     private final ExpenseRepository expenseRepository;
     private final Map<String, Integer> categoriesGoals = new HashMap<>();
+    private final Comparator<Expense> compareByDate = Comparator.comparing(Expense::getDate);
 
     @Transactional
     public List<String> getUserCategories(User user) {
@@ -51,6 +52,7 @@ public class ExpenseServiceUtils {
     public List<Expense> getExpensesFromCategory(User user, String categoryName) {
         return expenseRepository.findAllByUser(user).stream()
                 .filter(expense -> expense.getCategoryName().equals(categoryName))
+                .sorted(compareByDate.reversed())
                 .collect(Collectors.toList());
     }
 
