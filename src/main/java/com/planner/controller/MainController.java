@@ -50,12 +50,36 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomeService.findAllByUser(user));
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("stringCurrency", myCurrency.toString());
         model.addAttribute("EUR", CurrencyRateProvider.Currency.EUR);
         model.addAttribute("USD", CurrencyRateProvider.Currency.USD);
         model.addAttribute("CHF", CurrencyRateProvider.Currency.CHF);
         model.addAttribute("GBP", CurrencyRateProvider.Currency.GBP);
         return "main";
     }
+//    @GetMapping("/main/{year}")
+//    public String main(@PathVariable int year, Model model, @AuthenticationPrincipal OAuth2User principal) {
+//        User user = userRepository.findByUsername(principal.getAttribute("login"));
+//        List<Integer> years = expenseServiceUtils.getYears(user).stream()
+//                .filter(integer -> integer != year)
+//                .collect(Collectors.toList());
+//        List<IncomeDto> incomes = incomeService.findAllByUser(user, year);
+//        List<ExpenseDto> expenses = expenseServiceCRUD.findAllByUser(user, year);
+//        String goal = "50%";
+//        model.addAttribute("user", user);
+//        model.addAttribute("goal", goal);
+//        model.addAttribute("selectedYear", year);
+//        model.addAttribute("selectedMonth", "All");
+//        model.addAttribute("years",years);
+//        model.addAttribute("months", expenseServiceUtils.getMonths(user, year));
+//        model.addAttribute("expenses", expenses);
+//        model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
+//        model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year));
+//        model.addAttribute("incomes", incomes);
+//        model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
+//        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+//        return "main";
+//    }
 
 
     @GetMapping("/goodbye")
