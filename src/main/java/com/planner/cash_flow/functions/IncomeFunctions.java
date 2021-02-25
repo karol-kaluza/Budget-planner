@@ -8,6 +8,7 @@ import java.util.function.Function;
 public class IncomeFunctions {
 
     public static final Function<Income, IncomeDto> incomeToIncomeDto = income -> new IncomeDto(
+            income.getId(),
             income.getName(),
             income.getValue(),
             income.getDate(),

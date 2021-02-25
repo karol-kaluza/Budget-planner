@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,6 +20,8 @@ import static com.planner.cash_flow.functions.ExpenseFunctions.expenseToExpenseD
 public class ExpenseServiceCRUD {
 
     private final ExpenseRepository expenseRepository;
+
+    private final Comparator<ExpenseDto> compareByDate = Comparator.comparing(ExpenseDto::getDate);
 
     @Transactional
     public String saveExpense(ExpenseDto expenseDto) {
@@ -39,7 +42,29 @@ public class ExpenseServiceCRUD {
 
     @Transactional
     public List<ExpenseDto> findAllByUser(User user) {
-        return expenseRepository.findAllByUser(user).stream().map(expenseToExpenseDto).collect(Collectors.toList());
+        return expenseRepository.findAllByUser(user).stream()
+                .map(expenseToExpenseDto)
+                .sorted(compareByDate.reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ExpenseDto> findAllByUser(User user, int year) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(expenseToExpenseDto)
+                .filter(expenseDto -> expenseDto.getDate().getYear() == year)
+                .sorted(compareByDate.reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ExpenseDto> findAllByUser(User user, int year, int month) {
+        return expenseRepository.findAllByUser(user).stream()
+                .map(expenseToExpenseDto)
+                .filter(expenseDto -> expenseDto.getDate().getYear() == year
+                    && expenseDto.getDate().getMonthValue() == month)
+                .sorted(compareByDate.reversed())
+                .collect(Collectors.toList());
     }
 
     @Transactional

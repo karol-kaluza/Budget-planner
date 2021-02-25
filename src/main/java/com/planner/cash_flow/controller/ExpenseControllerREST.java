@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.planner.cash_flow.functions.ExpenseFunctions.expenseToExpenseDto;
 
 @RestController
 @RequestMapping("/expense")
@@ -40,12 +43,6 @@ public class ExpenseControllerREST {
                 userRepository.findByUsername(principal.getAttribute("login"))));
     }
 
-    //todo not return expensedto
-//    @GetMapping("/{id}")
-//    public ExpenseDto findById(@PathVariable UUID id) {
-//        return expenseServiceCRUD.findById(id);
-//    }
-
     @GetMapping
     public List<ExpenseDto> findAll() {
         return expenseServiceCRUD.findAll();
@@ -56,10 +53,30 @@ public class ExpenseControllerREST {
         expenseServiceCRUD.deleteExpense(id);
     }
 
-    //todo convert to dto
     @GetMapping("/{categoryName}")
-    public List<Expense> getAllFromCategory(@PathVariable String categoryName, @AuthenticationPrincipal OAuth2User principal) {
+    public List<ExpenseDto> getAllFromCategory(@PathVariable String categoryName, @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
-        return expenseServiceUtils.getExpensesFromCategory(user, categoryName);
+        return expenseServiceUtils.getExpensesFromCategory(user, categoryName).stream()
+                .map(expenseToExpenseDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{categoryName}/{year}")
+    public List<ExpenseDto> getAllFromCategory(@PathVariable String categoryName, @PathVariable int year, @AuthenticationPrincipal OAuth2User principal) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        return expenseServiceUtils.getExpensesFromCategory(user, categoryName).stream()
+                .filter(expense -> expense.getDate().getYear() == year)
+                .map(expenseToExpenseDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{categoryName}/{year}/{month}")
+    public List<ExpenseDto> getAllFromCategory(@PathVariable String categoryName, @PathVariable int year, @PathVariable int month, @AuthenticationPrincipal OAuth2User principal) {
+        User user = userRepository.findByUsername(principal.getAttribute("login"));
+        return expenseServiceUtils.getExpensesFromCategory(user, categoryName).stream()
+                .filter(expense -> expense.getDate().getYear() == year
+                    && expense.getDate().getMonthValue() == month)
+                .map(expenseToExpenseDto)
+                .collect(Collectors.toList());
     }
 }

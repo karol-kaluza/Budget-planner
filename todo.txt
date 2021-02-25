@@ -1,19 +1,14 @@
 TODO:
-- możliwość wyboru okresu z którego są wydatki (podłączyć gotowy formularz)
-- obliczyć goal na dany okres i kategorię
+- dodawanie wartości nie w int
+- buttony z walutami
+
 - obliczyć sumę wydatków i przychodów dla tabel
-- modyfikowanie i usuwanie wydatków i income !!!
-
-
-
-expenseRepository.getAllExpenses.stream()
-        .filter(expense.getYear == yearParam)
-        .map(expense -> expense::getMonth)
-        .Collectors(collect.toList)
-
-List
-
+- dane wyświetlają się po kolei
 -----------------------------------------------------
+- obliczyć goal na dany okres i kategorię
 - logowanie przez google
 - logowanie przez zwykły formularz
-- implementacja wymiany waluty - wydatki i przychody
+- implementacja wymiany waluty - wydatki i przychody - dodatkowa waluta
+- modyfikowanie wydatku
+------------------------------------------------------
+
