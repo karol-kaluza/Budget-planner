@@ -7,12 +7,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // TODO: 10/02/2021 reduce permissions
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login().defaultSuccessUrl("/user/check", true)
