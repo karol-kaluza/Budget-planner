@@ -19,5 +19,5 @@ public class UserFunctions {
             String.valueOf(map.get("avatar_url")),
             new ArrayList<Expense>(),
             new ArrayList<Income>(),
-            CurrencyRateProvider.Currency.PLN);
+            CurrencyRateProvider.Currency.EUR);
 }

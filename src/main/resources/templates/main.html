@@ -62,7 +62,7 @@
                 <tr>
                     <th>All expenses</th>
                     <th>PLN</th>
-                    <th th:text="${stringCurrency}"></th>
+                    <th th:text="${stringCurrency}" id="myCurrency"></th>
                     <th>Date</th>
                     <th></th>
                 </tr>
@@ -80,6 +80,7 @@
                 <tr>
                     <td>Sum:</td>
                     <td th:text="${expensesSum}"></td>
+                    <td th:text="${#numbers.formatDecimal(expensesSum * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -90,24 +91,24 @@
 </div>
 <div class="sidebar">
     <div class="card nav-item p-3 text-center border-0">
-        <img id="userlogo" class="card-image" alt="user logo" th:src="${user.avatarUrl}">
+        <img id="userlogo" class="card-image user-image" alt="user logo" th:src="${user.avatarUrl}">
         <h2 id="username" class="font-bold" th:text="${user.username}"></h2>
         <p class="badge bg-secondary"
         th:text="${stringCurrency} + ' PLN= ' + ${#numbers.formatDecimal(currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></p>
         <form method="POST" action="/logout">
             <button class="btn btn-primary w-100" type="submit">Logout</button>
         </form>
-        <div class="d-grid gap-2 d-md-block">
-            <form method="GET" th:action="@{/USD/main}">
+        <div class="btn-group justify-content-center my-3">
+            <form method="GET" th:action="@{/USD/main}" class="d-table">
                 <button class="btn btn-outline-dark" type="submit">USD</button>
             </form>
-            <form method="GET" th:action="@{/EUR/main}">
+            <form method="GET" th:action="@{/EUR/main}" class="d-table">
                 <button class="btn btn-outline-dark" type="submit">EUR</button>
             </form>
-            <form method="GET" th:action="@{/GBP/main}">
+            <form method="GET" th:action="@{/GBP/main}" class="d-table">
                 <button class="btn btn-outline-dark" type="submit">GBP</button>
             </form>
-            <form method="GET" th:action="@{/CHF/main}">
+            <form method="GET" th:action="@{/CHF/main}" class="d-table">
                 <button class="btn btn-outline-dark" type="submit">CHF</button>
             </form>
         </div>

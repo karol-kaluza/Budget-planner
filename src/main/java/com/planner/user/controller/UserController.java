@@ -30,7 +30,7 @@ public class UserController {
         } else {
             log.info(user.getUsername() + " already exists!");
         }
-        //todo add user deafult value
-        return "redirect:/PLN/main";
+        String userDefaultCurrency = user.getDefaultCurrency().toString();
+        return "redirect:/main/" + userDefaultCurrency;
     }
 }

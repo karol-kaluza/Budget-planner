@@ -74,9 +74,12 @@ const selectCategory = function(categoryName) {
   document.querySelector("#all-expenses").classList.toggle("d-none");
   document.querySelector("#selected-expenses").classList.toggle("d-none");
 
-  let path = location.pathname.replace("/main", "");
+  let path = location.pathname.replace("/main/", "");
+  if (isNaN(path)){
+    path = "";
+  }
 
-  $.get(`/expense/${categoryName}${path}`, function(data) {
+  $.get(`/expense/${categoryName}/${path}`, function(data) {
     $("#category-table").html("");
     $("#category-name").html(categoryName);
     for (const object of data) {
@@ -116,14 +119,14 @@ const deleteIncome = (id) => {
 //Handle time filtering
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById("month");
+const currency = document.getElementById("myCurrency").textContent;
 
 const selectYearInput = function() {
   let value = this.value;
   if(value != "All") {
-    window.location.href = `${location.origin}${location.pathname.replace("/main", `/main/${value}`)}`;
+    window.location.href = `${window.location.origin}/main/${currency}/${value}`;
   } else {
-    // window.location.href = location.pathname.replace("/main", `/main/${value}`);
-    console.log('not working');
+    window.location.href = `${window.location.origin}/main/${currency}`;
   }
 }
 
@@ -132,10 +135,9 @@ const selectMonthInput = function() {
   if(value != "All") {
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     value = months.indexOf(value) + 1;
-    window.location.href = `${location.origin}${location.pathname.replace("/main", `/main/${yearInput.value}/${value}`)}`;
+    window.location.href = `${window.location.origin}/main/${currency}/${yearInput.value}/${value}`;
   } else {
-    window.location.href = `${location.origin}${location.pathname.replace("/main", `/main/${yearInput.value}`)}`;
-
+    window.location.href = `${window.location.origin}/main/${currency}/${yearInput.value}`;
   }
 }
 
