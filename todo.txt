@@ -1,9 +1,8 @@
 TODO:
 
 - obliczyć sumę wydatków i przychodów dla tabeli z kategorii
-- dodać foot pod delete
-- pomniejszyć avatar
-- ustawić przyciski walut w linii
+
+
 
 -----------------------------------------------------
 - obliczyć goal na dany okres i kategorię
