@@ -120,9 +120,10 @@ const monthInput = document.getElementById("month");
 const selectYearInput = function() {
   let value = this.value;
   if(value != "All") {
-    window.location.href = `${window.location.origin}/main/${value}`;
+    window.location.href = `${location.origin}${location.pathname.replace("/main", `/main/${value}`)}`;
   } else {
-    window.location.href = `${window.location.origin}/main`;
+    // window.location.href = location.pathname.replace("/main", `/main/${value}`);
+    console.log('not working');
   }
 }
 
@@ -131,9 +132,10 @@ const selectMonthInput = function() {
   if(value != "All") {
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     value = months.indexOf(value) + 1;
-    window.location.href = `${window.location.origin}/main/${yearInput.value}/${value}`;
+    window.location.href = `${location.origin}${location.pathname.replace("/main", `/main/${yearInput.value}/${value}`)}`;
   } else {
-    window.location.href = `${window.location.origin}/main/${yearInput.value}`;
+    window.location.href = `${location.origin}${location.pathname.replace("/main", `/main/${yearInput.value}`)}`;
+
   }
 }
 

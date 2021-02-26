@@ -30,6 +30,7 @@ public class UserController {
         } else {
             log.info(user.getUsername() + " already exists!");
         }
-        return "redirect:/main";
+        //todo add user deafult value
+        return "redirect:/PLN/main";
     }
 }
