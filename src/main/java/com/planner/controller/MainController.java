@@ -51,7 +51,6 @@ public class MainController {
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
         model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }
