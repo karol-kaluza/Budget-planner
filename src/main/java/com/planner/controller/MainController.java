@@ -31,8 +31,10 @@ public class MainController {
     private final ExpenseServiceUtils expenseServiceUtils;
     private final IncomeServiceCRUD incomeService;
 
-    @GetMapping("/main")
-    public String main(Model model, @AuthenticationPrincipal OAuth2User principal) {
+    @GetMapping("/main/{currency}")
+    public String main(Model model,
+                       @AuthenticationPrincipal OAuth2User principal,
+                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
         List<IncomeDto> incomes = incomeService.findAllByUser(user);
         List<ExpenseDto> expenses = expenseServiceCRUD.findAllByUser(user);
@@ -48,12 +50,16 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }
 
-    @GetMapping("/main/{year}")
-    public String main(@PathVariable int year, Model model, @AuthenticationPrincipal OAuth2User principal) {
+    @GetMapping("/main/{currency}/{year}")
+    public String main(@PathVariable int year,
+                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency,
+                       Model model,
+                       @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
         List<Integer> years = expenseServiceUtils.getYears(user).stream()
                 .filter(integer -> integer != year)
@@ -65,19 +71,24 @@ public class MainController {
         model.addAttribute("goal", goal);
         model.addAttribute("selectedYear", year);
         model.addAttribute("selectedMonth", "All");
-        model.addAttribute("years",years);
+        model.addAttribute("years", years);
         model.addAttribute("months", expenseServiceUtils.getMonths(user, year));
         model.addAttribute("expenses", expenses);
         model.addAttribute("expensesSum", expenses.stream().map(ExpenseDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }
 
-    @GetMapping("/main/{year}/{month}")
-    public String main(@PathVariable int year, @PathVariable int month, Model model, @AuthenticationPrincipal OAuth2User principal) {
+    @GetMapping("/main/{currency}/{year}/{month}")
+    public String main(@PathVariable int year,
+                       @PathVariable int month,
+                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency,
+                       Model model,
+                       @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
         String selectedMonth = Month.of(month).toString().toLowerCase();
         List<Integer> years = expenseServiceUtils.getYears(user).stream()
@@ -100,7 +111,8 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year, month));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(CurrencyRateProvider.Currency.EUR));
+        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }
 

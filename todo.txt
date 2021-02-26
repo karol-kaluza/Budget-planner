@@ -1,13 +1,15 @@
 TODO:
-- buttony z walutami
 
 - obliczyć sumę wydatków i przychodów dla tabeli z kategorii
+- dodać foot pod delete
+- pomniejszyć avatar
+- ustawić przyciski walut w linii
 
 -----------------------------------------------------
 - obliczyć goal na dany okres i kategorię
 - logowanie przez google
 - logowanie przez zwykły formularz
-- implementacja wymiany waluty - wydatki i przychody - dodatkowa waluta
-- modyfikowanie wydatku
+- modyfikowanie wydatku i income
 ------------------------------------------------------
+
 

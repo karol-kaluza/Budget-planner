@@ -20,6 +20,7 @@ public class ExpenseDto {
     private String name;
     private String categoryName;
     private BigDecimal value;
+    private BigDecimal valueCurrency;
     private LocalDate date;
     @JsonIgnore
     private User user;

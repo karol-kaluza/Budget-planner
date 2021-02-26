@@ -30,6 +30,7 @@ public class UserController {
         } else {
             log.info(user.getUsername() + " already exists!");
         }
-        return "redirect:/main";
+        String userDefaultCurrency = user.getDefaultCurrency().toString();
+        return "redirect:/main/" + userDefaultCurrency;
     }
 }

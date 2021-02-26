@@ -11,6 +11,7 @@ public class IncomeFunctions {
             income.getId(),
             income.getName(),
             income.getValue(),
+            income.getValueCurrency(),
             income.getDate(),
             income.getUser()
     );
