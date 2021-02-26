@@ -15,10 +15,19 @@
 	display: none;
 }
 
+.d-table {
+	display: table;
+}
+
 .w-100 {
 	width: 100%;
 }
 
 .delete-expense {
 	padding: 1px 3px;
+}
+
+.user-image {
+	max-width: 175px;
+	margin: 0 auto;
 }
