@@ -14,7 +14,10 @@ public class CurrencyRestClient {
     }
 
     @VisibleForTesting
-    public String getDataFromAPI() {
-        return restTemplate.getForObject("/latest?base=PLN", String.class);
+    public String getDataFromAPI(String chosenCurrency) {
+        return restTemplate.getForObject("/latest?base=" + chosenCurrency, String.class);
     }
+//    public String getDataFromAPI() {
+//        return restTemplate.getForObject("/latest?base=EUR", String.class);
+//    }
 }

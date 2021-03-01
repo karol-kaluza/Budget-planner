@@ -6,6 +6,7 @@ import com.planner.cash_flow.service.ExpenseServiceCRUD;
 import com.planner.cash_flow.service.ExpenseServiceUtils;
 import com.planner.cash_flow.service.IncomeServiceCRUD;
 import com.planner.currency.CurrencyRateProvider;
+import com.planner.currency.CurrencyRestClient;
 import com.planner.user.model.User;
 import com.planner.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -50,7 +51,7 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+        model.addAttribute("currency", currencyRateProvider.getRate(myCurrency, CurrencyRateProvider.Currency.PLN));
         model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }
@@ -78,7 +79,7 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+//        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
         model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }
@@ -111,7 +112,7 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year, month));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
+//        model.addAttribute("currency", currencyRateProvider.getPrettyRate(myCurrency));
         model.addAttribute("stringCurrency", myCurrency.toString());
         return "main";
     }

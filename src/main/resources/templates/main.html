@@ -71,7 +71,7 @@
                 <tr th:each="expense : ${expenses}">
                     <td th:text="${expense.name}"></td>
                     <td th:text="${expense.value}"></td>
-                    <td th:text="${#numbers.formatDecimal(expense.value * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(expense.value / currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
                     <td th:text="${expense.date}"></td>
                     <td><button type="button" class="delete-expense btn btn-outline-danger btn-sm" th:attr="onclick=|deleteExpense('${expense.uuid}')|">Delete</button></td>
                 </tr>
@@ -80,7 +80,7 @@
                 <tr>
                     <td>Sum:</td>
                     <td th:text="${expensesSum}"></td>
-                    <td th:text="${#numbers.formatDecimal(expensesSum * currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(expensesSum / currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
                     <td></td>
                     <td></td>
                 </tr>
