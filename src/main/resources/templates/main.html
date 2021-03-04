@@ -62,7 +62,7 @@
                 <tr>
                     <th>All expenses</th>
                     <th>PLN</th>
-                    <th th:text="${stringCurrency}" id="myCurrency"></th>
+                    <th th:text="${foreignCurrencyName}" id="foreignCurrency"></th>
                     <th>Date</th>
                     <th></th>
                 </tr>
@@ -71,7 +71,7 @@
                 <tr th:each="expense : ${expenses}">
                     <td th:text="${expense.name}"></td>
                     <td th:text="${expense.value}"></td>
-                    <td th:text="${#numbers.formatDecimal(expense.value / currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(expense.value / currencyRate, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
                     <td th:text="${expense.date}"></td>
                     <td><button type="button" class="delete-expense btn btn-outline-danger btn-sm" th:attr="onclick=|deleteExpense('${expense.uuid}')|">Delete</button></td>
                 </tr>
@@ -80,7 +80,7 @@
                 <tr>
                     <td>Sum:</td>
                     <td th:text="${expensesSum}"></td>
-                    <td th:text="${#numbers.formatDecimal(expensesSum / currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(expensesSum / currencyRate, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -94,7 +94,7 @@
         <img id="userlogo" class="card-image user-image" alt="user logo" th:src="${user.avatarUrl}">
         <h2 id="username" class="font-bold" th:text="${user.username}"></h2>
         <p class="badge bg-secondary"
-        th:text="${stringCurrency} + ' PLN= ' + ${#numbers.formatDecimal(currency, 1, 'DEFAULT', 2, 'DEFAULT')}"></p>
+        th:text="${foreignCurrencyName} + ' PLN= ' + ${#numbers.formatDecimal(currencyRate, 1, 'DEFAULT', 2, 'DEFAULT')}"></p>
         <form method="POST" action="/logout">
             <button class="btn btn-primary w-100" type="submit">Logout</button>
         </form>

@@ -6,7 +6,6 @@ import com.planner.cash_flow.service.ExpenseServiceCRUD;
 import com.planner.cash_flow.service.ExpenseServiceUtils;
 import com.planner.cash_flow.service.IncomeServiceCRUD;
 import com.planner.currency.CurrencyRateProvider;
-import com.planner.currency.CurrencyRestClient;
 import com.planner.user.model.User;
 import com.planner.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -32,10 +31,10 @@ public class MainController {
     private final ExpenseServiceUtils expenseServiceUtils;
     private final IncomeServiceCRUD incomeService;
 
-    @GetMapping("/main/{currency}")
+    @GetMapping("/main/{foreignCurrency}")
     public String main(Model model,
                        @AuthenticationPrincipal OAuth2User principal,
-                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency) {
+                       @PathVariable("foreignCurrency") CurrencyRateProvider.Currency foreignCurrency){
         User user = userRepository.findByUsername(principal.getAttribute("login"));
         List<IncomeDto> incomes = incomeService.findAllByUser(user);
         List<ExpenseDto> expenses = expenseServiceCRUD.findAllByUser(user);
@@ -51,14 +50,14 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getRate(myCurrency, CurrencyRateProvider.Currency.PLN));
-        model.addAttribute("stringCurrency", myCurrency.toString());
+        model.addAttribute("currencyRate", currencyRateProvider.getRate(foreignCurrency, CurrencyRateProvider.Currency.PLN));
+        model.addAttribute("foreignCurrencyName", foreignCurrency.toString());
         return "main";
     }
 
-    @GetMapping("/main/{currency}/{year}")
+    @GetMapping("/main/{foreignCurrency}/{year}")
     public String main(@PathVariable int year,
-                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency,
+                       @PathVariable("foreignCurrency") CurrencyRateProvider.Currency foreignCurrency,
                        Model model,
                        @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
@@ -79,15 +78,15 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getRate(myCurrency, CurrencyRateProvider.Currency.PLN));
-        model.addAttribute("stringCurrency", myCurrency.toString());
+        model.addAttribute("currencyRate", currencyRateProvider.getRate(foreignCurrency, CurrencyRateProvider.Currency.PLN));
+        model.addAttribute("foreignCurrencyName", foreignCurrency.toString());
         return "main";
     }
 
-    @GetMapping("/main/{currency}/{year}/{month}")
+    @GetMapping("/main/{foreignCurrency}/{year}/{month}")
     public String main(@PathVariable int year,
                        @PathVariable int month,
-                       @PathVariable("currency") CurrencyRateProvider.Currency myCurrency,
+                       @PathVariable("foreignCurrency") CurrencyRateProvider.Currency foreignCurrency,
                        Model model,
                        @AuthenticationPrincipal OAuth2User principal) {
         User user = userRepository.findByUsername(principal.getAttribute("login"));
@@ -112,8 +111,8 @@ public class MainController {
         model.addAttribute("categories", expenseServiceUtils.getUserCategories(user, year, month));
         model.addAttribute("incomes", incomes);
         model.addAttribute("incomesSum", incomes.stream().map(IncomeDto::getValue).reduce(BigDecimal.ZERO, BigDecimal::add));
-        model.addAttribute("currency", currencyRateProvider.getRate(myCurrency, CurrencyRateProvider.Currency.PLN));
-        model.addAttribute("stringCurrency", myCurrency.toString());
+        model.addAttribute("currencyRate", currencyRateProvider.getRate(foreignCurrency, CurrencyRateProvider.Currency.PLN));
+        model.addAttribute("foreignCurrencyName", foreignCurrency.toString());
         return "main";
     }
 

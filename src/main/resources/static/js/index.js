@@ -119,14 +119,14 @@ const deleteIncome = (id) => {
 //Handle time filtering
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById("month");
-const currency = document.getElementById("myCurrency").textContent;
+const foreignCurrency = document.getElementById("foreignCurrency").textContent;
 
 const selectYearInput = function() {
   let value = this.value;
   if(value != "All") {
-    window.location.href = `${window.location.origin}/main/${currency}/${value}`;
+    window.location.href = `${window.location.origin}/main/${foreignCurrency}/${value}`;
   } else {
-    window.location.href = `${window.location.origin}/main/${currency}`;
+    window.location.href = `${window.location.origin}/main/${foreignCurrency}`;
   }
 }
 
@@ -135,9 +135,9 @@ const selectMonthInput = function() {
   if(value != "All") {
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     value = months.indexOf(value) + 1;
-    window.location.href = `${window.location.origin}/main/${currency}/${yearInput.value}/${value}`;
+    window.location.href = `${window.location.origin}/main/${foreignCurrency}/${yearInput.value}/${value}`;
   } else {
-    window.location.href = `${window.location.origin}/main/${currency}/${yearInput.value}`;
+    window.location.href = `${window.location.origin}/main/${foreignCurrency}/${yearInput.value}`;
   }
 }
 
